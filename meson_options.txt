@@ -6,7 +6,7 @@ option(
 
 option(
   'gtk_doc',
-  type: 'boolean', value: false,
+  type: 'boolean', value: true,
   description: 'Build the API reference'
 )
 
