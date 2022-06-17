@@ -13,7 +13,7 @@ glib_docpath = dependency('glib-2.0').get_pkgconfig_variable('prefix') / 'share/
 gobject_docpath = dependency('gobject-2.0').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/gobject'
 gio_docpath = dependency('gio-2.0').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/gio'
 gtk_docpath = dependency('gtk+-3.0').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/gtk3'
-webkitgtk_docpath = dependency('webkit2gtk-4.0').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/webkit2gtk-4.0'
+webkitgtk_docpath = dependency('webkit2gtk-4.1').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/webkit2gtk-4.1'
 
 GNOME.gtkdoc(
   gtkdoc_module_name,
