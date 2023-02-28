@@ -17,7 +17,6 @@ configure_file(
 
 appdata = 'org.gnome.Devhelp.appdata.xml'
 I18N.merge_file(
-  appdata,
   input: appdata + '.in',
   output: appdata,
   po_dir: '../po/',
@@ -27,7 +26,6 @@ I18N.merge_file(
 
 desktop_file = 'org.gnome.Devhelp.desktop'
 I18N.merge_file(
-  desktop_file,
   type: 'desktop',
   input: desktop_file + '.in',
   output: desktop_file,
