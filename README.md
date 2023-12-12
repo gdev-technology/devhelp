@@ -21,7 +21,7 @@ Dependencies
 - GLib
 - GTK
 - WebKitGTK
-- [Amtk](https://wiki.gnome.org/Projects/Amtk)
+- [libgedit-amtk](https://gedit-technology.github.io/)
 - gsettings-desktop-schemas
 
 Description
