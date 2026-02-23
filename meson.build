@@ -5,7 +5,7 @@
 
 project(
   'devhelp', 'c',
-  meson_version: '>= 0.57',
+  meson_version: '>= 0.59',
   version: '40.beta',
   default_options: ['warning_level=2']
 )
@@ -164,6 +164,7 @@ endif
 GNOME.post_install(
   glib_compile_schemas: true,
   gtk_update_icon_cache: true,
+  update_desktop_database: true,
 )
 
 summary('Prefix', get_option('prefix'))
