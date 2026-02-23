@@ -9,11 +9,11 @@ configure_file(
 gtkdoc_module_name = 'devhelp-@0@'.format(LIBDEVHELP_API_VERSION)
 html_dir = get_option('prefix') / GNOME.gtkdoc_html_dir(gtkdoc_module_name)
 
-glib_docpath = dependency('glib-2.0').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/glib'
-gobject_docpath = dependency('gobject-2.0').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/gobject'
-gio_docpath = dependency('gio-2.0').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/gio'
-gtk_docpath = dependency('gtk+-3.0').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/gtk3'
-webkitgtk_docpath = dependency('webkit2gtk-4.1').get_pkgconfig_variable('prefix') / 'share/gtk-doc/html/webkit2gtk-4.1'
+glib_docpath = dependency('glib-2.0').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/glib'
+gobject_docpath = dependency('gobject-2.0').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/gobject'
+gio_docpath = dependency('gio-2.0').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/gio'
+gtk_docpath = dependency('gtk+-3.0').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/gtk3'
+webkitgtk_docpath = dependency('webkit2gtk-4.1').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/webkit2gtk-4.1'
 
 GNOME.gtkdoc(
   gtkdoc_module_name,
