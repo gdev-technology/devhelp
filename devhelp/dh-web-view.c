@@ -141,10 +141,10 @@ dh_web_view_scroll_event (GtkWidget      *widget,
                          * which can be adjusted for taste.
                          */
                         if ((gint)view->priv->total_scroll_delta_y <= -1) {
-                                view->priv->total_scroll_delta_y = 0.f;
+                                view->priv->total_scroll_delta_y = 0.0;
                                 bump_zoom_level (view, 1);
                         } else if ((gint)view->priv->total_scroll_delta_y >= 1) {
-                                view->priv->total_scroll_delta_y = 0.f;
+                                view->priv->total_scroll_delta_y = 0.0;
                                 bump_zoom_level (view, -1);
                         }
                         return GDK_EVENT_STOP;
@@ -582,7 +582,7 @@ static void
 dh_web_view_init (DhWebView *view)
 {
         view->priv = dh_web_view_get_instance_private (view);
-        view->priv->total_scroll_delta_y = 0.f;
+        view->priv->total_scroll_delta_y = 0.0;
 
         gtk_widget_set_hexpand (GTK_WIDGET (view), TRUE);
         gtk_widget_set_vexpand (GTK_WIDGET (view), TRUE);
