@@ -138,7 +138,10 @@ warning_cflags = [
   '-Wrestrict',
   '-Wnull-dereference',
   '-Wjump-misses-init',
-  '-Wdouble-promotion'
+  '-Wdouble-promotion',
+
+  # We are currently not actively porting the code.
+  '-Wno-deprecated-declarations',
 ]
 
 c_compiler = meson.get_compiler('c')
