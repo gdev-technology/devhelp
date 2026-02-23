@@ -476,7 +476,7 @@ dh_web_view_constructed (GObject *object)
 
         webkit_context = webkit_web_view_get_context (WEBKIT_WEB_VIEW (view));
         if (!webkit_web_context_get_sandbox_enabled (webkit_context))
-                g_warning ("WebKitWebContext is not sandboxed.");
+                g_warning_once ("WebKitWebContext is not sandboxed.");
 
         webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (view));
         webkit_settings_set_enable_back_forward_navigation_gestures (webkit_settings, TRUE);
