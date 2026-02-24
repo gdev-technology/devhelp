@@ -30,9 +30,7 @@ GNOME.gtkdoc(
     '--extra-dir=@0@'.format(gtk_docpath),
     '--extra-dir=@0@'.format(webkitgtk_docpath)
   ],
-  content_files: [
-    'api-breaks.xml'
-  ],
+  #content_files: [],
   ignore_headers: [
     'dh-book-list-simple.h',
     'dh-dconf-migration.h',
