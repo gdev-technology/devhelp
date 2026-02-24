@@ -8,7 +8,7 @@ https://wiki.gnome.org/Apps/Devhelp
 Installation of the Devhelp Flatpak
 -----------------------------------
 
-- [Devhelp on Flathub](https://flathub.org/apps/details/org.gnome.Devhelp)
+- [Devhelp on Flathub](https://flathub.org/en/apps/org.gnome.Devhelp)
 
 How to contribute
 -----------------
@@ -21,7 +21,7 @@ Dependencies
 - GLib
 - GTK
 - WebKitGTK
-- [libgedit-amtk](https://gedit-technology.github.io/)
+- [libgedit-amtk](https://gedit-text-editor.org/technology.html)
 - gsettings-desktop-schemas
 
 Description
