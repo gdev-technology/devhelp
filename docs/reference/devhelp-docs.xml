@@ -65,11 +65,6 @@
       <title>Misc</title>
       <xi:include href="xml/dh-completion.xml"/>
     </chapter>
-
-    <chapter id="deprecated">
-      <title>Deprecated</title>
-      <xi:include href="xml/dh-book-manager.xml"/>
-    </chapter>
   </part>
 
   <xi:include href="api-breaks.xml"/>

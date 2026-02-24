@@ -11,7 +11,6 @@ devhelp/dh-book-list-builder.c
 devhelp/dh-book-list.c
 devhelp/dh-book-list-directory.c
 devhelp/dh-book-list-simple.c
-devhelp/dh-book-manager.c
 devhelp/dh-book-tree.c
 devhelp/dh-completion.c
 devhelp/dh-error.c

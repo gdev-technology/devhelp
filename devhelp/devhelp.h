@@ -16,7 +16,6 @@
 #include <devhelp/dh-book-list.h>
 #include <devhelp/dh-book-list-builder.h>
 #include <devhelp/dh-book-list-directory.h>
-#include <devhelp/dh-book-manager.h>
 #include <devhelp/dh-book-tree.h>
 #include <devhelp/dh-completion.h>
 #include <devhelp/dh-init.h>

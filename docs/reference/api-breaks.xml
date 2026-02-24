@@ -32,7 +32,7 @@
     <itemizedlist>
       <listitem>
         <para>
-          <link linkend="DhBookManager">DhBookManager</link> is now completely
+          <code>DhBookManager</code> is now completely
           empty and entirely deprecated, the minimum amount of API is kept to
           not break Anjuta. It has been replaced by a more flexible
           infrastructure: <link linkend="DhProfile">DhProfile</link>,
@@ -42,7 +42,7 @@
           you don't adapt the code of the application – because in that case it
           will use the default <link linkend="DhProfile">DhProfile</link>, which
           contains the same content as how
-          <link linkend="DhBookManager">DhBookManager</link> was implemented.
+          <code>DhBookManager</code> was implemented.
         </para>
       </listitem>
       <listitem>
@@ -253,12 +253,12 @@
       <listitem>
         <para>
           The <code>DhLanguage</code> class is now private, it's currently used
-          only internally by <link linkend="DhBookManager">DhBookManager</link>.
+          only internally by <code>DhBookManager</code>.
         </para>
       </listitem>
       <listitem>
         <para>
-          Due to <link linkend="DhBookManager">DhBookManager</link> being now a
+          Due to <code>DhBookManager</code> being now a
           singleton, there has been the following API changes:
           <itemizedlist>
             <listitem>
