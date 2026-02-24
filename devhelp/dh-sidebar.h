@@ -41,7 +41,7 @@ struct _DhSidebarClass {
 
 GType           dh_sidebar_get_type             (void);
 
-DhSidebar *     dh_sidebar_new2                 (DhProfile *profile);
+DhSidebar *     dh_sidebar_new                  (DhProfile *profile);
 
 DhProfile *     dh_sidebar_get_profile          (DhSidebar *sidebar);
 

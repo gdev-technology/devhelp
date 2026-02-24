@@ -675,7 +675,7 @@ dh_window_init (DhWindow *window)
                          G_SETTINGS_BIND_NO_SENSITIVITY);
 
         /* Left side of hpaned */
-        priv->sidebar = dh_sidebar_new2 (NULL);
+        priv->sidebar = dh_sidebar_new (NULL);
 
         /* Right side of hpaned */
         contents_vgrid = gtk_grid_new ();

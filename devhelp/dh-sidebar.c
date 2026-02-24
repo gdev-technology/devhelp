@@ -647,14 +647,13 @@ dh_sidebar_init (DhSidebar *sidebar)
 }
 
 /**
- * dh_sidebar_new2:
+ * dh_sidebar_new:
  * @profile: (nullable): a #DhProfile, or %NULL for the default profile.
  *
  * Returns: (transfer floating): a new #DhSidebar widget.
- * Since: 3.30
  */
 DhSidebar *
-dh_sidebar_new2 (DhProfile *profile)
+dh_sidebar_new (DhProfile *profile)
 {
         g_return_val_if_fail (profile == NULL || DH_IS_PROFILE (profile), NULL);
 
