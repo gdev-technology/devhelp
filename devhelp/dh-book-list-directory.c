@@ -429,8 +429,6 @@ dh_book_list_directory_class_init (DhBookListDirectoryClass *klass)
          * DhBookListDirectory:directory:
          *
          * The directory, as a #GFile, containing a set of Devhelp books.
-         *
-         * Since: 3.30
          */
         properties[PROP_DIRECTORY] =
                 g_param_spec_object ("directory",
@@ -467,7 +465,6 @@ dh_book_list_directory_init (DhBookListDirectory *list_directory)
  * #DhBookListDirectory repeatedly).
  *
  * Returns: (transfer full): a #DhBookListDirectory for @directory.
- * Since: 3.30
  */
 DhBookListDirectory *
 dh_book_list_directory_new (GFile *directory)
@@ -494,7 +491,6 @@ dh_book_list_directory_new (GFile *directory)
  * @list_directory: a #DhBookListDirectory.
  *
  * Returns: (transfer none): the #DhBookListDirectory:directory.
- * Since: 3.30
  */
 GFile *
 dh_book_list_directory_get_directory (DhBookListDirectory *list_directory)

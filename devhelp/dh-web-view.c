@@ -543,8 +543,6 @@ dh_web_view_class_init (DhWebViewClass *klass)
          *
          * The #DhProfile. If set to %NULL, the default profile as returned by
          * dh_profile_get_default() is used.
-         *
-         * Since: 3.30
          */
         properties[PROP_PROFILE] =
                 g_param_spec_object ("profile",
@@ -565,8 +563,6 @@ dh_web_view_class_init (DhWebViewClass *klass)
          * The ::open-new-tab signal is emitted when a URI needs to be opened in
          * a new #DhWebView. This happens when doing Ctrl+click or middle click
          * on a link.
-         *
-         * Since: 3.30
          */
         signals[SIGNAL_OPEN_NEW_TAB] =
                 g_signal_new ("open-new-tab",
@@ -593,7 +589,6 @@ dh_web_view_init (DhWebView *view)
  * @profile: (nullable): a #DhProfile, or %NULL for the default profile.
  *
  * Returns: (transfer floating): a new #DhWebView widget.
- * Since: 3.30
  */
 DhWebView *
 dh_web_view_new (DhProfile *profile)
@@ -610,7 +605,6 @@ dh_web_view_new (DhProfile *profile)
  * @view: a #DhWebView.
  *
  * Returns: (transfer none): the #DhWebView:profile.
- * Since: 3.30
  */
 DhProfile *
 dh_web_view_get_profile (DhWebView *view)
@@ -629,7 +623,6 @@ dh_web_view_get_profile (DhWebView *view)
  * (translated).
  *
  * Returns: the title of @view, suitable for a tab label or window title.
- * Since: 3.30
  */
 const gchar *
 dh_web_view_get_devhelp_title (DhWebView *view)
@@ -655,8 +648,6 @@ dh_web_view_get_devhelp_title (DhWebView *view)
  * @search_text is not empty, it calls webkit_find_controller_search() if not
  * already done. If @search_text is empty or %NULL, it calls
  * webkit_find_controller_search_finish().
- *
- * Since: 3.30
  */
 void
 dh_web_view_set_search_text (DhWebView   *view,
@@ -701,8 +692,6 @@ dh_web_view_set_search_text (DhWebView   *view,
  *
  * Like webkit_find_controller_search_next(), but takes into account whether
  * dh_web_view_set_search_text() has been called.
- *
- * Since: 3.30
  */
 void
 dh_web_view_search_next (DhWebView *view)
@@ -724,8 +713,6 @@ dh_web_view_search_next (DhWebView *view)
  *
  * Like webkit_find_controller_search_previous(), but takes into account whether
  * dh_web_view_set_search_text() has been called.
- *
- * Since: 3.30
  */
 void
 dh_web_view_search_previous (DhWebView *view)
@@ -746,7 +733,6 @@ dh_web_view_search_previous (DhWebView *view)
  * @view: a #DhWebView.
  *
  * Returns: whether calling dh_web_view_zoom_in() will have an effect.
- * Since: 3.30
  */
 gboolean
 dh_web_view_can_zoom_in (DhWebView *view)
@@ -764,7 +750,6 @@ dh_web_view_can_zoom_in (DhWebView *view)
  * @view: a #DhWebView.
  *
  * Returns: whether calling dh_web_view_zoom_out() will have an effect.
- * Since: 3.30
  */
 gboolean
 dh_web_view_can_zoom_out (DhWebView *view)
@@ -782,7 +767,6 @@ dh_web_view_can_zoom_out (DhWebView *view)
  * @view: a #DhWebView.
  *
  * Returns: whether calling dh_web_view_reset_zoom() will have an effect.
- * Since: 3.30
  */
 gboolean
 dh_web_view_can_reset_zoom (DhWebView *view)
@@ -800,8 +784,6 @@ dh_web_view_can_reset_zoom (DhWebView *view)
  * @view: a #DhWebView.
  *
  * Makes the text larger.
- *
- * Since: 3.30
  */
 void
 dh_web_view_zoom_in (DhWebView *view)
@@ -816,8 +798,6 @@ dh_web_view_zoom_in (DhWebView *view)
  * @view: a #DhWebView.
  *
  * Makes the text smaller.
- *
- * Since: 3.30
  */
 void
 dh_web_view_zoom_out (DhWebView *view)
@@ -832,8 +812,6 @@ dh_web_view_zoom_out (DhWebView *view)
  * @view: a #DhWebView.
  *
  * Reset the text size to the normal size.
- *
- * Since: 3.30
  */
 void
 dh_web_view_reset_zoom (DhWebView *view)

@@ -155,8 +155,6 @@ dh_notebook_class_init (DhNotebookClass *klass)
          *
          * The #DhProfile. If set to %NULL, the default profile as returned by
          * dh_profile_get_default() is used.
-         *
-         * Since: 3.30
          */
         properties[PROP_PROFILE] =
                 g_param_spec_object ("profile",
@@ -183,7 +181,6 @@ dh_notebook_init (DhNotebook *notebook)
  * @profile: (nullable): a #DhProfile, or %NULL for the default profile.
  *
  * Returns: (transfer floating): a new #DhNotebook.
- * Since: 3.30
  */
 DhNotebook *
 dh_notebook_new (DhProfile *profile)
@@ -200,7 +197,6 @@ dh_notebook_new (DhProfile *profile)
  * @notebook: a #DhNotebook.
  *
  * Returns: (transfer none): the #DhNotebook:profile.
- * Since: 3.30
  */
 DhProfile *
 dh_notebook_get_profile (DhNotebook *notebook)
@@ -228,8 +224,6 @@ web_view_open_new_tab_cb (DhWebView   *web_view,
  * Creates a new #DhTab and #DhTabLabel and appends them to the #GtkNotebook.
  *
  * The #DhWebView will have the same #DhProfile as @notebook.
- *
- * Since: 3.30
  */
 void
 dh_notebook_open_new_tab (DhNotebook  *notebook,
@@ -281,7 +275,6 @@ dh_notebook_open_new_tab (DhNotebook  *notebook,
  * @notebook: a #DhNotebook.
  *
  * Returns: (transfer none) (nullable): the #DhTab currently shown in @notebook.
- * Since: 3.30
  */
 DhTab *
 dh_notebook_get_active_tab (DhNotebook *notebook)
@@ -302,7 +295,6 @@ dh_notebook_get_active_tab (DhNotebook *notebook)
  * @notebook: a #DhNotebook.
  *
  * Returns: (transfer none) (nullable): the #DhWebView of the active tab.
- * Since: 3.30
  */
 DhWebView *
 dh_notebook_get_active_web_view (DhNotebook *notebook)
@@ -321,7 +313,6 @@ dh_notebook_get_active_web_view (DhNotebook *notebook)
  *
  * Returns: (transfer container) (element-type DhWebView): a #GList of all
  *   #DhWebView's contained in @notebook.
- * Since: 3.30
  */
 GList *
 dh_notebook_get_all_web_views (DhNotebook *notebook)

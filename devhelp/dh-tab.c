@@ -124,8 +124,6 @@ dh_tab_class_init (DhTabClass *klass)
          *
          * The #DhWebView of the tab. If set to %NULL a #DhWebView is created
          * with the default #DhProfile.
-         *
-         * Since: 3.30
          */
         properties[PROP_WEB_VIEW] =
                 g_param_spec_object ("web-view",
@@ -153,7 +151,6 @@ dh_tab_init (DhTab *tab)
  *   default #DhProfile.
  *
  * Returns: (transfer floating): a new #DhTab.
- * Since: 3.30
  */
 DhTab *
 dh_tab_new (DhWebView *web_view)
@@ -170,7 +167,6 @@ dh_tab_new (DhWebView *web_view)
  * @tab: a #DhTab.
  *
  * Returns: (transfer none): the #DhTab:web-view.
- * Since: 3.30
  */
 DhWebView *
 dh_tab_get_web_view (DhTab *tab)

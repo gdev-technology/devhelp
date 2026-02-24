@@ -20,7 +20,7 @@
  * This function can be called several times, but is meant to be called at the
  * beginning of main(), before any other Devhelp function call.
  *
- * Since version 3.38, this function enables the WebKitGTK sandbox by calling
+ * This function enables the WebKitGTK sandbox by calling
  * webkit_web_context_set_sandbox_enabled() on the default #WebKitWebContext.
  */
 void
@@ -50,8 +50,6 @@ dh_init (void)
  * It is not mandatory to call this function, it's just to be friendlier to
  * memory debugging tools. This function is meant to be called at the end of
  * main(). It can be called several times.
- *
- * Since: 3.26
  */
 
 /* Another way is to use a DSO destructor, see gconstructor.h in GLib.

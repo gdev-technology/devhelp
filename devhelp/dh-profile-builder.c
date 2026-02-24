@@ -56,7 +56,6 @@ dh_profile_builder_init (DhProfileBuilder *builder)
  * dh_profile_builder_new:
  *
  * Returns: (transfer full): a new #DhProfileBuilder.
- * Since: 3.30
  */
 DhProfileBuilder *
 dh_profile_builder_new (void)
@@ -73,8 +72,6 @@ dh_profile_builder_new (void)
  *
  * If you don't call this function, the default #DhSettings object as returned
  * by dh_settings_get_default() will be used.
- *
- * Since: 3.30
  */
 void
 dh_profile_builder_set_settings (DhProfileBuilder *builder,
@@ -95,8 +92,6 @@ dh_profile_builder_set_settings (DhProfileBuilder *builder,
  *
  * If you don't call this function, the default #DhBookList object as returned
  * by dh_book_list_get_default() will be used.
- *
- * Since: 3.30
  */
 void
 dh_profile_builder_set_book_list (DhProfileBuilder *builder,
@@ -113,7 +108,6 @@ dh_profile_builder_set_book_list (DhProfileBuilder *builder,
  * @builder: a #DhProfileBuilder.
  *
  * Returns: (transfer full): the newly created #DhProfile object.
- * Since: 3.30
  */
 DhProfile *
 dh_profile_builder_create_object (DhProfileBuilder *builder)

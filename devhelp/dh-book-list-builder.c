@@ -63,7 +63,6 @@ dh_book_list_builder_init (DhBookListBuilder *builder)
  * dh_book_list_builder_new:
  *
  * Returns: (transfer full): a new #DhBookListBuilder.
- * Since: 3.30
  */
 DhBookListBuilder *
 dh_book_list_builder_new (void)
@@ -84,8 +83,6 @@ dh_book_list_builder_new (void)
  * sub-#DhBookList's must be added in order of decreasing priority (the first
  * sub-#DhBookList added has the highest priority). The priority is used in case
  * of book ID conflicts (see dh_book_get_id()).
- *
- * Since: 3.30
  */
 void
 dh_book_list_builder_add_sub_book_list (DhBookListBuilder *builder,
@@ -155,8 +152,6 @@ add_default_sub_book_lists_in_data_dir (DhBookListBuilder *builder,
  *
  * The exact list of directories is subject to change, it is not part of the
  * API.
- *
- * Since: 3.30
  */
 void
 dh_book_list_builder_add_default_sub_book_lists (DhBookListBuilder *builder)
@@ -211,8 +206,6 @@ dh_book_list_builder_add_default_sub_book_lists (DhBookListBuilder *builder)
  * settings from several #DhSettings objects and combine them. Only the last
  * call to this function is taken into account when creating the #DhBookList
  * with dh_book_list_builder_create_object().
- *
- * Since: 3.30
  */
 void
 dh_book_list_builder_read_books_disabled_setting (DhBookListBuilder *builder,
@@ -232,7 +225,6 @@ dh_book_list_builder_read_books_disabled_setting (DhBookListBuilder *builder,
  * the subclass is not exposed to the public API.
  *
  * Returns: (transfer full): the newly created #DhBookList object.
- * Since: 3.30
  */
 DhBookList *
 dh_book_list_builder_create_object (DhBookListBuilder *builder)

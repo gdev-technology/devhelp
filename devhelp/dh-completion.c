@@ -97,7 +97,6 @@ dh_completion_init (DhCompletion *completion)
  * dh_completion_new:
  *
  * Returns: a new #DhCompletion object.
- * Since: 3.28
  */
 DhCompletion *
 dh_completion_new (void)
@@ -113,8 +112,6 @@ dh_completion_new (void)
  * Adds a string to the @completion object.
  *
  * After adding all the strings you need to call dh_completion_sort().
- *
- * Since: 3.28
  */
 void
 dh_completion_add_string (DhCompletion *completion,
@@ -132,8 +129,6 @@ dh_completion_add_string (DhCompletion *completion,
  *
  * Sorts all the strings. It is required to call this function after adding
  * strings with dh_completion_add_string().
- *
- * Since: 3.28
  */
 void
 dh_completion_sort (DhCompletion *completion)
@@ -313,7 +308,6 @@ do_complete (DhCompletion *completion,
  *
  * Returns: (transfer full) (nullable): the completed prefix, or %NULL if a
  * longer prefix has not been found. Free with g_free() when no longer needed.
- * Since: 3.28
  */
 gchar *
 dh_completion_complete (DhCompletion *completion,
@@ -333,7 +327,6 @@ dh_completion_complete (DhCompletion *completion,
  *
  * Returns: (transfer full) (nullable): the completed prefix, or %NULL if a
  * longer prefix has not been found. Free with g_free() when no longer needed.
- * Since: 3.28
  */
 gchar *
 dh_completion_aggregate_complete (GList       *completion_objects,

@@ -142,8 +142,6 @@ dh_tab_label_class_init (DhTabLabelClass *klass)
          *
          * The associated #DhTab. #DhTabLabel has a weak reference to the
          * #DhTab.
-         *
-         * Since: 3.30
          */
         properties[PROP_TAB] =
                 g_param_spec_object ("tab",
@@ -221,7 +219,6 @@ dh_tab_label_init (DhTabLabel *tab_label)
  * @tab: the associated #DhTab.
  *
  * Returns: (transfer floating): a new #DhTabLabel.
- * Since: 3.30
  */
 GtkWidget *
 dh_tab_label_new (DhTab *tab)
@@ -238,7 +235,6 @@ dh_tab_label_new (DhTab *tab)
  * @tab_label: a #DhTabLabel.
  *
  * Returns: (transfer none) (nullable): the #DhTabLabel:tab.
- * Since: 3.30
  */
 DhTab *
 dh_tab_label_get_tab (DhTabLabel *tab_label)

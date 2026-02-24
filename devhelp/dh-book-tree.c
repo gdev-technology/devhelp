@@ -829,8 +829,6 @@ dh_book_tree_class_init (DhBookTreeClass *klass)
          *
          * The #DhProfile. If set to %NULL, the default profile as returned by
          * dh_profile_get_default() is used.
-         *
-         * Since: 3.30
          */
         properties[PROP_PROFILE] =
                 g_param_spec_object ("profile",
@@ -908,7 +906,6 @@ dh_book_tree_new (DhProfile *profile)
  * @tree: a #DhBookTree.
  *
  * Returns: (transfer none): the #DhProfile of @tree.
- * Since: 3.30
  */
 DhProfile *
 dh_book_tree_get_profile (DhBookTree *tree)
@@ -928,7 +925,6 @@ dh_book_tree_get_profile (DhBookTree *tree)
  * Returns: (transfer full) (nullable): the currently selected #DhLink in @tree,
  * or %NULL if the selection is empty or if a language group row is selected.
  * Unref with dh_link_unref() when no longer needed.
- * Since: 3.30
  */
 DhLink *
 dh_book_tree_get_selected_link (DhBookTree *tree)

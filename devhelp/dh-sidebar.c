@@ -621,8 +621,6 @@ dh_sidebar_class_init (DhSidebarClass *klass)
          *
          * The #DhProfile. If set to %NULL, the default profile as returned by
          * dh_profile_get_default() is used.
-         *
-         * Since: 3.30
          */
         properties[PROP_PROFILE] =
                 g_param_spec_object ("profile",
@@ -667,7 +665,6 @@ dh_sidebar_new (DhProfile *profile)
  * @sidebar: a #DhSidebar.
  *
  * Returns: (transfer none): the #DhProfile of @sidebar.
- * Since: 3.30
  */
 DhProfile *
 dh_sidebar_get_profile (DhSidebar *sidebar)
@@ -692,7 +689,6 @@ dh_sidebar_get_profile (DhSidebar *sidebar)
  * visible #GtkTreeView of @sidebar, or %NULL if the selection is empty or if a
  * language group row is selected. Unref with dh_link_unref() when no longer
  * needed.
- * Since: 3.30
  */
 DhLink *
 dh_sidebar_get_selected_link (DhSidebar *sidebar)

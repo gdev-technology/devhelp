@@ -454,7 +454,6 @@ dh_book_get_tree (DhBook *book)
  * @book: a #DhBook.
  *
  * Returns: (transfer none): the #DhCompletion of @book.
- * Since: 3.28
  */
 DhCompletion *
 dh_book_get_completion (DhBook *book)

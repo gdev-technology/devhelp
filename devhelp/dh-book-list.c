@@ -123,8 +123,6 @@ dh_book_list_class_init (DhBookListClass *klass)
          * The default object method handler adds @book to the internal #GList
          * of @book_list after verifying that @book is not already present in
          * the list.
-         *
-         * Since: 3.30
          */
         signals[SIGNAL_ADD_BOOK] =
                 g_signal_new ("add-book",
@@ -146,8 +144,6 @@ dh_book_list_class_init (DhBookListClass *klass)
          * The default object method handler removes @book from the internal
          * #GList of @book_list, and verifies that @book was present in the list
          * and that @book was not inserted several times.
-         *
-         * Since: 3.30
          */
         signals[SIGNAL_REMOVE_BOOK] =
                 g_signal_new ("remove-book",
@@ -169,7 +165,6 @@ dh_book_list_init (DhBookList *book_list)
  * dh_book_list_new:
  *
  * Returns: (transfer full): a new empty #DhBookList object.
- * Since: 3.30
  */
 DhBookList *
 dh_book_list_new (void)
@@ -186,7 +181,6 @@ dh_book_list_new (void)
  * #DhSettings object as returned by dh_settings_get_default().
  *
  * Returns: (transfer none): the default #DhBookList object.
- * Since: 3.30
  */
 DhBookList *
 dh_book_list_get_default (void)
@@ -228,7 +222,6 @@ _dh_book_list_unref_default (void)
  *
  * Returns: (transfer none) (element-type DhBook): the #GList of #DhBook's part
  * of @book_list.
- * Since: 3.30
  */
 GList *
 dh_book_list_get_books (DhBookList *book_list)
@@ -247,8 +240,6 @@ dh_book_list_get_books (DhBookList *book_list)
  *
  * It is a programmer error to call this function if @book is already inserted
  * in @book_list.
- *
- * Since: 3.30
  */
 void
 dh_book_list_add_book (DhBookList *book_list,
@@ -272,8 +263,6 @@ dh_book_list_add_book (DhBookList *book_list,
  *
  * It is a programmer error to call this function if @book is not present in
  * @book_list.
- *
- * Since: 3.30
  */
 void
 dh_book_list_remove_book (DhBookList *book_list,

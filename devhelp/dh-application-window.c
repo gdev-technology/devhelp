@@ -31,8 +31,6 @@
  * Note that this function doesn't take a “self” window parameter, to be more
  * flexible: it is possible to have several pairs of #DhSidebar/#DhNotebook per
  * window, to show different #DhProfile's.
- *
- * Since: 3.30
  */
 void
 dh_application_window_bind_sidebar_and_notebook (DhSidebar  *sidebar,

@@ -101,7 +101,6 @@ _dh_profile_new (DhSettings *settings,
  * returned by dh_book_list_get_default().
  *
  * Returns: (transfer none): the default #DhProfile object.
- * Since: 3.30
  */
 DhProfile *
 dh_profile_get_default (void)
@@ -137,7 +136,6 @@ _dh_profile_unref_default (void)
  * be the same for the lifetime of @profile.
  *
  * Returns: (transfer none): the #DhSettings of @profile.
- * Since: 3.30
  */
 DhSettings *
 dh_profile_get_settings (DhProfile *profile)
@@ -155,7 +153,6 @@ dh_profile_get_settings (DhProfile *profile)
  * be the same for the lifetime of @profile.
  *
  * Returns: (transfer none): the #DhBookList of @profile.
- * Since: 3.30
  */
 DhBookList *
 dh_profile_get_book_list (DhProfile *profile)

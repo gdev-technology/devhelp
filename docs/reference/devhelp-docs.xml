@@ -81,25 +81,15 @@
       <title>API Index</title>
       <xi:include href="xml/api-index-full.xml"><xi:fallback /></xi:include>
     </index>
+    <!--
     <index id="deprecated-api-index" role="deprecated">
       <title>Index of deprecated API</title>
       <xi:include href="xml/api-index-deprecated.xml"><xi:fallback /></xi:include>
-    </index>
-    <index id="api-index-3-26" role="3.26">
-      <title>Index of new symbols in 3.26</title>
-      <xi:include href="xml/api-index-3.26.xml"><xi:fallback /></xi:include>
-    </index>
-    <index id="api-index-3-28" role="3.28">
-      <title>Index of new symbols in 3.28</title>
-      <xi:include href="xml/api-index-3.28.xml"><xi:fallback /></xi:include>
-    </index>
-    <index id="api-index-3-30" role="3.30">
-      <title>Index of new symbols in 3.30</title>
-      <xi:include href="xml/api-index-3.30.xml"><xi:fallback /></xi:include>
     </index>
     <index id="api-index-3-36" role="3.36">
       <title>Index of new symbols in 3.36</title>
       <xi:include href="xml/api-index-3.36.xml"><xi:fallback /></xi:include>
     </index>
+    -->
   </part>
 </book>

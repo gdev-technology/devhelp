@@ -402,8 +402,6 @@ dh_settings_class_init (DhSettingsClass *klass)
          * DhSettings:group-books-by-language:
          *
          * Whether books should be grouped by programming language in the UI.
-         *
-         * Since: 3.30
          */
         properties[PROP_GROUP_BOOKS_BY_LANGUAGE] =
                 g_param_spec_boolean ("group-books-by-language",
@@ -418,8 +416,6 @@ dh_settings_class_init (DhSettingsClass *klass)
          * DhSettings:use-system-fonts:
          *
          * Whether to use the system default fonts.
-         *
-         * Since: 3.30
          */
         properties[PROP_USE_SYSTEM_FONTS] =
                 g_param_spec_boolean ("use-system-fonts",
@@ -436,8 +432,6 @@ dh_settings_class_init (DhSettingsClass *klass)
          * Font for text with variable width.
          *
          * This property is independent of #DhSettings:use-system-fonts.
-         *
-         * Since: 3.30
          */
         properties[PROP_VARIABLE_FONT] =
                 g_param_spec_string ("variable-font",
@@ -454,8 +448,6 @@ dh_settings_class_init (DhSettingsClass *klass)
          * Font for text with fixed width, such as code examples.
          *
          * This property is independent of #DhSettings:use-system-fonts.
-         *
-         * Since: 3.30
          */
         properties[PROP_FIXED_FONT] =
                 g_param_spec_string ("fixed-font",
@@ -474,8 +466,6 @@ dh_settings_class_init (DhSettingsClass *klass)
          *
          * The ::books-disabled-changed signal is emitted when the
          * "books-disabled" #GSettings key changes.
-         *
-         * Since: 3.30
          */
         signals[SIGNAL_BOOKS_DISABLED_CHANGED] =
                 g_signal_new ("books-disabled-changed",
@@ -491,8 +481,6 @@ dh_settings_class_init (DhSettingsClass *klass)
          *
          * The ::fonts-changed signal is emitted when the return values of
          * dh_settings_get_selected_fonts() have potentially changed.
-         *
-         * Since: 3.30
          */
         signals[SIGNAL_FONTS_CHANGED] =
                 g_signal_new ("fonts-changed",
@@ -565,7 +553,6 @@ _dh_settings_new (const gchar *contents_path,
  * #DhSettingsBuilder) and dh_settings_bind_all() has been called.
  *
  * Returns: (transfer none): the default #DhSettings object.
- * Since: 3.30
  */
 DhSettings *
 dh_settings_get_default (void)
@@ -599,8 +586,6 @@ _dh_settings_unref_default (void)
  * @settings: a #DhSettings.
  *
  * Binds all the #DhSettings properties to their corresponding #GSettings keys.
- *
- * Since: 3.30
  */
 void
 dh_settings_bind_all (DhSettings *settings)
@@ -616,7 +601,6 @@ dh_settings_bind_all (DhSettings *settings)
  * @settings: a #DhSettings.
  *
  * Returns: the value of the #DhSettings:group-books-by-language property.
- * Since: 3.30
  */
 gboolean
 dh_settings_get_group_books_by_language (DhSettings *settings)
@@ -632,8 +616,6 @@ dh_settings_get_group_books_by_language (DhSettings *settings)
  * @group_books_by_language: the new value.
  *
  * Sets the #DhSettings:group-books-by-language property.
- *
- * Since: 3.30
  */
 void
 dh_settings_set_group_books_by_language (DhSettings *settings,
@@ -655,8 +637,6 @@ dh_settings_set_group_books_by_language (DhSettings *settings,
  *
  * Binds the #DhSettings:group-books-by-language property to the corresponding
  * #GSettings key.
- *
- * Since: 3.30
  */
 void
 dh_settings_bind_group_books_by_language (DhSettings *settings)
@@ -679,7 +659,6 @@ dh_settings_bind_group_books_by_language (DhSettings *settings)
  * %FALSE, otherwise %TRUE is returned.
  *
  * Returns: whether @book is enabled.
- * Since: 3.30
  */
 gboolean
 dh_settings_is_book_enabled (DhSettings *settings,
@@ -702,8 +681,6 @@ dh_settings_is_book_enabled (DhSettings *settings,
  *
  * Modifies the "books-disabled" #GSettings key. It adds or removes the @book ID
  * from "books-disabled".
- *
- * Since: 3.30
  */
 void
 dh_settings_set_book_enabled (DhSettings *settings,
@@ -734,8 +711,6 @@ dh_settings_set_book_enabled (DhSettings *settings,
  *
  * This function is useful if you call dh_settings_set_book_enabled() several
  * times in a row.
- *
- * Since: 3.30
  */
 void
 dh_settings_freeze_books_disabled_changed (DhSettings *settings)
@@ -755,8 +730,6 @@ dh_settings_freeze_books_disabled_changed (DhSettings *settings)
  * the #DhSettings::books-disabled-changed signal.
  *
  * A bit like g_object_thaw_notify(), except that there is no freeze count.
- *
- * Since: 3.30
  */
 void
 dh_settings_thaw_books_disabled_changed (DhSettings *settings)
@@ -785,8 +758,6 @@ dh_settings_thaw_books_disabled_changed (DhSettings *settings)
  * If #DhSettings:use-system-fonts is %TRUE, returns the system fonts. Otherwise
  * returns the values of the #DhSettings:variable-font and
  * #DhSettings:fixed-font properties.
- *
- * Since: 3.30
  */
 void
 dh_settings_get_selected_fonts (DhSettings  *settings,
@@ -813,7 +784,6 @@ dh_settings_get_selected_fonts (DhSettings  *settings,
  * @settings: a #DhSettings.
  *
  * Returns: the value of the #DhSettings:use-system-fonts property.
- * Since: 3.30
  */
 gboolean
 dh_settings_get_use_system_fonts (DhSettings *settings)
@@ -829,8 +799,6 @@ dh_settings_get_use_system_fonts (DhSettings *settings)
  * @use_system_fonts: the new value.
  *
  * Sets the #DhSettings:use-system-fonts property.
- *
- * Since: 3.30
  */
 void
 dh_settings_set_use_system_fonts (DhSettings *settings,
@@ -857,7 +825,6 @@ dh_settings_set_use_system_fonts (DhSettings *settings,
  * property.
  *
  * Returns: the value of the #DhSettings:variable-font property.
- * Since: 3.30
  */
 const gchar *
 dh_settings_get_variable_font (DhSettings *settings)
@@ -873,8 +840,6 @@ dh_settings_get_variable_font (DhSettings *settings)
  * @variable_font: the new value.
  *
  * Sets the #DhSettings:variable-font property.
- *
- * Since: 3.30
  */
 void
 dh_settings_set_variable_font (DhSettings  *settings,
@@ -902,7 +867,6 @@ dh_settings_set_variable_font (DhSettings  *settings,
  * property.
  *
  * Returns: the value of the #DhSettings:fixed-font property.
- * Since: 3.30
  */
 const gchar *
 dh_settings_get_fixed_font (DhSettings *settings)
@@ -918,8 +882,6 @@ dh_settings_get_fixed_font (DhSettings *settings)
  * @fixed_font: the new value.
  *
  * Sets the #DhSettings:fixed-font property.
- *
- * Since: 3.30
  */
 void
 dh_settings_set_fixed_font (DhSettings  *settings,
@@ -944,8 +906,6 @@ dh_settings_set_fixed_font (DhSettings  *settings,
  *
  * Binds the #DhSettings:use-system-fonts, #DhSettings:variable-font and
  * #DhSettings:fixed-font properties to their corresponding #GSettings keys.
- *
- * Since: 3.30
  */
 void
 dh_settings_bind_fonts (DhSettings *settings)

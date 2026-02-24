@@ -298,8 +298,6 @@ dh_search_bar_class_init (DhSearchBarClass *klass)
          *
          * The associated #DhNotebook. #DhSearchBar has a strong reference to
          * the #DhNotebook.
-         *
-         * Since: 3.30
          */
         properties[PROP_NOTEBOOK] =
                 g_param_spec_object ("notebook",
@@ -324,7 +322,6 @@ dh_search_bar_init (DhSearchBar *search_bar)
  * @notebook: a #DhNotebook.
  *
  * Returns: (transfer floating): a new #DhSearchBar.
- * Since: 3.30
  */
 DhSearchBar *
 dh_search_bar_new (DhNotebook *notebook)
@@ -341,7 +338,6 @@ dh_search_bar_new (DhNotebook *notebook)
  * @search_bar: a #DhSearchBar.
  *
  * Returns: (transfer none): the #DhSearchBar:notebook.
- * Since: 3.30
  */
 DhNotebook *
 dh_search_bar_get_notebook (DhSearchBar *search_bar)
@@ -356,8 +352,6 @@ dh_search_bar_get_notebook (DhSearchBar *search_bar)
  * @search_bar: a #DhSearchBar.
  *
  * Grabs the focus to the #DhSearchBar search entry and selects its text.
- *
- * Since: 3.36
  */
 void
 dh_search_bar_grab_focus_to_search_entry (DhSearchBar *search_bar)

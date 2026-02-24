@@ -72,7 +72,6 @@ dh_settings_builder_init (DhSettingsBuilder *builder)
  * dh_settings_builder_new:
  *
  * Returns: (transfer full): a new #DhSettingsBuilder.
- * Since: 3.30
  */
 DhSettingsBuilder *
 dh_settings_builder_new (void)
@@ -89,8 +88,6 @@ dh_settings_builder_new (void)
  *
  * If you don't call this function, the default path for this schema will be
  * used.
- *
- * Since: 3.30
  */
 void
 dh_settings_builder_set_contents_path (DhSettingsBuilder *builder,
@@ -112,8 +109,6 @@ dh_settings_builder_set_contents_path (DhSettingsBuilder *builder,
  *
  * If you don't call this function, the default path for this schema will be
  * used.
- *
- * Since: 3.30
  */
 void
 dh_settings_builder_set_fonts_path (DhSettingsBuilder *builder,
@@ -131,7 +126,6 @@ dh_settings_builder_set_fonts_path (DhSettingsBuilder *builder,
  * @builder: a #DhSettingsBuilder.
  *
  * Returns: (transfer full): the newly created #DhSettings object.
- * Since: 3.30
  */
 DhSettings *
 dh_settings_builder_create_object (DhSettingsBuilder *builder)

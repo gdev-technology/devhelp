@@ -130,7 +130,6 @@ dh_link_new_common (DhLinkType   type,
  * anchor. Usually the index.html page.
  *
  * Returns: a new #DhLink of type %DH_LINK_TYPE_BOOK.
- * Since: 3.28
  */
 DhLink *
 dh_link_new_book (const gchar *base_path,
@@ -289,7 +288,6 @@ dh_link_get_name (DhLink *link)
  * Returns: whether the relative URL of @link matches with @relative_url. There
  * is a special case for the index.html page, it can also match the empty
  * string.
- * Since: 3.28
  */
 gboolean
 dh_link_match_relative_url (DhLink      *link,
@@ -335,7 +333,6 @@ dh_link_match_relative_url (DhLink      *link,
  * this function will return %TRUE if the @page_id is `"DhLink"`.
  *
  * Returns: whether @link belongs to @page_id.
- * Since: 3.28
  */
 gboolean
 dh_link_belongs_to_page (DhLink      *link,
