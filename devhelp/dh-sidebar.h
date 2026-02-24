@@ -10,7 +10,6 @@
 #define DH_SIDEBAR_H
 
 #include <gtk/gtk.h>
-#include <devhelp/dh-book-manager.h>
 #include <devhelp/dh-link.h>
 #include <devhelp/dh-profile.h>
 
@@ -41,9 +40,6 @@ struct _DhSidebarClass {
 };
 
 GType           dh_sidebar_get_type             (void);
-
-G_DEPRECATED_FOR (dh_sidebar_new2)
-GtkWidget *     dh_sidebar_new                  (DhBookManager *book_manager);
 
 DhSidebar *     dh_sidebar_new2                 (DhProfile *profile);
 

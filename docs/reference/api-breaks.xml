@@ -293,8 +293,7 @@
             <listitem>
               <para>
                 The <code>book_manager</code> parameter of
-                <link linkend="dh-sidebar-new">dh_sidebar_new()</link> is now
-                deprecated.
+                <code>dh_sidebar_new()</code> is now deprecated.
               </para>
             </listitem>
           </itemizedlist>

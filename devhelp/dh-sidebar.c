@@ -647,20 +647,6 @@ dh_sidebar_init (DhSidebar *sidebar)
 }
 
 /**
- * dh_sidebar_new:
- * @book_manager: (nullable): a #DhBookManager. This parameter is deprecated,
- * you should just pass %NULL.
- *
- * Returns: (transfer floating): a new #DhSidebar widget.
- * Deprecated: 3.30: Use dh_sidebar_new2() instead.
- */
-GtkWidget *
-dh_sidebar_new (DhBookManager *book_manager)
-{
-        return g_object_new (DH_TYPE_SIDEBAR, NULL);
-}
-
-/**
  * dh_sidebar_new2:
  * @profile: (nullable): a #DhProfile, or %NULL for the default profile.
  *
