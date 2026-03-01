@@ -11,7 +11,6 @@
 #include <devhelp/dh-enum-types.h>
 
 #include <devhelp/dh-application-window.h>
-#include <devhelp/dh-assistant-view.h>
 #include <devhelp/dh-book.h>
 #include <devhelp/dh-book-list.h>
 #include <devhelp/dh-book-list-builder.h>

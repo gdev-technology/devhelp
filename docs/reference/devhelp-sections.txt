@@ -13,23 +13,6 @@ dh_application_window_bind_sidebar_and_notebook
 </SECTION>
 
 <SECTION>
-<FILE>dh-assistant-view</FILE>
-DhAssistantView
-dh_assistant_view_new
-dh_assistant_view_set_link
-dh_assistant_view_search
-<SUBSECTION Standard>
-DhAssistantViewClass
-DH_ASSISTANT_VIEW
-DH_ASSISTANT_VIEW_CLASS
-DH_ASSISTANT_VIEW_GET_CLASS
-DH_IS_ASSISTANT_VIEW
-DH_IS_ASSISTANT_VIEW_CLASS
-DH_TYPE_ASSISTANT_VIEW
-dh_assistant_view_get_type
-</SECTION>
-
-<SECTION>
 <FILE>dh-book</FILE>
 DhBook
 dh_book_new
