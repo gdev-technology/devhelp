@@ -9,12 +9,10 @@
 /* Devhelp GSettings schema IDs */
 #define SETTINGS_SCHEMA_ID_WINDOW               "org.gnome.devhelp.state.main.window"
 #define SETTINGS_SCHEMA_ID_PANED                "org.gnome.devhelp.state.main.paned"
-#define SETTINGS_SCHEMA_ID_ASSISTANT            "org.gnome.devhelp.state.assistant.window"
 
 struct _DhSettingsAppPrivate {
         GSettings *settings_window;
         GSettings *settings_paned;
-        GSettings *settings_assistant;
 };
 
 /* DhSettingsApp is a singleton. */
@@ -29,7 +27,6 @@ dh_settings_app_dispose (GObject *object)
 
         g_clear_object (&self->priv->settings_window);
         g_clear_object (&self->priv->settings_paned);
-        g_clear_object (&self->priv->settings_assistant);
 
         G_OBJECT_CLASS (dh_settings_app_parent_class)->dispose (object);
 }
@@ -59,7 +56,6 @@ dh_settings_app_init (DhSettingsApp *self)
 
         self->priv->settings_window = g_settings_new (SETTINGS_SCHEMA_ID_WINDOW);
         self->priv->settings_paned = g_settings_new (SETTINGS_SCHEMA_ID_PANED);
-        self->priv->settings_assistant = g_settings_new (SETTINGS_SCHEMA_ID_ASSISTANT);
 }
 
 DhSettingsApp *
@@ -95,11 +91,4 @@ dh_settings_app_peek_paned_settings (DhSettingsApp *self)
 {
         g_return_val_if_fail (DH_IS_SETTINGS_APP (self), NULL);
         return self->priv->settings_paned;
-}
-
-GSettings *
-dh_settings_app_peek_assistant_settings (DhSettingsApp *self)
-{
-        g_return_val_if_fail (DH_IS_SETTINGS_APP (self), NULL);
-        return self->priv->settings_assistant;
 }

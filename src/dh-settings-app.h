@@ -41,8 +41,6 @@ GSettings *     dh_settings_app_peek_window_settings        (DhSettingsApp *self
 
 GSettings *     dh_settings_app_peek_paned_settings         (DhSettingsApp *self);
 
-GSettings *     dh_settings_app_peek_assistant_settings     (DhSettingsApp *self);
-
 G_END_DECLS
 
 #endif /* DH_SETTINGS_APP_H */
