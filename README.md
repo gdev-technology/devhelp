@@ -46,10 +46,9 @@ Emacs, Geany, …).
 Integration with other developer tools
 --------------------------------------
 
-Devhelp provides some command line options, such as `--search` and
-`--search-assistant`. A text editor plugin can for example launch the command
-`devhelp --search function_name` when a keyboard shortcut is pressed, with the
-`function_name` under the cursor.
+Devhelp provides some command line options, such as `--search`. A text editor
+plugin can for example launch the command `devhelp --search function_name` when
+a keyboard shortcut is pressed, with the `function_name` under the cursor.
 
 Devhelp also provides a shared library, to integrate the GTK widgets inside an
 IDE. It is used for example by Builder and Anjuta.
