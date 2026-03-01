@@ -11,7 +11,6 @@
 #include "dh-app.h"
 #include <glib/gi18n.h>
 #include <amtk/amtk.h>
-#include "dh-assistant.h"
 #include "dh-preferences.h"
 #include "dh-settings-app.h"
 #include "dh-util-app.h"
@@ -169,24 +168,6 @@ add_action_infos (DhApp *app)
         add_no_gaction_action_infos ();
 }
 
-static DhAssistant *
-get_active_assistant_window (DhApp *app)
-{
-        GList *windows;
-        GList *l;
-
-        windows = gtk_application_get_windows (GTK_APPLICATION (app));
-
-        for (l = windows; l != NULL; l = l->next) {
-                GtkWindow *cur_window = GTK_WINDOW (l->data);
-
-                if (DH_IS_ASSISTANT (cur_window))
-                        return DH_ASSISTANT (cur_window);
-        }
-
-        return NULL;
-}
-
 static void
 save_active_main_window_gsettings (DhApp *app)
 {
@@ -200,21 +181,6 @@ save_active_main_window_gsettings (DhApp *app)
         settings = dh_settings_app_get_singleton ();
         dh_util_window_settings_save (GTK_WINDOW (active_window),
                                       dh_settings_app_peek_window_settings (settings));
-}
-
-static void
-save_active_assistant_window_gsettings (DhApp *app)
-{
-        DhAssistant *active_assistant;
-        DhSettingsApp *settings;
-
-        active_assistant = get_active_assistant_window (app);
-        if (active_assistant == NULL)
-                return;
-
-        settings = dh_settings_app_get_singleton ();
-        dh_util_window_settings_save (GTK_WINDOW (active_assistant),
-                                      dh_settings_app_peek_assistant_settings (settings));
 }
 
 static void
@@ -311,7 +277,6 @@ quit_cb (GSimpleAction *action,
         DhApp *app = DH_APP (user_data);
 
         save_active_main_window_gsettings (app);
-        save_active_assistant_window_gsettings (app);
 
         g_application_quit (G_APPLICATION (app));
 }
@@ -334,29 +299,6 @@ search_cb (GSimpleAction *action,
         window = dh_app_get_active_main_window (app, TRUE);
         dh_window_search (window, keyword);
         gtk_window_present (GTK_WINDOW (window));
-}
-
-static void
-search_assistant_cb (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       user_data)
-{
-        DhApp *app = DH_APP (user_data);
-        DhAssistant *assistant;
-        const gchar *keyword;
-
-        keyword = g_variant_get_string (parameter, NULL);
-        if (keyword == NULL || keyword[0] == '\0') {
-                g_warning ("Cannot look for keyword in Search Assistant: no keyword given.");
-                return;
-        }
-
-        assistant = get_active_assistant_window (app);
-        if (assistant == NULL)
-                assistant = dh_assistant_new (app);
-
-        dh_assistant_search (assistant, keyword);
-        gtk_window_present (GTK_WINDOW (assistant));
 }
 
 static void
@@ -387,7 +329,6 @@ add_action_entries (DhApp *app)
 
                 /* Additional commandline-specific actions */
                 { "search", search_cb, "s" },
-                { "search-assistant", search_assistant_cb, "s" },
                 { "raise", raise_cb },
         };
 
@@ -479,11 +420,6 @@ static GOptionEntry options[] = {
           N_("Search for a keyword"),
           N_("KEYWORD")
         },
-        { "search-assistant", 'a',
-          0, G_OPTION_ARG_STRING, NULL,
-          N_("Search and display any hit in the assistant window"),
-          N_("KEYWORD")
-        },
         { "version", 'v',
           0, G_OPTION_ARG_NONE, &option_version,
           N_("Display the version and exit"),
@@ -517,14 +453,12 @@ dh_app_command_line (GApplication            *g_app,
         GVariantDict *options_dict;
         gboolean option_new_window = FALSE;
         const gchar *option_search = NULL;
-        const gchar *option_search_assistant = NULL;
         gboolean option_quit = FALSE;
 
         options_dict = g_application_command_line_get_options_dict (command_line);
 
         g_variant_dict_lookup (options_dict, "new-window", "b", &option_new_window);
         g_variant_dict_lookup (options_dict, "search", "&s", &option_search);
-        g_variant_dict_lookup (options_dict, "search-assistant", "&s", &option_search_assistant);
         g_variant_dict_lookup (options_dict, "quit", "b", &option_quit);
 
         if (option_quit) {
@@ -539,11 +473,6 @@ dh_app_command_line (GApplication            *g_app,
                 g_action_group_activate_action (G_ACTION_GROUP (app),
                                                 "search",
                                                 g_variant_new_string (option_search));
-
-        if (option_search_assistant != NULL)
-                g_action_group_activate_action (G_ACTION_GROUP (app),
-                                                "search-assistant",
-                                                g_variant_new_string (option_search_assistant));
 
         g_action_group_activate_action (G_ACTION_GROUP (app), "raise", NULL);
 
