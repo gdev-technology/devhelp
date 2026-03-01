@@ -33,8 +33,6 @@ devhelp/dh-web-view.c
 plugins/gedit-plugin/devhelp.plugin.desktop.in
 plugins/gedit-plugin/devhelp.py
 src/dh-app.c
-src/dh-assistant.c
-src/dh-assistant.ui
 src/dh-main.c
 src/dh-preferences.c
 src/dh-preferences.ui
