@@ -35,27 +35,6 @@ _dh_util_ascii_strtitle (gchar *str)
         }
 }
 
-gchar *
-_dh_util_create_data_uri_for_filename (const gchar *filename,
-                                       const gchar *mime_type)
-{
-        gchar *data;
-        gsize  data_length;
-        gchar *base64;
-        gchar *uri;
-
-        if (!g_file_get_contents (filename, &data, &data_length, NULL))
-                return NULL;
-
-        base64 = g_base64_encode ((const guchar *)data, data_length);
-        g_free (data);
-
-        uri = g_strdup_printf ("data:%s;charset=utf8;base64,%s", mime_type, base64);
-        g_free(base64);
-
-        return uri;
-}
-
 /* Adds q2 onto the end of q1, and frees q2. */
 void
 _dh_util_queue_concat (GQueue *q1,

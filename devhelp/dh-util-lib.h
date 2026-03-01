@@ -18,10 +18,6 @@ G_GNUC_INTERNAL
 void            _dh_util_ascii_strtitle                 (gchar *str);
 
 G_GNUC_INTERNAL
-gchar *         _dh_util_create_data_uri_for_filename   (const gchar *filename,
-                                                         const gchar *mime_type);
-
-G_GNUC_INTERNAL
 void            _dh_util_queue_concat                   (GQueue *q1,
                                                          GQueue *q2);
 
