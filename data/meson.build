@@ -45,9 +45,4 @@ configure_file(
   install_dir: get_option('datadir') / 'dbus-1/services'
 )
 
-install_data(
-  ['assistant.css', 'assistant.js'],
-  install_dir: get_option('datadir') / 'devhelp/assistant'
-)
-
 install_man('devhelp.1')
