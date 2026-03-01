@@ -754,20 +754,3 @@ dh_window_search (DhWindow    *window,
 
         dh_sidebar_set_search_string (priv->sidebar, str);
 }
-
-/* Only call this with a URI that is known to be in the docs. */
-void
-_dh_window_display_uri (DhWindow    *window,
-                        const gchar *uri)
-{
-        DhWebView *web_view;
-
-        g_return_if_fail (DH_IS_WINDOW (window));
-        g_return_if_fail (uri != NULL);
-
-        web_view = get_active_web_view (window);
-        if (web_view == NULL)
-                return;
-
-        webkit_web_view_load_uri (WEBKIT_WEB_VIEW (web_view), uri);
-}
