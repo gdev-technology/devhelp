@@ -15,10 +15,6 @@
 G_BEGIN_DECLS
 
 G_GNUC_INTERNAL
-gchar *         _dh_util_build_data_filename            (const gchar *first_part,
-                                                         ...);
-
-G_GNUC_INTERNAL
 void            _dh_util_ascii_strtitle                 (gchar *str);
 
 G_GNUC_INTERNAL

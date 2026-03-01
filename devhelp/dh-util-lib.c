@@ -9,45 +9,6 @@
 #include "dh-util-lib.h"
 #include "dh-link.h"
 
-gchar *
-_dh_util_build_data_filename (const gchar *first_part,
-                              ...)
-{
-        gchar        *datadir = NULL;
-        va_list       args;
-        const gchar  *part;
-        gchar       **strv;
-        gint          i;
-        gchar        *ret;
-
-        va_start (args, first_part);
-
-        if (datadir == NULL) {
-                datadir = g_strdup (DATADIR);
-        }
-
-        /* 2 = 1 initial component + terminating NULL element. */
-        strv = g_malloc (sizeof (gchar *) * 2);
-        strv[0] = (gchar *) datadir;
-
-        i = 1;
-        for (part = first_part; part; part = va_arg (args, char *), i++) {
-                /* +2 = 1 new element + terminating NULL element. */
-                strv = g_realloc (strv, sizeof (gchar*) * (i + 2));
-                strv[i] = (gchar *) part;
-        }
-
-        strv[i] = NULL;
-        ret = g_build_filenamev (strv);
-        g_free (strv);
-
-        g_free (datadir);
-
-        va_end (args);
-
-        return ret;
-}
-
 /* We're only going to expect ASCII strings here, so there's no point in
  * playing with g_unichar_totitle() and such.
  * Note that we modify the string in place.
