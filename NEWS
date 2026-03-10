@@ -1,3 +1,29 @@
+News in 50.0, 2026-03-10
+------------------------
+* Build:
+    - Fix build error with newer Meson.
+    - Enable gtk_doc option by default.
+    - Use some new Meson features and fix deprecations.
+
+* libdevhelp is no longer used by outside projects (gnome-builder uses Manuals,
+  and Anjuta has been archived). As a result:
+    - Remove the deprecated API.
+    - No longer document the API breaks.
+    - Treat the libdevhelp as something internal, be able to change the code and
+      API at will.
+
+* Remove the assistant feature. In the past (with X11, not Wayland) it was
+  possible to position the assistant window on the screen. With Wayland this
+  feature has been removed, so the assistant is much less useful.
+  So the --search-assistant command line option has been removed.
+  The code cleanup has been done afterwards, to avoid dead code and simplify
+  where possible.
+
+* Upgrade from webkit2gtk-4.0 to webkit2gtk-4.1 (this is still GTK 3).
+* Upgrade from amtk to libgedit-amtk.
+* Fix some compiler warnings.
+* Documentation updates.
+
 News in 40.alpha, 2021-01-11
 ----------------------------
 * New GNOME versioning scheme.
