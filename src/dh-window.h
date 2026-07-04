@@ -31,7 +31,7 @@ struct _DhWindowClass {
         GtkApplicationWindowClass parent_class;
 };
 
-GType           dh_window_get_type              (void) G_GNUC_CONST;
+GType           dh_window_get_type              (void);
 
 GtkWidget *     dh_window_new                   (GtkApplication *application);
 

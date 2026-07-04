@@ -32,7 +32,7 @@ struct _DhAppClass {
         GtkApplicationClass parent_class;
 };
 
-GType           dh_app_get_type                 (void) G_GNUC_CONST;
+GType           dh_app_get_type                 (void);
 
 DhApp *         dh_app_new                      (void);
 

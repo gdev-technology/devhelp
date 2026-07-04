@@ -39,7 +39,7 @@ struct _DhSettingsClass {
         gpointer padding[12];
 };
 
-GType           dh_settings_get_type                            (void) G_GNUC_CONST;
+GType           dh_settings_get_type                            (void);
 
 G_GNUC_INTERNAL
 DhSettings *    _dh_settings_new                                (const gchar *contents_path,

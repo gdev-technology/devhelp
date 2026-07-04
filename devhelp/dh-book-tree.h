@@ -33,7 +33,7 @@ struct _DhBookTreeClass {
         gpointer padding[12];
 };
 
-GType           dh_book_tree_get_type           (void) G_GNUC_CONST;
+GType           dh_book_tree_get_type           (void);
 
 DhBookTree *    dh_book_tree_new                (DhProfile *profile);
 

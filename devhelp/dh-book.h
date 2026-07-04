@@ -36,7 +36,7 @@ struct _DhBookClass {
         gpointer padding[12];
 };
 
-GType        dh_book_get_type        (void) G_GNUC_CONST;
+GType        dh_book_get_type        (void);
 
 DhBook *     dh_book_new             (GFile *index_file);
 
