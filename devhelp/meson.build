@@ -106,7 +106,7 @@ LIBDEVHELP_SHARED_LIB_DEP = declare_dependency(
 )
 
 PKG_CONFIG.generate(
-  filebase: 'libdevhelp-@0@'.format(LIBDEVHELP_API_VERSION_FULL),
+  filebase: 'libdevhelp-@0@'.format(LIBDEVHELP_API_VERSION),
   name: meson.project_name(),
   description: meson.project_name(),
   libraries: libdevhelp_shared_lib,
@@ -118,14 +118,14 @@ PKG_CONFIG.generate(
 
 GNOME.generate_gir(
   libdevhelp_shared_lib,
-  export_packages: 'libdevhelp-@0@'.format(LIBDEVHELP_API_VERSION_FULL),
+  export_packages: 'libdevhelp-@0@'.format(LIBDEVHELP_API_VERSION),
   header: 'devhelp/devhelp.h',
   identifier_prefix: 'Dh',
   include_directories: ROOT_INCLUDE_DIR,
   includes: ['Gtk-3.0', 'WebKit2-4.1'],
   install: true,
   namespace: 'Devhelp',
-  nsversion: LIBDEVHELP_API_VERSION_FULL,
+  nsversion: LIBDEVHELP_API_VERSION,
   sources: [
     libdevhelp_public_headers,
     libdevhelp_public_c_files,

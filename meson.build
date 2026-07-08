@@ -17,10 +17,6 @@ I18N = import('i18n')
 # API version, used for parallel installability.
 LIBDEVHELP_API_VERSION = '3'
 
-# It would be nice to get rid of this variant, to use only the short version
-# everywhere.
-LIBDEVHELP_API_VERSION_FULL = '3.0'
-
 # Libtool versioning
 #
 # A good time to update it is for the GNOME x.y.90 version, at API freeze, so
