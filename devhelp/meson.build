@@ -94,7 +94,7 @@ libdevhelp_shared_lib = shared_library(
   link_whole: libdevhelp_static_lib,
   link_args: '-Wl,--version-script,' + symbol_map,
   link_depends: symbol_map,
-  version: LIBDEVHELP_LT_VERSION,
+  soversion: SO_VERSION,
   install: true
 )
 

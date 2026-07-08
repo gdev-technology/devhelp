@@ -14,33 +14,10 @@ GNOME = import('gnome')
 PKG_CONFIG = import('pkgconfig')
 I18N = import('i18n')
 
+SO_VERSION = 0
+
 # API version, used for parallel installability.
 LIBDEVHELP_API_VERSION = '3'
-
-# Libtool versioning
-#
-# A good time to update it is for the GNOME x.y.90 version, at API freeze, so
-# that packagers have the time to update the package. For other development
-# releases (if the minor package version is odd), keep the same Libtool
-# version.
-#
-# To update the Libtool version, apply the following algorithm step by step:
-# 1. If the library source code has changed at all since the last
-#    update, then increment REVISION.
-# 2. If any exported functions or data have been added, removed, or
-#    changed since the last update, increment CURRENT and set REVISION
-#    to 0.
-# 3. If any exported functions or data have been added since the last
-#    public release, increment AGE.
-# 4. If any exported functions or data have been removed since the last
-#    public release, set AGE to 0.
-#
-# When incrementing the API version (usually for a new major package version),
-# set CURRENT, REVISION and AGE to 0 since it's like a new library.
-lt_current = 6
-lt_revision = 3
-lt_age = 0
-LIBDEVHELP_LT_VERSION = '@0@.@1@.@2@'.format(lt_current, lt_revision, lt_age)
 
 LIBDEVHELP_PUBLIC_DEPS = [
   dependency('gio-2.0', version: '>= 2.64'),
