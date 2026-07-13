@@ -525,9 +525,7 @@ _dh_parser_read_file (GFile   *index_file,
 {
         DhParser *parser;
         gchar *index_file_uri;
-        gboolean gz;
         GFileInputStream *file_input_stream = NULL;
-        GInputStream *input_stream = NULL;
         gboolean ok = TRUE;
 
         g_return_val_if_fail (G_IS_FILE (index_file), FALSE);
@@ -542,19 +540,10 @@ _dh_parser_read_file (GFile   *index_file,
 
         index_file_uri = g_file_get_uri (index_file);
 
-        if (g_str_has_suffix (index_file_uri, ".devhelp2")) {
+        if (g_str_has_suffix (index_file_uri, ".devhelp2"))
                 parser->version = FORMAT_VERSION_2;
-                gz = FALSE;
-        } else if (g_str_has_suffix (index_file_uri, ".devhelp")) {
+        else if (g_str_has_suffix (index_file_uri, ".devhelp"))
                 parser->version = FORMAT_VERSION_1;
-                gz = FALSE;
-        } else if (g_str_has_suffix (index_file_uri, ".devhelp2.gz")) {
-                parser->version = FORMAT_VERSION_2;
-                gz = TRUE;
-        } else {
-                parser->version = FORMAT_VERSION_1;
-                gz = TRUE;
-        }
 
         parser->markup_parser = g_new0 (GMarkupParser, 1);
         parser->markup_parser->start_element = parser_start_node_cb;
@@ -580,22 +569,11 @@ _dh_parser_read_file (GFile   *index_file,
                            "be ported to the Devhelp index file format version 2.",
                            index_file_uri);
 
-        if (gz) {
-                GZlibDecompressor *zlib_decompressor;
-
-                zlib_decompressor = g_zlib_decompressor_new (G_ZLIB_COMPRESSOR_FORMAT_GZIP);
-                input_stream = g_converter_input_stream_new (G_INPUT_STREAM (file_input_stream),
-                                                             G_CONVERTER (zlib_decompressor));
-                g_object_unref (zlib_decompressor);
-        } else {
-                input_stream = G_INPUT_STREAM (g_object_ref (file_input_stream));
-        }
-
         while (TRUE) {
                 gchar buffer[BYTES_PER_READ];
                 gssize bytes_read;
 
-                bytes_read = g_input_stream_read (input_stream,
+                bytes_read = g_input_stream_read (G_INPUT_STREAM (file_input_stream),
                                                   buffer,
                                                   BYTES_PER_READ,
                                                   NULL,
@@ -645,7 +623,6 @@ _dh_parser_read_file (GFile   *index_file,
 exit:
         g_free (index_file_uri);
         g_clear_object (&file_input_stream);
-        g_clear_object (&input_stream);
         dh_parser_free (parser);
 
         return ok;
