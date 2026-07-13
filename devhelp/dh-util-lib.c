@@ -100,13 +100,13 @@ _dh_util_free_book_tree (GNode *book_tree)
 
 /* Returns: (transfer full) (element-type GFile): the list of possible Devhelp
  * index files in @book_directory, in order of preference.
+ * TODO: simplify, there is now only one possibility.
  */
 GSList *
 _dh_util_get_possible_index_files (GFile *book_directory)
 {
         const gchar *extensions[] = {
                 ".devhelp2",
-                ".devhelp2.gz",
                 NULL
         };
         gchar *directory_name;
