@@ -28,12 +28,8 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 <note>
   <p>
     The “2” in the <file>*.devhelp2</file> file extension is because it is the
-    second version of the file format. The first version of the format, with
-    the <file>*.devhelp</file> file extension, is deprecated and its support in
-    <app>Devhelp</app> may be removed in the future. On application startup,
-    when <app>Devhelp</app> scans the filesystem to find books, it emits a
-    warning message in the terminal for each book that uses a deprecated
-    format.
+    second version of the file format. <app>Devhelp</app> no longer supports
+    the first version.
   </p>
 </note>
 
