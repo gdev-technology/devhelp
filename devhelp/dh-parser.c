@@ -112,11 +112,13 @@ parser_start_node_book (DhParser             *parser,
         gint line;
         gint col;
         gint attr_num;
-        gchar *base = NULL;
+        const gchar *xmlns;
         const gchar *name = NULL;
         const gchar *title = NULL;
+        const gchar *base = NULL;
         const gchar *uri = NULL;
         const gchar *language = NULL;
+        gchar *base_to_free = NULL;
         DhLink *link;
 
         if (g_ascii_strcasecmp (node_name, "book") != 0) {
@@ -130,33 +132,29 @@ parser_start_node_book (DhParser             *parser,
         }
 
         for (attr_num = 0; attribute_names[attr_num] != NULL; attr_num++) {
-                if (g_ascii_strcasecmp (attribute_names[attr_num], "xmlns") == 0) {
-                        const gchar *xmlns;
-
+                if (g_ascii_strcasecmp (attribute_names[attr_num], "xmlns") == 0)
                         xmlns = attribute_values[attr_num];
-                        if (g_ascii_strcasecmp (xmlns, NAMESPACE) != 0) {
-                                g_markup_parse_context_get_position (context, &line, &col);
-                                g_set_error (error,
-                                             DH_ERROR,
-                                             DH_ERROR_MALFORMED_BOOK,
-                                             "Expected xmlns value “" NAMESPACE "”, "
-                                             "got “%s” at line %d, column %d.",
-                                             xmlns, line, col);
-                                return;
-                        }
-                } else if (g_ascii_strcasecmp (attribute_names[attr_num], "name") == 0) {
+                else if (g_ascii_strcasecmp (attribute_names[attr_num], "name") == 0)
                         name = attribute_values[attr_num];
-                } else if (g_ascii_strcasecmp (attribute_names[attr_num], "title") == 0) {
+                else if (g_ascii_strcasecmp (attribute_names[attr_num], "title") == 0)
                         title = attribute_values[attr_num];
-                } else if (g_ascii_strcasecmp (attribute_names[attr_num], "base") == 0) {
-                        /* Dup this one */
-                        // FIXME: potential memory leak with the early return just above.
-                        base = g_strdup (attribute_values[attr_num]);
-                } else if (g_ascii_strcasecmp (attribute_names[attr_num], "link") == 0) {
+                else if (g_ascii_strcasecmp (attribute_names[attr_num], "base") == 0)
+                        base = attribute_values[attr_num];
+                else if (g_ascii_strcasecmp (attribute_names[attr_num], "link") == 0)
                         uri = attribute_values[attr_num];
-                } else if (g_ascii_strcasecmp (attribute_names[attr_num], "language") == 0) {
+                else if (g_ascii_strcasecmp (attribute_names[attr_num], "language") == 0)
                         language = attribute_values[attr_num];
-                }
+        }
+
+        if (xmlns != NULL && g_ascii_strcasecmp (xmlns, NAMESPACE) != 0) {
+                g_markup_parse_context_get_position (context, &line, &col);
+                g_set_error (error,
+                             DH_ERROR,
+                             DH_ERROR_MALFORMED_BOOK,
+                             "Expected xmlns value “" NAMESPACE "”, "
+                             "got “%s” at line %d, column %d.",
+                             xmlns, line, col);
+                return;
         }
 
         if (name == NULL || title == NULL || uri == NULL) {
@@ -164,7 +162,7 @@ parser_start_node_book (DhParser             *parser,
                 g_set_error (error,
                              DH_ERROR,
                              DH_ERROR_MALFORMED_BOOK,
-                             "“title”, “name” and “link” attributes are required "
+                             "“name”, “title” and “link” attributes are required "
                              "inside the <book> element at line %d, column %d.",
                              line, col);
                 return;
@@ -185,7 +183,10 @@ parser_start_node_book (DhParser             *parser,
                 GFile *directory;
 
                 directory = g_file_get_parent (parser->index_file);
-                base = g_file_get_path (directory);
+
+                base_to_free = g_file_get_path (directory);
+                base = base_to_free;
+
                 g_object_unref (directory);
         }
 
@@ -193,7 +194,6 @@ parser_start_node_book (DhParser             *parser,
                                  parser->book_id,
                                  parser->book_title,
                                  uri);
-        g_free (base);
         parser->all_links = g_list_prepend (parser->all_links, link);
 
         g_assert (parser->book_node == NULL);
@@ -201,6 +201,8 @@ parser_start_node_book (DhParser             *parser,
 
         parser->book_node = g_node_new (dh_link_ref (link));
         parser->parent_node = parser->book_node;
+
+        g_free (base_to_free);
 }
 
 static void
