@@ -44,15 +44,6 @@
 
 #define BYTES_PER_READ 4096
 
-typedef enum {
-        FORMAT_VERSION_1,
-
-        /* The main change is that version 2 uses <keyword> instead of
-         * <function>.
-         */
-        FORMAT_VERSION_2
-} FormatVersion;
-
 typedef struct {
         GMarkupParser *markup_parser;
         GMarkupParseContext *context;
@@ -73,8 +64,6 @@ typedef struct {
 
         /* Current sub section node */
         GNode *parent_node;
-
-        FormatVersion version;
 
         guint parsing_chapters : 1;
         guint parsing_keywords : 1;
@@ -293,22 +282,12 @@ parser_start_node_keyword (DhParser             *parser,
         DhLink *link;
         gchar *name_to_free = NULL;
 
-        if (parser->version == FORMAT_VERSION_2 &&
-            g_ascii_strcasecmp (node_name, "keyword") != 0) {
+        if (g_ascii_strcasecmp (node_name, "keyword") != 0) {
                 g_markup_parse_context_get_position (context, &line, &col);
                 g_set_error (error,
                              DH_ERROR,
                              DH_ERROR_MALFORMED_BOOK,
                              "Expected <keyword> element, got <%s> at line %d, column %d.",
-                             node_name, line, col);
-                return;
-        } else if (parser->version == FORMAT_VERSION_1 &&
-                   g_ascii_strcasecmp (node_name, "function") != 0) {
-                g_markup_parse_context_get_position (context, &line, &col);
-                g_set_error (error,
-                             DH_ERROR,
-                             DH_ERROR_MALFORMED_BOOK,
-                             "Expected <function> element, got <%s> at line %d, column %d.",
                              node_name, line, col);
                 return;
         }
@@ -324,49 +303,33 @@ parser_start_node_keyword (DhParser             *parser,
                         deprecated = attribute_values[attr_num];
         }
 
-        if (name == NULL || uri == NULL) {
+        if (type == NULL || name == NULL || uri == NULL) {
                 g_markup_parse_context_get_position (context, &line, &col);
                 g_set_error (error,
                              DH_ERROR,
                              DH_ERROR_MALFORMED_BOOK,
-                             "“name” and “link” attributes are required inside "
-                             "the <%s> element at line %d, column %d.",
-                             parser->version == FORMAT_VERSION_2 ? "keyword" : "function",
+                             "“type”, “name” and “link” attributes are required inside "
+                             "the <keyword> element at line %d, column %d.",
                              line, col);
                 return;
         }
 
-        if (parser->version == FORMAT_VERSION_2 && type == NULL) {
-                g_markup_parse_context_get_position (context, &line, &col);
-                g_set_error (error,
-                             DH_ERROR,
-                             DH_ERROR_MALFORMED_BOOK,
-                             "“type” attribute is required inside the "
-                             "<keyword> element at line %d, column %d.",
-                             line, col);
-                return;
-        }
-
-        if (parser->version == FORMAT_VERSION_2) {
-                if (g_str_equal (type, "function"))
-                        link_type = DH_LINK_TYPE_FUNCTION;
-                else if (g_str_equal (type, "struct"))
-                        link_type = DH_LINK_TYPE_STRUCT;
-                else if (g_str_equal (type, "macro"))
-                        link_type = DH_LINK_TYPE_MACRO;
-                else if (g_str_equal (type, "enum"))
-                        link_type = DH_LINK_TYPE_ENUM;
-                else if (g_str_equal (type, "typedef"))
-                        link_type = DH_LINK_TYPE_TYPEDEF;
-                else if (g_str_equal (type, "property"))
-                        link_type = DH_LINK_TYPE_PROPERTY;
-                else if (g_str_equal (type, "signal"))
-                        link_type = DH_LINK_TYPE_SIGNAL;
-                else
-                        link_type = DH_LINK_TYPE_KEYWORD;
-        } else {
+        if (g_str_equal (type, "function"))
+                link_type = DH_LINK_TYPE_FUNCTION;
+        else if (g_str_equal (type, "struct"))
+                link_type = DH_LINK_TYPE_STRUCT;
+        else if (g_str_equal (type, "macro"))
+                link_type = DH_LINK_TYPE_MACRO;
+        else if (g_str_equal (type, "enum"))
+                link_type = DH_LINK_TYPE_ENUM;
+        else if (g_str_equal (type, "typedef"))
+                link_type = DH_LINK_TYPE_TYPEDEF;
+        else if (g_str_equal (type, "property"))
+                link_type = DH_LINK_TYPE_PROPERTY;
+        else if (g_str_equal (type, "signal"))
+                link_type = DH_LINK_TYPE_SIGNAL;
+        else
                 link_type = DH_LINK_TYPE_KEYWORD;
-        }
 
         /* Strip out trailing "() (handling variants with space or non-breaking
          * space before the parentheses).
@@ -378,47 +341,24 @@ parser_start_node_keyword (DhParser             *parser,
          */
         if (g_str_has_suffix (name, "\xc2\xa0()")) {
                 name_to_free = g_strndup (name, strlen (name) - 4);
-
-                if (link_type == DH_LINK_TYPE_KEYWORD)
-                        link_type = DH_LINK_TYPE_FUNCTION;
-
                 name = name_to_free;
         } else if (g_str_has_suffix (name, " ()")) {
                 name_to_free = g_strndup (name, strlen (name) - 3);
-
-                if (link_type == DH_LINK_TYPE_KEYWORD)
-                        link_type = DH_LINK_TYPE_FUNCTION;
-
                 name = name_to_free;
         } else if (g_str_has_suffix (name, "()")) {
                 name_to_free = g_strndup (name, strlen (name) - 2);
-
-                /* With old devhelp format, take a guess that this is a
-                 * macro.
-                 */
-                if (link_type == DH_LINK_TYPE_KEYWORD)
-                        link_type = DH_LINK_TYPE_MACRO;
-
                 name = name_to_free;
         }
 
         /* Strip out prefixing "struct", "union", "enum", to make searching
-         * easier. Also fix up the link type (only applies for old devhelp
-         * format).
+         * easier.
          */
-        if (g_str_has_prefix (name, "struct ")) {
+        if (g_str_has_prefix (name, "struct "))
                 name = name + 7;
-                if (link_type == DH_LINK_TYPE_KEYWORD)
-                        link_type = DH_LINK_TYPE_STRUCT;
-        } else if (g_str_has_prefix (name, "union ")) {
+        else if (g_str_has_prefix (name, "union "))
                 name = name + 6;
-                if (link_type == DH_LINK_TYPE_KEYWORD)
-                        link_type = DH_LINK_TYPE_STRUCT;
-        } else if (g_str_has_prefix (name, "enum ")) {
+        else if (g_str_has_prefix (name, "enum "))
                 name = name + 5;
-                if (link_type == DH_LINK_TYPE_KEYWORD)
-                        link_type = DH_LINK_TYPE_ENUM;
-        }
 
         g_assert (parser->book_node != NULL);
 
@@ -525,7 +465,6 @@ _dh_parser_read_file (GFile   *index_file,
                       GError **error)
 {
         DhParser *parser;
-        gchar *index_file_uri;
         GFileInputStream *file_input_stream = NULL;
         gboolean ok = TRUE;
 
@@ -538,13 +477,6 @@ _dh_parser_read_file (GFile   *index_file,
         g_return_val_if_fail (error != NULL && *error == NULL, FALSE);
 
         parser = g_new0 (DhParser, 1);
-
-        index_file_uri = g_file_get_uri (index_file);
-
-        if (g_str_has_suffix (index_file_uri, ".devhelp2"))
-                parser->version = FORMAT_VERSION_2;
-        else if (g_str_has_suffix (index_file_uri, ".devhelp"))
-                parser->version = FORMAT_VERSION_1;
 
         parser->markup_parser = g_new0 (GMarkupParser, 1);
         parser->markup_parser->start_element = parser_start_node_cb;
@@ -559,16 +491,6 @@ _dh_parser_read_file (GFile   *index_file,
                 ok = FALSE;
                 goto exit;
         }
-
-        /* At this point we know that the file exists, the G_IO_ERROR_NOT_FOUND
-         * has been catched earlier. So print warning.
-         */
-        if (parser->version == FORMAT_VERSION_1)
-                g_warning ("The file '%s' uses the Devhelp index file format version 1, "
-                           "which is deprecated. A future version of Devhelp may remove "
-                           "the support for the format version 1. The index file should "
-                           "be ported to the Devhelp index file format version 2.",
-                           index_file_uri);
 
         while (TRUE) {
                 gchar buffer[BYTES_PER_READ];
@@ -622,7 +544,6 @@ _dh_parser_read_file (GFile   *index_file,
         parser->all_links = NULL;
 
 exit:
-        g_free (index_file_uri);
         g_clear_object (&file_input_stream);
         dh_parser_free (parser);
 
