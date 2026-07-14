@@ -68,8 +68,8 @@ static GParamSpec *properties[N_PROPERTIES];
 G_DEFINE_TYPE_WITH_PRIVATE (DhBookListDirectory, dh_book_list_directory, DH_TYPE_BOOK_LIST)
 
 /* Prototypes */
-static gboolean create_book_from_index_file (DhBookListDirectory *list_directory,
-                                             GFile               *index_file);
+static void create_book_from_index_file (DhBookListDirectory *list_directory,
+                                         GFile               *index_file);
 
 static NewPossibleBookData *
 new_possible_book_data_new (DhBookListDirectory *list_directory,
@@ -124,11 +124,7 @@ book_updated_cb (DhBook              *book,
         g_object_unref (index_file);
 }
 
-/* Returns TRUE if "successful", FALSE if the next possible index file in the
- * book directory needs to be tried.
- * TODO: simplify, the return value isn't used anymore.
- */
-static gboolean
+static void
 create_book_from_index_file (DhBookListDirectory *list_directory,
                              GFile               *index_file)
 {
@@ -146,19 +142,19 @@ create_book_from_index_file (DhBookListDirectory *list_directory,
                 cur_index_file = dh_book_get_index_file (cur_book);
 
                 if (g_file_equal (index_file, cur_index_file))
-                        return TRUE;
+                        return;
         }
 
         book = dh_book_new (index_file);
         if (book == NULL)
-                return FALSE;
+                return;
 
         /* Check if book with same ID was already loaded (we need to force
          * unique book IDs).
          */
         if (g_list_find_custom (books, book, (GCompareFunc)dh_book_cmp_by_id) != NULL) {
                 g_object_unref (book);
-                return TRUE;
+                return;
         }
 
         g_signal_connect_object (book,
@@ -175,8 +171,6 @@ create_book_from_index_file (DhBookListDirectory *list_directory,
 
         dh_book_list_add_book (DH_BOOK_LIST (list_directory), book);
         g_object_unref (book);
-
-        return TRUE;
 }
 
 /* @book_directory is a directory containing a single book, with the index file
