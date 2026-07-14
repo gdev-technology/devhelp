@@ -126,6 +126,7 @@ book_updated_cb (DhBook              *book,
 
 /* Returns TRUE if "successful", FALSE if the next possible index file in the
  * book directory needs to be tried.
+ * TODO: simplify, the return value isn't used anymore.
  */
 static gboolean
 create_book_from_index_file (DhBookListDirectory *list_directory,
@@ -185,19 +186,11 @@ static void
 create_book_from_book_directory (DhBookListDirectory *list_directory,
                                  GFile               *book_directory)
 {
-        GSList *possible_index_files;
-        GSList *l;
+        GFile *index_file;
 
-        possible_index_files = _dh_util_get_possible_index_files (book_directory);
-
-        for (l = possible_index_files; l != NULL; l = l->next) {
-                GFile *index_file = G_FILE (l->data);
-
-                if (create_book_from_index_file (list_directory, index_file))
-                        break;
-        }
-
-        g_slist_free_full (possible_index_files, g_object_unref);
+        index_file = _dh_util_get_index_file (book_directory);
+        create_book_from_index_file (list_directory, index_file);
+        g_object_unref (index_file);
 }
 
 static gboolean

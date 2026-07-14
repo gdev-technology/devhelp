@@ -25,7 +25,7 @@ G_GNUC_INTERNAL
 void            _dh_util_free_book_tree                 (GNode *book_tree);
 
 G_GNUC_INTERNAL
-GSList *        _dh_util_get_possible_index_files       (GFile *book_directory);
+GFile *         _dh_util_get_index_file                 (GFile *book_directory);
 
 G_GNUC_INTERNAL
 void            _dh_util_bind_sidebar_and_notebook      (DhSidebar  *sidebar,
