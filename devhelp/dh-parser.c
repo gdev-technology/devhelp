@@ -161,6 +161,7 @@ parser_start_node_book (DhParser             *parser,
                         title = attribute_values[attr_num];
                 } else if (g_ascii_strcasecmp (attribute_names[attr_num], "base") == 0) {
                         /* Dup this one */
+                        // FIXME: potential memory leak with the early return just above.
                         base = g_strdup (attribute_values[attr_num]);
                 } else if (g_ascii_strcasecmp (attribute_names[attr_num], "link") == 0) {
                         uri = attribute_values[attr_num];
