@@ -1,3 +1,13 @@
+News in 51.beta, yyyy-mm-dd (not yet released)
+---------------------------
+* Remove support of index file format version 1. It was deprecated. It permits
+  to simplify the code, especially the XML parser.
+* Remove support of gzip compressed index files. To simplify a little the code.
+* Remove gedit plugin: gedit no longer supports plugins implemented in Python.
+* Don't annotate get_type() functions with G_GNUC_CONST.
+* Build: small simplifications.
+* Small code maintenance.
+
 News in 50.0, 2026-03-10
 ------------------------
 * Build:
