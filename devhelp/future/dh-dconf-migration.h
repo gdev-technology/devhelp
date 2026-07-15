@@ -23,4 +23,3 @@ G_GNUC_INTERNAL
 void                    _dh_dconf_migration_sync_and_free       (DhDconfMigration *migration);
 
 G_END_DECLS
-
