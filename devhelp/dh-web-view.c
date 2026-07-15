@@ -484,7 +484,6 @@ dh_web_view_constructed (GObject *object)
         /* Disable some things we have no need for. */
         webkit_settings_set_enable_html5_database (webkit_settings, FALSE);
         webkit_settings_set_enable_html5_local_storage (webkit_settings, FALSE);
-        webkit_settings_set_enable_plugins (webkit_settings, FALSE);
 
         if (view->priv->profile == NULL)
                 set_profile (view, dh_profile_get_default ());
