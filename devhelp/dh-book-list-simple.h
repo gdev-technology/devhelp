@@ -43,4 +43,3 @@ DhBookList *    _dh_book_list_simple_new        (GList      *sub_book_lists,
                                                  DhSettings *settings);
 
 G_END_DECLS
-

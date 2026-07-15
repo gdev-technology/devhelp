@@ -39,4 +39,3 @@ DhWindow *      dh_app_get_active_main_window   (DhApp    *app,
                                                  gboolean  create_if_none);
 
 G_END_DECLS
-

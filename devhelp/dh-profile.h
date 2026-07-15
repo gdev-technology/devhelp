@@ -51,4 +51,3 @@ DhSettings *    dh_profile_get_settings         (DhProfile *profile);
 DhBookList *    dh_profile_get_book_list        (DhProfile *profile);
 
 G_END_DECLS
-

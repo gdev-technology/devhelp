@@ -41,4 +41,3 @@ DhBookListDirectory *   dh_book_list_directory_new              (GFile *director
 GFile *                 dh_book_list_directory_get_directory    (DhBookListDirectory *list_directory);
 
 G_END_DECLS
-

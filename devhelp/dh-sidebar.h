@@ -55,4 +55,3 @@ void            dh_sidebar_set_search_string    (DhSidebar   *sidebar,
 void            dh_sidebar_set_search_focus     (DhSidebar *sidebar);
 
 G_END_DECLS
-

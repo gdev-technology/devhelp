@@ -38,4 +38,3 @@ void            dh_window_search                (DhWindow    *window,
                                                  const gchar *str);
 
 G_END_DECLS
-

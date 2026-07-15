@@ -18,4 +18,3 @@ void    dh_util_window_settings_restore         (GtkWindow *gtk_window,
                                                  GSettings *settings);
 
 G_END_DECLS
-

@@ -60,4 +60,3 @@ gint         dh_book_cmp_by_title    (DhBook *a,
                                       DhBook *b);
 
 G_END_DECLS
-

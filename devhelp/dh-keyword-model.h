@@ -51,4 +51,3 @@ DhLink *        dh_keyword_model_filter    (DhKeywordModel *model,
                                             DhProfile      *profile);
 
 G_END_DECLS
-

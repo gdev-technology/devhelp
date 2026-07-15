@@ -21,4 +21,3 @@ gboolean _dh_parser_read_file (GFile   *index_file,
                                GError **error);
 
 G_END_DECLS
-

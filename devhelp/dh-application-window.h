@@ -15,4 +15,3 @@ void    dh_application_window_bind_sidebar_and_notebook         (DhSidebar  *sid
                                                                  DhNotebook *notebook);
 
 G_END_DECLS
-

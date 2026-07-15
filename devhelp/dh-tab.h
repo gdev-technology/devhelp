@@ -41,4 +41,3 @@ DhTab *         dh_tab_new              (DhWebView *web_view);
 DhWebView *     dh_tab_get_web_view     (DhTab *tab);
 
 G_END_DECLS
-

@@ -43,4 +43,3 @@ DhNotebook *    dh_search_bar_get_notebook               (DhSearchBar *search_ba
 void            dh_search_bar_grab_focus_to_search_entry (DhSearchBar *search_bar);
 
 G_END_DECLS
-

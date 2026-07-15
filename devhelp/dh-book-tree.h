@@ -44,4 +44,3 @@ void            dh_book_tree_select_uri         (DhBookTree  *tree,
                                                  const gchar *uri);
 
 G_END_DECLS
-

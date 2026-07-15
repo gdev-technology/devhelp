@@ -48,4 +48,3 @@ void            dh_settings_builder_set_fonts_path      (DhSettingsBuilder *buil
 DhSettings *    dh_settings_builder_create_object       (DhSettingsBuilder *builder);
 
 G_END_DECLS
-

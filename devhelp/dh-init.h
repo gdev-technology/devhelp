@@ -13,4 +13,3 @@ void    dh_init         (void);
 void    dh_finalize     (void);
 
 G_END_DECLS
-

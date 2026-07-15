@@ -49,4 +49,3 @@ gchar *         dh_completion_aggregate_complete        (GList       *completion
                                                          const gchar *prefix);
 
 G_END_DECLS
-

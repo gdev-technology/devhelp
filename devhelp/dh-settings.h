@@ -91,4 +91,3 @@ void            dh_settings_set_fixed_font                      (DhSettings  *se
 void            dh_settings_bind_fonts                          (DhSettings *settings);
 
 G_END_DECLS
-

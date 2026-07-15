@@ -21,4 +21,3 @@ G_GNUC_INTERNAL
 GQuark _dh_error_quark (void);
 
 G_END_DECLS
-

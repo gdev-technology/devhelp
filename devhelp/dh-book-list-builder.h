@@ -51,4 +51,3 @@ void            dh_book_list_builder_read_books_disabled_setting        (DhBookL
 DhBookList *    dh_book_list_builder_create_object                      (DhBookListBuilder *builder);
 
 G_END_DECLS
-

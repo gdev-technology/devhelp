@@ -41,4 +41,3 @@ GtkWidget *     dh_tab_label_new                (DhTab *tab);
 DhTab *         dh_tab_label_get_tab            (DhTabLabel *tab_label);
 
 G_END_DECLS
-

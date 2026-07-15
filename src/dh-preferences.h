@@ -33,4 +33,3 @@ GType   dh_preferences_get_type         (void);
 void    dh_preferences_show_dialog      (GtkWindow *parent);
 
 G_END_DECLS
-

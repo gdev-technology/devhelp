@@ -45,4 +45,3 @@ gboolean                _dh_search_context_is_exact_link        (DhSearchContext
                                                                  DhLink          *link);
 
 G_END_DECLS
-

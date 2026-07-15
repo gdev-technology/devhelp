@@ -31,4 +31,3 @@ void            _dh_util_bind_sidebar_and_notebook      (DhSidebar  *sidebar,
                                                          DhNotebook *notebook);
 
 G_END_DECLS
-

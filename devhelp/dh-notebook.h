@@ -53,4 +53,3 @@ DhWebView *     dh_notebook_get_active_web_view         (DhNotebook *notebook);
 GList *         dh_notebook_get_all_web_views           (DhNotebook *notebook);
 
 G_END_DECLS
-

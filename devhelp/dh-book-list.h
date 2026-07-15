@@ -74,4 +74,3 @@ void            dh_book_list_remove_book        (DhBookList *book_list,
                                                  DhBook     *book);
 
 G_END_DECLS
-

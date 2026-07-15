@@ -96,4 +96,3 @@ gint         dh_link_compare            (gconstpointer  a,
 const gchar *dh_link_type_to_string     (DhLinkType     link_type);
 
 G_END_DECLS
-

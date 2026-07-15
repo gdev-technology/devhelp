@@ -49,4 +49,3 @@ void                    dh_profile_builder_set_book_list        (DhProfileBuilde
 DhProfile *             dh_profile_builder_create_object        (DhProfileBuilder *builder);
 
 G_END_DECLS
-
