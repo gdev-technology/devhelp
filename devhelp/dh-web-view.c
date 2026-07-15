@@ -493,7 +493,7 @@ dh_web_view_constructed (GObject *object)
                                  "fonts-changed",
                                  G_CALLBACK (settings_fonts_changed_cb),
                                  view,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         update_fonts (view);
 }
