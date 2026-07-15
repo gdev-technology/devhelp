@@ -11,6 +11,8 @@
  * @Short_description: #WebKitWebView zoom controller
  *
  * #WebKitWebView zoom controller.
+ *
+ * It handles Ctrl+scroll to zoom in/zoom out.
  */
 
 struct _DhWebViewZoomControllerPrivate {
@@ -85,24 +87,24 @@ bump_zoom_level (DhWebViewZoomController *zoom_controller,
         webkit_web_view_set_zoom_level (zoom_controller->priv->web_view, new_zoom_level);
 }
 
-#if 0
 static gboolean
-dh_web_view_scroll_event (GtkWidget      *widget,
-                          GdkEventScroll *scroll_event)
+scroll_event_cb (WebKitWebView  *web_view,
+                 GdkEventScroll *scroll_event,
+                 gpointer        user_data)
 {
-        DhWebView *view = DH_WEB_VIEW (widget);
+        DhWebViewZoomController *zoom_controller = DH_WEB_VIEW_ZOOM_CONTROLLER (user_data);
         gdouble delta_y;
 
         if ((scroll_event->state & GDK_CONTROL_MASK) == 0)
-                goto chain_up;
+                return GDK_EVENT_PROPAGATE;
 
         switch (scroll_event->direction) {
                 case GDK_SCROLL_UP:
-                        bump_zoom_level (view, 1);
+                        bump_zoom_level (zoom_controller, 1);
                         return GDK_EVENT_STOP;
 
                 case GDK_SCROLL_DOWN:
-                        bump_zoom_level (view, -1);
+                        bump_zoom_level (zoom_controller, -1);
                         return GDK_EVENT_STOP;
 
                 case GDK_SCROLL_LEFT:
@@ -111,18 +113,18 @@ dh_web_view_scroll_event (GtkWidget      *widget,
 
                 case GDK_SCROLL_SMOOTH:
                         gdk_event_get_scroll_deltas ((GdkEvent *)scroll_event, NULL, &delta_y);
-                        view->priv->total_scroll_delta_y += delta_y;
+                        zoom_controller->priv->total_scroll_delta_y += delta_y;
 
                         /* Avoiding direct float comparison.
                          * -1 and 1 are the thresholds for bumping the zoom level,
                          * which can be adjusted for taste.
                          */
-                        if ((gint)view->priv->total_scroll_delta_y <= -1) {
-                                view->priv->total_scroll_delta_y = 0.0;
-                                bump_zoom_level (view, 1);
-                        } else if ((gint)view->priv->total_scroll_delta_y >= 1) {
-                                view->priv->total_scroll_delta_y = 0.0;
-                                bump_zoom_level (view, -1);
+                        if ((gint)zoom_controller->priv->total_scroll_delta_y <= -1) {
+                                zoom_controller->priv->total_scroll_delta_y = 0.0;
+                                bump_zoom_level (zoom_controller, 1);
+                        } else if ((gint)zoom_controller->priv->total_scroll_delta_y >= 1) {
+                                zoom_controller->priv->total_scroll_delta_y = 0.0;
+                                bump_zoom_level (zoom_controller, -1);
                         }
                         return GDK_EVENT_STOP;
 
@@ -130,13 +132,8 @@ dh_web_view_scroll_event (GtkWidget      *widget,
                         g_warn_if_reached ();
         }
 
-chain_up:
-        if (GTK_WIDGET_CLASS (dh_web_view_parent_class)->scroll_event == NULL)
-                return GDK_EVENT_PROPAGATE;
-
-        return GTK_WIDGET_CLASS (dh_web_view_parent_class)->scroll_event (widget, scroll_event);
+        return GDK_EVENT_PROPAGATE;
 }
-#endif
 
 static void
 set_web_view (DhWebViewZoomController *zoom_controller,
@@ -144,6 +141,12 @@ set_web_view (DhWebViewZoomController *zoom_controller,
 {
         g_assert (zoom_controller->priv->web_view == NULL);
         g_set_weak_pointer (&zoom_controller->priv->web_view, web_view);
+
+        g_signal_connect_object (web_view,
+                                 "scroll-event",
+                                 G_CALLBACK (scroll_event_cb),
+                                 zoom_controller,
+                                 G_CONNECT_DEFAULT);
 }
 
 static void

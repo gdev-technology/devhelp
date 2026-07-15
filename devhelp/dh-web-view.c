@@ -16,7 +16,6 @@
  * some features, and with some customizations for the libdevhelp use-case.
  *
  * Features:
- * - Ctrl+scroll to zoom in/zoom out.
  * - Sending the #DhWebView::open-new-tab signal on middle click or Ctrl+click
  *   on a link (#DhNotebook handles that signal).
  * - Calls gtk_show_uri_on_window() when opening a non-local link (for example a
