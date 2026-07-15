@@ -34,7 +34,7 @@ struct _DhSettingsClass {
         void (* fonts_changed)          (DhSettings *settings);
 
         /* Padding for future expansion */
-        gpointer padding[12];
+        gpointer padding[1];
 };
 
 GType           dh_settings_get_type                            (void);

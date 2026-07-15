@@ -31,7 +31,7 @@ struct _DhBookListSimpleClass {
         DhBookListClass parent_class;
 
         /* Padding for future expansion */
-        gpointer padding[12];
+        gpointer padding[1];
 };
 
 G_GNUC_INTERNAL

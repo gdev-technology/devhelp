@@ -32,7 +32,7 @@ struct _DhNotebookClass {
         GtkNotebookClass parent_class;
 
         /* Padding for future expansion */
-        gpointer padding[12];
+        gpointer padding[1];
 };
 
 GType           dh_notebook_get_type                    (void);

@@ -30,7 +30,7 @@ struct _DhTabClass {
         GtkGridClass parent_class;
 
         /* Padding for future expansion */
-        gpointer padding[12];
+        gpointer padding[1];
 };
 
 GType           dh_tab_get_type         (void);
