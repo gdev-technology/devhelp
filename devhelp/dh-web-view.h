@@ -1,13 +1,12 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-/* SPDX-FileCopyrightText: 2018 Sébastien Wilmet <swilmet@gnome.org>
+/* SPDX-FileCopyrightText: 2018-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_WEB_VIEW_H
-#define DH_WEB_VIEW_H
+#pragma once
 
 #include <webkit2/webkit2.h>
 #include <devhelp/dh-profile.h>
+#include <devhelp/dh-web-view-zoom-controller.h>
 
 G_BEGIN_DECLS
 
@@ -24,7 +23,6 @@ typedef struct _DhWebViewPrivate  DhWebViewPrivate;
 
 struct _DhWebView {
         WebKitWebView parent;
-
         DhWebViewPrivate *priv;
 };
 
@@ -34,14 +32,14 @@ struct _DhWebViewClass {
         /* Signals */
         void    (* open_new_tab)        (DhWebView   *view,
                                          const gchar *uri);
-
-        /* Padding for future expansion */
-        gpointer padding[12];
 };
 
 GType           dh_web_view_get_type            (void);
 
 DhWebView *     dh_web_view_new                 (DhProfile *profile);
+
+DhWebViewZoomController *
+                dh_web_view_get_zoom_controller (DhWebView *view);
 
 DhProfile *     dh_web_view_get_profile         (DhWebView *view);
 
@@ -54,18 +52,4 @@ void            dh_web_view_search_next         (DhWebView *view);
 
 void            dh_web_view_search_previous     (DhWebView *view);
 
-gboolean        dh_web_view_can_zoom_in         (DhWebView *view);
-
-gboolean        dh_web_view_can_zoom_out        (DhWebView *view);
-
-gboolean        dh_web_view_can_reset_zoom      (DhWebView *view);
-
-void            dh_web_view_zoom_in             (DhWebView *view);
-
-void            dh_web_view_zoom_out            (DhWebView *view);
-
-void            dh_web_view_reset_zoom          (DhWebView *view);
-
 G_END_DECLS
-
-#endif /* DH_WEB_VIEW_H */

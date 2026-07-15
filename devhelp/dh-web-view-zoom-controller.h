@@ -32,4 +32,16 @@ GType                           dh_web_view_zoom_controller_get_type            
 
 DhWebViewZoomController *       dh_web_view_zoom_controller_new                 (WebKitWebView *web_view);
 
+gboolean                        dh_web_view_zoom_controller_can_zoom_in         (DhWebViewZoomController *zoom_controller);
+
+gboolean                        dh_web_view_zoom_controller_can_zoom_out        (DhWebViewZoomController *zoom_controller);
+
+gboolean                        dh_web_view_zoom_controller_can_reset_zoom      (DhWebViewZoomController *zoom_controller);
+
+void                            dh_web_view_zoom_controller_zoom_in             (DhWebViewZoomController *zoom_controller);
+
+void                            dh_web_view_zoom_controller_zoom_out            (DhWebViewZoomController *zoom_controller);
+
+void                            dh_web_view_zoom_controller_reset_zoom          (DhWebViewZoomController *zoom_controller);
+
 G_END_DECLS

@@ -30,5 +30,6 @@
 #include <devhelp/dh-tab.h>
 #include <devhelp/dh-tab-label.h>
 #include <devhelp/dh-web-view.h>
+#include <devhelp/dh-web-view-zoom-controller.h>
 
 #endif /* DEVHELP_H */

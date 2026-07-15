@@ -1,11 +1,9 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-/* SPDX-FileCopyrightText: 2018-2020 Sébastien Wilmet <swilmet@gnome.org>
+/* SPDX-FileCopyrightText: 2018-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 #include "config.h"
 #include "dh-web-view.h"
-#include <math.h>
 #include <glib/gi18n-lib.h>
 #include "dh-link.h"
 
@@ -32,9 +30,9 @@
  */
 
 struct _DhWebViewPrivate {
+        DhWebViewZoomController *zoom_controller;
         DhProfile *profile;
         gchar *search_text;
-        gdouble total_scroll_delta_y;
 };
 
 enum {
@@ -51,114 +49,7 @@ enum {
 static GParamSpec *properties[N_PROPERTIES];
 static guint signals[N_SIGNALS];
 
-static const gdouble zoom_levels[] = {
-        0.5,            /* 50% */
-        0.8408964152,   /* 75% */
-        1.0,            /* 100% */
-        1.1892071149,   /* 125% */
-        1.4142135623,   /* 150% */
-        1.6817928304,   /* 175% */
-        2.0,            /* 200% */
-        2.8284271247,   /* 300% */
-        4.0             /* 400% */
-};
-
-static const guint n_zoom_levels = G_N_ELEMENTS (zoom_levels);
-
-#define ZOOM_DEFAULT (zoom_levels[2])
-
 G_DEFINE_TYPE_WITH_PRIVATE (DhWebView, dh_web_view, WEBKIT_TYPE_WEB_VIEW)
-
-static gint
-get_current_zoom_level_index (DhWebView *view)
-{
-        gdouble zoom_level;
-        gdouble previous;
-        guint i;
-
-        zoom_level = webkit_web_view_get_zoom_level (WEBKIT_WEB_VIEW (view));
-
-        previous = zoom_levels[0];
-        for (i = 1; i < n_zoom_levels; i++) {
-                gdouble current = zoom_levels[i];
-                gdouble mean = sqrt (previous * current);
-
-                if (zoom_level <= mean)
-                        return i - 1;
-
-                previous = current;
-        }
-
-        return n_zoom_levels - 1;
-}
-
-static void
-bump_zoom_level (DhWebView *view,
-                 gint       bump_amount)
-{
-        gint zoom_level_index;
-        gdouble new_zoom_level;
-
-        if (bump_amount == 0)
-                return;
-
-        zoom_level_index = get_current_zoom_level_index (view) + bump_amount;
-        zoom_level_index = CLAMP (zoom_level_index, 0, (gint)n_zoom_levels - 1);
-        new_zoom_level = zoom_levels[zoom_level_index];
-
-        webkit_web_view_set_zoom_level (WEBKIT_WEB_VIEW (view), new_zoom_level);
-}
-
-static gboolean
-dh_web_view_scroll_event (GtkWidget      *widget,
-                          GdkEventScroll *scroll_event)
-{
-        DhWebView *view = DH_WEB_VIEW (widget);
-        gdouble delta_y;
-
-        if ((scroll_event->state & GDK_CONTROL_MASK) == 0)
-                goto chain_up;
-
-        switch (scroll_event->direction) {
-                case GDK_SCROLL_UP:
-                        bump_zoom_level (view, 1);
-                        return GDK_EVENT_STOP;
-
-                case GDK_SCROLL_DOWN:
-                        bump_zoom_level (view, -1);
-                        return GDK_EVENT_STOP;
-
-                case GDK_SCROLL_LEFT:
-                case GDK_SCROLL_RIGHT:
-                        break;
-
-                case GDK_SCROLL_SMOOTH:
-                        gdk_event_get_scroll_deltas ((GdkEvent *)scroll_event, NULL, &delta_y);
-                        view->priv->total_scroll_delta_y += delta_y;
-
-                        /* Avoiding direct float comparison.
-                         * -1 and 1 are the thresholds for bumping the zoom level,
-                         * which can be adjusted for taste.
-                         */
-                        if ((gint)view->priv->total_scroll_delta_y <= -1) {
-                                view->priv->total_scroll_delta_y = 0.0;
-                                bump_zoom_level (view, 1);
-                        } else if ((gint)view->priv->total_scroll_delta_y >= 1) {
-                                view->priv->total_scroll_delta_y = 0.0;
-                                bump_zoom_level (view, -1);
-                        }
-                        return GDK_EVENT_STOP;
-
-                default:
-                        g_warn_if_reached ();
-        }
-
-chain_up:
-        if (GTK_WIDGET_CLASS (dh_web_view_parent_class)->scroll_event == NULL)
-                return GDK_EVENT_PROPAGATE;
-
-        return GTK_WIDGET_CLASS (dh_web_view_parent_class)->scroll_event (widget, scroll_event);
-}
 
 static gboolean
 dh_web_view_button_press_event (GtkWidget      *widget,
@@ -503,6 +394,7 @@ dh_web_view_dispose (GObject *object)
 {
         DhWebView *view = DH_WEB_VIEW (object);
 
+        g_clear_object (&view->priv->zoom_controller);
         g_clear_object (&view->priv->profile);
 
         G_OBJECT_CLASS (dh_web_view_parent_class)->dispose (object);
@@ -531,7 +423,6 @@ dh_web_view_class_init (DhWebViewClass *klass)
         object_class->dispose = dh_web_view_dispose;
         object_class->finalize = dh_web_view_finalize;
 
-        widget_class->scroll_event = dh_web_view_scroll_event;
         widget_class->button_press_event = dh_web_view_button_press_event;
 
         webkit_class->load_failed = dh_web_view_load_failed;
@@ -577,7 +468,8 @@ static void
 dh_web_view_init (DhWebView *view)
 {
         view->priv = dh_web_view_get_instance_private (view);
-        view->priv->total_scroll_delta_y = 0.0;
+
+        view->priv->zoom_controller = dh_web_view_zoom_controller_new (WEBKIT_WEB_VIEW (view));
 
         gtk_widget_set_hexpand (GTK_WIDGET (view), TRUE);
         gtk_widget_set_vexpand (GTK_WIDGET (view), TRUE);
@@ -597,6 +489,20 @@ dh_web_view_new (DhProfile *profile)
         return g_object_new (DH_TYPE_WEB_VIEW,
                              "profile", profile,
                              NULL);
+}
+
+/**
+ * dh_web_view_get_zoom_controller:
+ * @view: a #DhWebView.
+ *
+ * Returns: (transfer none): the #DhWebViewZoomController associated with @view.
+ */
+DhWebViewZoomController *
+dh_web_view_get_zoom_controller (DhWebView *view)
+{
+        g_return_val_if_fail (DH_IS_WEB_VIEW (view), NULL);
+
+        return view->priv->zoom_controller;
 }
 
 /**
@@ -725,97 +631,4 @@ dh_web_view_search_previous (DhWebView *view)
 
         find_controller = webkit_web_view_get_find_controller (WEBKIT_WEB_VIEW (view));
         webkit_find_controller_search_previous (find_controller);
-}
-
-/**
- * dh_web_view_can_zoom_in:
- * @view: a #DhWebView.
- *
- * Returns: whether calling dh_web_view_zoom_in() will have an effect.
- */
-gboolean
-dh_web_view_can_zoom_in (DhWebView *view)
-{
-        gint zoom_level_index;
-
-        g_return_val_if_fail (DH_IS_WEB_VIEW (view), FALSE);
-
-        zoom_level_index = get_current_zoom_level_index (view);
-        return zoom_level_index < ((gint)n_zoom_levels - 1);
-}
-
-/**
- * dh_web_view_can_zoom_out:
- * @view: a #DhWebView.
- *
- * Returns: whether calling dh_web_view_zoom_out() will have an effect.
- */
-gboolean
-dh_web_view_can_zoom_out (DhWebView *view)
-{
-        gint zoom_level_index;
-
-        g_return_val_if_fail (DH_IS_WEB_VIEW (view), FALSE);
-
-        zoom_level_index = get_current_zoom_level_index (view);
-        return zoom_level_index > 0;
-}
-
-/**
- * dh_web_view_can_reset_zoom:
- * @view: a #DhWebView.
- *
- * Returns: whether calling dh_web_view_reset_zoom() will have an effect.
- */
-gboolean
-dh_web_view_can_reset_zoom (DhWebView *view)
-{
-        gint zoom_level_index;
-
-        g_return_val_if_fail (DH_IS_WEB_VIEW (view), FALSE);
-
-        zoom_level_index = get_current_zoom_level_index (view);
-        return zoom_levels[zoom_level_index] != ZOOM_DEFAULT;
-}
-
-/**
- * dh_web_view_zoom_in:
- * @view: a #DhWebView.
- *
- * Makes the text larger.
- */
-void
-dh_web_view_zoom_in (DhWebView *view)
-{
-        g_return_if_fail (DH_IS_WEB_VIEW (view));
-
-        bump_zoom_level (view, 1);
-}
-
-/**
- * dh_web_view_zoom_out:
- * @view: a #DhWebView.
- *
- * Makes the text smaller.
- */
-void
-dh_web_view_zoom_out (DhWebView *view)
-{
-        g_return_if_fail (DH_IS_WEB_VIEW (view));
-
-        bump_zoom_level (view, -1);
-}
-
-/**
- * dh_web_view_reset_zoom:
- * @view: a #DhWebView.
- *
- * Reset the text size to the normal size.
- */
-void
-dh_web_view_reset_zoom (DhWebView *view)
-{
-        g_return_if_fail (DH_IS_WEB_VIEW (view));
-
-        webkit_web_view_set_zoom_level (WEBKIT_WEB_VIEW (view), ZOOM_DEFAULT);
 }

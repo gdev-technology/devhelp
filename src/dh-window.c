@@ -96,6 +96,7 @@ static void
 update_zoom_actions_sensitivity (DhWindow *window)
 {
         DhWebView *web_view;
+        DhWebViewZoomController *zoom_controller;
         GAction *action;
         gboolean enabled;
 
@@ -103,15 +104,17 @@ update_zoom_actions_sensitivity (DhWindow *window)
         if (web_view == NULL)
                 return;
 
-        enabled = dh_web_view_can_zoom_in (web_view);
+        zoom_controller = dh_web_view_get_zoom_controller (web_view);
+
+        enabled = dh_web_view_zoom_controller_can_zoom_in (zoom_controller);
         action = g_action_map_lookup_action (G_ACTION_MAP (window), "zoom-in");
         g_simple_action_set_enabled (G_SIMPLE_ACTION (action), enabled);
 
-        enabled = dh_web_view_can_zoom_out (web_view);
+        enabled = dh_web_view_zoom_controller_can_zoom_out (zoom_controller);
         action = g_action_map_lookup_action (G_ACTION_MAP (window), "zoom-out");
         g_simple_action_set_enabled (G_SIMPLE_ACTION (action), enabled);
 
-        enabled = dh_web_view_can_reset_zoom (web_view);
+        enabled = dh_web_view_zoom_controller_can_reset_zoom (zoom_controller);
         action = g_action_map_lookup_action (G_ACTION_MAP (window), "zoom-default");
         g_simple_action_set_enabled (G_SIMPLE_ACTION (action), enabled);
 }
@@ -285,10 +288,14 @@ zoom_in_cb (GSimpleAction *action,
 {
         DhWindow *window = DH_WINDOW (user_data);
         DhWebView *web_view;
+        DhWebViewZoomController *zoom_controller;
 
         web_view = get_active_web_view (window);
-        if (web_view != NULL)
-                dh_web_view_zoom_in (web_view);
+        if (web_view == NULL)
+                return;
+
+        zoom_controller = dh_web_view_get_zoom_controller (web_view);
+        dh_web_view_zoom_controller_zoom_in (zoom_controller);
 }
 
 static void
@@ -298,10 +305,14 @@ zoom_out_cb (GSimpleAction *action,
 {
         DhWindow *window = DH_WINDOW (user_data);
         DhWebView *web_view;
+        DhWebViewZoomController *zoom_controller;
 
         web_view = get_active_web_view (window);
-        if (web_view != NULL)
-                dh_web_view_zoom_out (web_view);
+        if (web_view == NULL)
+                return;
+
+        zoom_controller = dh_web_view_get_zoom_controller (web_view);
+        dh_web_view_zoom_controller_zoom_out (zoom_controller);
 }
 
 static void
@@ -311,10 +322,14 @@ zoom_default_cb (GSimpleAction *action,
 {
         DhWindow *window = DH_WINDOW (user_data);
         DhWebView *web_view;
+        DhWebViewZoomController *zoom_controller;
 
         web_view = get_active_web_view (window);
-        if (web_view != NULL)
-                dh_web_view_reset_zoom (web_view);
+        if (web_view == NULL)
+                return;
+
+        zoom_controller = dh_web_view_get_zoom_controller (web_view);
+        dh_web_view_zoom_controller_reset_zoom (zoom_controller);
 }
 
 static void
