@@ -215,7 +215,7 @@ notebook_page_added_after_cb (GtkNotebook *notebook,
                                  "load-changed",
                                  G_CALLBACK (web_view_load_changed_cb),
                                  sidebar,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 }
 
 static void
@@ -239,7 +239,7 @@ _dh_util_bind_sidebar_and_notebook (DhSidebar  *sidebar,
                                  "link-selected",
                                  G_CALLBACK (sidebar_link_selected_cb),
                                  notebook,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         g_signal_connect_object (notebook,
                                  "page-added",

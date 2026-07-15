@@ -115,7 +115,7 @@ book_tree_setup_selection (DhBookTree *tree)
                                  "changed",
                                  G_CALLBACK (book_tree_selection_changed_cb),
                                  tree,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 }
 
 /* Tries to find:
@@ -695,7 +695,7 @@ dh_book_tree_constructed (GObject *object)
                                  "notify::group-books-by-language",
                                  G_CALLBACK (group_books_by_language_notify_cb),
                                  tree,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         book_tree_populate_tree (tree);
 }
@@ -753,7 +753,7 @@ do_popup_menu (DhBookTree     *tree,
                                          "activate",
                                          G_CALLBACK (collapse_all_activate_cb),
                                          tree,
-                                         0);
+                                         G_CONNECT_DEFAULT);
         }
 
         if (event != NULL) {

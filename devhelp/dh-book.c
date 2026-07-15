@@ -322,7 +322,7 @@ dh_book_new (GFile *index_file)
                                          "changed",
                                          G_CALLBACK (index_file_changed_cb),
                                          book,
-                                         0);
+                                         G_CONNECT_DEFAULT);
         }
 
         return book;

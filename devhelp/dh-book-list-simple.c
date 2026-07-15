@@ -215,7 +215,7 @@ _dh_book_list_simple_new (GList      *sub_book_lists,
                                          "books-disabled-changed",
                                          G_CALLBACK (books_disabled_changed_cb),
                                          list_simple,
-                                         0);
+                                         G_CONNECT_DEFAULT);
         }
 
         repopulate (list_simple);

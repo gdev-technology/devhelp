@@ -542,7 +542,7 @@ init_bookshelf_view (DhPreferences *prefs)
                                  "toggled",
                                  G_CALLBACK (bookshelf_row_toggled_cb),
                                  prefs,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         /* Title column */
         cell_renderer_text = gtk_cell_renderer_text_new ();
@@ -584,13 +584,13 @@ init_bookshelf_tab (DhPreferences *prefs)
                                  "notify::group-books-by-language",
                                  G_CALLBACK (bookshelf_group_books_by_language_notify_cb),
                                  prefs,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         g_signal_connect_object (settings,
                                  "books-disabled-changed",
                                  G_CALLBACK (bookshelf_books_disabled_changed_cb),
                                  prefs,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         g_signal_connect_object (priv->full_book_list,
                                  "add-book",

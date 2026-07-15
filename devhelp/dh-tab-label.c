@@ -74,7 +74,7 @@ set_tab (DhTabLabel *tab_label,
                                  "notify::title",
                                  G_CALLBACK (web_view_title_notify_cb),
                                  tab_label,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         update_label (tab_label);
 }

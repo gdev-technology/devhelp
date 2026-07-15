@@ -160,13 +160,13 @@ create_book_from_index_file (DhBookListDirectory *list_directory,
                                  "deleted",
                                  G_CALLBACK (book_deleted_cb),
                                  list_directory,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         g_signal_connect_object (book,
                                  "updated",
                                  G_CALLBACK (book_updated_cb),
                                  list_directory,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         dh_book_list_add_book (DH_BOOK_LIST (list_directory), book);
         g_object_unref (book);
@@ -262,7 +262,7 @@ monitor_books_directory (DhBookListDirectory *list_directory)
                                          "changed",
                                          G_CALLBACK (books_directory_changed_cb),
                                          list_directory,
-                                         0);
+                                         G_CONNECT_DEFAULT);
         }
 }
 

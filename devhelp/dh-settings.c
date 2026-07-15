@@ -510,13 +510,13 @@ dh_settings_init (DhSettings *settings)
                                  "changed::" SYSTEM_FIXED_FONT_KEY,
                                  G_CALLBACK (system_font_changed_cb),
                                  settings,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         g_signal_connect_object (settings->priv->gsettings_desktop_interface,
                                  "changed::" SYSTEM_VARIABLE_FONT_KEY,
                                  G_CALLBACK (system_font_changed_cb),
                                  settings,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 }
 
 DhSettings *
@@ -538,7 +538,7 @@ _dh_settings_new (const gchar *contents_path,
                                  "changed::books-disabled",
                                  G_CALLBACK (books_disabled_changed_cb),
                                  settings,
-                                 0);
+                                 G_CONNECT_DEFAULT);
 
         load_books_disabled (settings);
 
