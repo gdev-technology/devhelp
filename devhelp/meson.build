@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2018 Sébastien Wilmet <swilmet@gnome.org>
+# SPDX-FileCopyrightText: 2018-2026 Sébastien Wilmet <swilmet@gnome.org>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 libdevhelp_public_headers = [
@@ -22,7 +22,8 @@ libdevhelp_public_headers = [
   'dh-sidebar.h',
   'dh-tab.h',
   'dh-tab-label.h',
-  'dh-web-view.h'
+  'dh-web-view.h',
+  'dh-web-view-zoom-controller.h',
 ]
 
 libdevhelp_public_c_files = [
@@ -45,7 +46,8 @@ libdevhelp_public_c_files = [
   'dh-sidebar.c',
   'dh-tab.c',
   'dh-tab-label.c',
-  'dh-web-view.c'
+  'dh-web-view.c',
+  'dh-web-view-zoom-controller.c',
 ]
 
 libdevhelp_private_c_files = [
