@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_INIT_H
-#define DH_INIT_H
+#pragma once
 
 #include <glib.h>
 
@@ -15,4 +14,3 @@ void    dh_finalize     (void);
 
 G_END_DECLS
 
-#endif /* DH_INIT_H */

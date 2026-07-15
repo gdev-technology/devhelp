@@ -5,8 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_KEYWORD_MODEL_H
-#define DH_KEYWORD_MODEL_H
+#pragma once
 
 #include <glib-object.h>
 #include <devhelp/dh-link.h>
@@ -53,4 +52,3 @@ DhLink *        dh_keyword_model_filter    (DhKeywordModel *model,
 
 G_END_DECLS
 
-#endif /* DH_KEYWORD_MODEL_H */

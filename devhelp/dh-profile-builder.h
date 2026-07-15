@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_PROFILE_BUILDER_H
-#define DH_PROFILE_BUILDER_H
+#pragma once
 
 #include <glib-object.h>
 #include <devhelp/dh-book-list.h>
@@ -51,4 +50,3 @@ DhProfile *             dh_profile_builder_create_object        (DhProfileBuilde
 
 G_END_DECLS
 
-#endif /* DH_PROFILE_BUILDER_H */

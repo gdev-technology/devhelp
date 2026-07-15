@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_BOOK_LIST_BUILDER_H
-#define DH_BOOK_LIST_BUILDER_H
+#pragma once
 
 #include <glib-object.h>
 #include <devhelp/dh-book-list.h>
@@ -53,4 +52,3 @@ DhBookList *    dh_book_list_builder_create_object                      (DhBookL
 
 G_END_DECLS
 
-#endif /* DH_BOOK_LIST_BUILDER_H */

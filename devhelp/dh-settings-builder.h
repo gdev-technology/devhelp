@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_SETTINGS_BUILDER_H
-#define DH_SETTINGS_BUILDER_H
+#pragma once
 
 #include <glib-object.h>
 #include <devhelp/dh-settings.h>
@@ -50,4 +49,3 @@ DhSettings *    dh_settings_builder_create_object       (DhSettingsBuilder *buil
 
 G_END_DECLS
 
-#endif /* DH_SETTINGS_BUILDER_H */

@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_APP_H
-#define DH_APP_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include "dh-window.h"
@@ -41,4 +40,3 @@ DhWindow *      dh_app_get_active_main_window   (DhApp    *app,
 
 G_END_DECLS
 
-#endif /* DH_APP_H */

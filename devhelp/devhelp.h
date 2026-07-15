@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DEVHELP_H
-#define DEVHELP_H
+#pragma once
 
 /* Include all the public headers. */
 
@@ -32,4 +31,3 @@
 #include <devhelp/dh-web-view.h>
 #include <devhelp/dh-web-view-zoom-controller.h>
 
-#endif /* DEVHELP_H */

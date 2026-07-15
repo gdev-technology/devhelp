@@ -7,8 +7,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_BOOK_H
-#define DH_BOOK_H
+#pragma once
 
 #include <gio/gio.h>
 #include <devhelp/dh-completion.h>
@@ -62,4 +61,3 @@ gint         dh_book_cmp_by_title    (DhBook *a,
 
 G_END_DECLS
 
-#endif /* DH_BOOK_H */

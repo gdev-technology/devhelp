@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_NOTEBOOK_H
-#define DH_NOTEBOOK_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <devhelp/dh-profile.h>
@@ -55,4 +54,3 @@ GList *         dh_notebook_get_all_web_views           (DhNotebook *notebook);
 
 G_END_DECLS
 
-#endif /* DH_NOTEBOOK_H */

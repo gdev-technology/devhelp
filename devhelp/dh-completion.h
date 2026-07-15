@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_COMPLETION_H
-#define DH_COMPLETION_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -51,4 +50,3 @@ gchar *         dh_completion_aggregate_complete        (GList       *completion
 
 G_END_DECLS
 
-#endif /* DH_COMPLETION_H */

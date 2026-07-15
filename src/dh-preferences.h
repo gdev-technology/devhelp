@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_PREFERENCES_H
-#define DH_PREFERENCES_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -35,4 +34,3 @@ void    dh_preferences_show_dialog      (GtkWindow *parent);
 
 G_END_DECLS
 
-#endif /* DH_PREFERENCES_H */

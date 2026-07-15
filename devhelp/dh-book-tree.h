@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_BOOK_TREE_H
-#define DH_BOOK_TREE_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <devhelp/dh-link.h>
@@ -46,4 +45,3 @@ void            dh_book_tree_select_uri         (DhBookTree  *tree,
 
 G_END_DECLS
 
-#endif /* DH_BOOK_TREE_H */

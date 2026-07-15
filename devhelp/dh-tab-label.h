@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_TAB_LABEL_H
-#define DH_TAB_LABEL_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <devhelp/dh-tab.h>
@@ -43,4 +42,3 @@ DhTab *         dh_tab_label_get_tab            (DhTabLabel *tab_label);
 
 G_END_DECLS
 
-#endif /* DH_TAB_LABEL_H */

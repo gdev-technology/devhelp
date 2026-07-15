@@ -6,8 +6,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_WINDOW_H
-#define DH_WINDOW_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -40,4 +39,3 @@ void            dh_window_search                (DhWindow    *window,
 
 G_END_DECLS
 
-#endif /* DH_WINDOW_H */

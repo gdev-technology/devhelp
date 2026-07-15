@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_SETTINGS_H
-#define DH_SETTINGS_H
+#pragma once
 
 #include <gio/gio.h>
 #include <devhelp/dh-book.h>
@@ -93,4 +92,3 @@ void            dh_settings_bind_fonts                          (DhSettings *set
 
 G_END_DECLS
 
-#endif /* DH_SETTINGS_H */

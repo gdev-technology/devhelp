@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_BOOK_LIST_H
-#define DH_BOOK_LIST_H
+#pragma once
 
 #include <glib-object.h>
 #include <devhelp/dh-book.h>
@@ -76,4 +75,3 @@ void            dh_book_list_remove_book        (DhBookList *book_list,
 
 G_END_DECLS
 
-#endif /* DH_BOOK_LIST_H */

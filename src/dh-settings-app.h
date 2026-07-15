@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_SETTINGS_APP_H
-#define DH_SETTINGS_APP_H
+#pragma once
 
 #include <gio/gio.h>
 
@@ -43,4 +42,3 @@ GSettings *     dh_settings_app_peek_paned_settings         (DhSettingsApp *self
 
 G_END_DECLS
 
-#endif /* DH_SETTINGS_APP_H */

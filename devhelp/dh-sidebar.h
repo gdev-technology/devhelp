@@ -6,8 +6,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_SIDEBAR_H
-#define DH_SIDEBAR_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <devhelp/dh-link.h>
@@ -57,4 +56,3 @@ void            dh_sidebar_set_search_focus     (DhSidebar *sidebar);
 
 G_END_DECLS
 
-#endif /* DH_SIDEBAR_H */

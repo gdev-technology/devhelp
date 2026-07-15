@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_BOOK_LIST_SIMPLE_H
-#define DH_BOOK_LIST_SIMPLE_H
+#pragma once
 
 #include <glib-object.h>
 #include "dh-book-list.h"
@@ -45,4 +44,3 @@ DhBookList *    _dh_book_list_simple_new        (GList      *sub_book_lists,
 
 G_END_DECLS
 
-#endif /* DH_BOOK_LIST_SIMPLE_H */

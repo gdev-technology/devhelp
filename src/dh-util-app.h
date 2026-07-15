@@ -5,8 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_UTIL_APP_H
-#define DH_UTIL_APP_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -20,4 +19,3 @@ void    dh_util_window_settings_restore         (GtkWindow *gtk_window,
 
 G_END_DECLS
 
-#endif /* DH_UTIL_APP_H */

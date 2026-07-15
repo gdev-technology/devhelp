@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_PROFILE_H
-#define DH_PROFILE_H
+#pragma once
 
 #include <glib-object.h>
 #include <devhelp/dh-book-list.h>
@@ -53,4 +52,3 @@ DhBookList *    dh_profile_get_book_list        (DhProfile *profile);
 
 G_END_DECLS
 
-#endif /* DH_PROFILE_H */

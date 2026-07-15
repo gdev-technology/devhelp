@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_TAB_H
-#define DH_TAB_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <devhelp/dh-web-view.h>
@@ -43,4 +42,3 @@ DhWebView *     dh_tab_get_web_view     (DhTab *tab);
 
 G_END_DECLS
 
-#endif /* DH_TAB_H */

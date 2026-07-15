@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_SEARCH_BAR_H
-#define DH_SEARCH_BAR_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <devhelp/dh-notebook.h>
@@ -45,4 +44,3 @@ void            dh_search_bar_grab_focus_to_search_entry (DhSearchBar *search_ba
 
 G_END_DECLS
 
-#endif /* DH_SEARCH_BAR_H */

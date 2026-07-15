@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_SEARCH_CONTEXT_H
-#define DH_SEARCH_CONTEXT_H
+#pragma once
 
 #include <glib.h>
 #include "dh-book.h"
@@ -47,4 +46,3 @@ gboolean                _dh_search_context_is_exact_link        (DhSearchContext
 
 G_END_DECLS
 
-#endif /* DH_SEARCH_CONTEXT_H */

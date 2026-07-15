@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_DCONF_MIGRATION_H
-#define DH_DCONF_MIGRATION_H
+#pragma once
 
 #include <glib.h>
 
@@ -26,4 +25,3 @@ void                    _dh_dconf_migration_sync_and_free       (DhDconfMigratio
 
 G_END_DECLS
 
-#endif /* DH_DCONF_MIGRATION_H */

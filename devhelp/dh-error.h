@@ -5,8 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#ifndef DH_ERROR_H
-#define DH_ERROR_H
+#pragma once
 
 #include <glib.h>
 
@@ -23,4 +22,3 @@ GQuark _dh_error_quark (void);
 
 G_END_DECLS
 
-#endif /* DH_ERROR_H */
