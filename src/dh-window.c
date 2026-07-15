@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* SPDX-FileCopyrightText: 2001-2008 Imendio AB
  * SPDX-FileCopyrightText: 2012 Aleksander Morgado <aleksander@gnu.org>
  * SPDX-FileCopyrightText: 2012 Thomas Bechtold <toabctl@gnome.org>

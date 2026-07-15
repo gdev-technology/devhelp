@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* SPDX-FileCopyrightText: 2002 CodeFactory AB
  * SPDX-FileCopyrightText: 2002 Mikael Hallendal <micke@imendio.com>
  * SPDX-FileCopyrightText: 2008 Imendio AB
