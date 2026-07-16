@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2002 Mikael Hallendal <micke@imendio.com>
  * SPDX-FileCopyrightText: 2004-2008 Imendio AB
  * SPDX-FileCopyrightText: 2010 Lanedo GmbH
- * SPDX-FileCopyrightText: 2017, 2018 Sébastien Wilmet <swilmet@gnome.org>
+ * SPDX-FileCopyrightText: 2017-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -21,30 +21,7 @@
  * A #DhBook usually contains the documentation for one library (or
  * application), for example GLib or GTK. A #DhBook corresponds to one index
  * file. An index file is a file with the extension `*.devhelp2`.
- *
- * #DhBook creates a #GFileMonitor on the index file, and emits the
- * #DhBook::updated or #DhBook::deleted signal in case the index file has
- * changed on the filesystem. #DhBookListDirectory listens to those #DhBook
- * signals, and emits in turn the #DhBookList #DhBookList::remove-book and
- * #DhBookList::add-book signals.
  */
-
-/* Timeout to wait for new events on the index file so that they are merged and
- * we don't spam unneeded signals.
- */
-#define EVENT_MERGE_TIMEOUT_SECS (2)
-
-enum {
-        SIGNAL_UPDATED,
-        SIGNAL_DELETED,
-        N_SIGNALS
-};
-
-typedef enum {
-        BOOK_MONITOR_EVENT_NONE,
-        BOOK_MONITOR_EVENT_UPDATED,
-        BOOK_MONITOR_EVENT_DELETED
-} BookMonitorEvent;
 
 typedef struct {
         GFile *index_file;
@@ -60,30 +37,16 @@ typedef struct {
         GList *links;
 
         DhCompletion *completion;
-
-        GFileMonitor *index_file_monitor;
-        BookMonitorEvent last_monitor_event;
-        guint monitor_event_timeout_id;
 } DhBookPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhBook, dh_book, G_TYPE_OBJECT);
 
-static guint signals[N_SIGNALS];
-
 static void
 dh_book_dispose (GObject *object)
 {
-        DhBookPrivate *priv;
-
-        priv = dh_book_get_instance_private (DH_BOOK (object));
+        DhBookPrivate *priv = dh_book_get_instance_private (DH_BOOK (object));
 
         g_clear_object (&priv->completion);
-        g_clear_object (&priv->index_file_monitor);
-
-        if (priv->monitor_event_timeout_id != 0) {
-                g_source_remove (priv->monitor_event_timeout_id);
-                priv->monitor_event_timeout_id = 0;
-        }
 
         G_OBJECT_CLASS (dh_book_parent_class)->dispose (object);
 }
@@ -91,9 +54,7 @@ dh_book_dispose (GObject *object)
 static void
 dh_book_finalize (GObject *object)
 {
-        DhBookPrivate *priv;
-
-        priv = dh_book_get_instance_private (DH_BOOK (object));
+        DhBookPrivate *priv = dh_book_get_instance_private (DH_BOOK (object));
 
         g_clear_object (&priv->index_file);
         g_free (priv->id);
@@ -112,122 +73,11 @@ dh_book_class_init (DhBookClass *klass)
 
         object_class->dispose = dh_book_dispose;
         object_class->finalize = dh_book_finalize;
-
-        /**
-         * DhBook::updated:
-         * @book: the #DhBook emitting the signal.
-         *
-         * The ::updated signal is emitted when the index file has been
-         * modified (but the file still exists).
-         */
-        signals[SIGNAL_UPDATED] =
-                g_signal_new ("updated",
-                              G_TYPE_FROM_CLASS (klass),
-                              G_SIGNAL_RUN_LAST,
-                              0,
-                              NULL, NULL, NULL,
-                              G_TYPE_NONE,
-                              0);
-
-        /**
-         * DhBook::deleted:
-         * @book: the #DhBook emitting the signal.
-         *
-         * The ::deleted signal is emitted when the index file has been deleted
-         * from the filesystem.
-         */
-        signals[SIGNAL_DELETED] =
-                g_signal_new ("deleted",
-                              G_TYPE_FROM_CLASS (klass),
-                              G_SIGNAL_RUN_LAST,
-                              0,
-                              NULL, NULL, NULL,
-                              G_TYPE_NONE,
-                              0);
 }
 
 static void
 dh_book_init (DhBook *book)
 {
-        DhBookPrivate *priv = dh_book_get_instance_private (book);
-
-        priv->last_monitor_event = BOOK_MONITOR_EVENT_NONE;
-}
-
-static gboolean
-monitor_event_timeout_cb (gpointer data)
-{
-        DhBook *book = DH_BOOK (data);
-        DhBookPrivate *priv = dh_book_get_instance_private (book);
-        BookMonitorEvent last_monitor_event = priv->last_monitor_event;
-
-        /* Reset event */
-        priv->last_monitor_event = BOOK_MONITOR_EVENT_NONE;
-        priv->monitor_event_timeout_id = 0;
-
-        /* We'll get either is_deleted OR is_updated, not possible to have both
-         * or none.
-         */
-        switch (last_monitor_event)
-        {
-        case BOOK_MONITOR_EVENT_DELETED:
-                /* Emit the signal, but make sure we hold a reference while
-                 * doing it.
-                 */
-                g_object_ref (book);
-                g_signal_emit (book, signals[SIGNAL_DELETED], 0);
-                g_object_unref (book);
-                break;
-
-        case BOOK_MONITOR_EVENT_UPDATED:
-                /* Emit the signal, but make sure we hold a reference while
-                 * doing it.
-                 */
-                g_object_ref (book);
-                g_signal_emit (book, signals[SIGNAL_UPDATED], 0);
-                g_object_unref (book);
-                break;
-
-        case BOOK_MONITOR_EVENT_NONE:
-        default:
-                break;
-        }
-
-        /* book can be destroyed here. */
-
-        return G_SOURCE_REMOVE;
-}
-
-static void
-index_file_changed_cb (GFileMonitor      *file_monitor,
-                       GFile             *file,
-                       GFile             *other_file,
-                       GFileMonitorEvent  event_type,
-                       DhBook            *book)
-{
-        DhBookPrivate *priv = dh_book_get_instance_private (book);
-        gboolean reset_timeout = FALSE;
-
-        /* CREATED may happen if the file is deleted and then created right
-         * away, as we're merging events.
-         */
-        if (event_type == G_FILE_MONITOR_EVENT_CHANGED ||
-            event_type == G_FILE_MONITOR_EVENT_CREATED) {
-                priv->last_monitor_event = BOOK_MONITOR_EVENT_UPDATED;
-                reset_timeout = TRUE;
-        } else if (event_type == G_FILE_MONITOR_EVENT_DELETED) {
-                priv->last_monitor_event = BOOK_MONITOR_EVENT_DELETED;
-                reset_timeout = TRUE;
-        }
-
-        if (reset_timeout) {
-                if (priv->monitor_event_timeout_id != 0)
-                        g_source_remove (priv->monitor_event_timeout_id);
-
-                priv->monitor_event_timeout_id = g_timeout_add_seconds (EVENT_MERGE_TIMEOUT_SECS,
-                                                                        monitor_event_timeout_cb,
-                                                                        book);
-        }
 }
 
 /**
@@ -235,7 +85,7 @@ index_file_changed_cb (GFileMonitor      *file_monitor,
  * @index_file: the index file.
  *
  * Returns: (nullable): a new #DhBook object, or %NULL if parsing the index file
- * failed.
+ *   failed.
  */
 DhBook *
 dh_book_new (GFile *index_file)
@@ -278,10 +128,6 @@ dh_book_new (GFile *index_file)
                 }
 
                 g_clear_error (&error);
-
-                /* Deallocate the book, as we are not going to add it in the
-                 * manager.
-                 */
                 g_object_unref (book);
                 return NULL;
         }
@@ -296,34 +142,6 @@ dh_book_new (GFile *index_file)
                           g_strdup_printf (_("Language: %s"), language) :
                           g_strdup (_("Language: Undefined")));
         g_free (language);
-
-        /* Setup monitor for changes */
-
-        priv->index_file_monitor = g_file_monitor_file (priv->index_file,
-                                                        G_FILE_MONITOR_NONE,
-                                                        NULL,
-                                                        &error);
-
-        if (error != NULL) {
-                gchar *parse_name;
-
-                parse_name = g_file_get_parse_name (priv->index_file);
-
-                g_warning ("Failed to create file monitor for file “%s”: %s",
-                           parse_name,
-                           error->message);
-
-                g_free (parse_name);
-                g_clear_error (&error);
-        }
-
-        if (priv->index_file_monitor != NULL) {
-                g_signal_connect_object (priv->index_file_monitor,
-                                         "changed",
-                                         G_CALLBACK (index_file_changed_cb),
-                                         book,
-                                         G_CONNECT_DEFAULT);
-        }
 
         return book;
 }
