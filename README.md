@@ -10,11 +10,6 @@ Installation of the Devhelp Flatpak
 
 - [Devhelp on Flathub](https://flathub.org/en/apps/org.gnome.Devhelp)
 
-How to contribute
------------------
-
-See the [HACKING](HACKING) file.
-
 Dependencies
 ------------
 
