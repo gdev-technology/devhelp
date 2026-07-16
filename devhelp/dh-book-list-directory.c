@@ -1,4 +1,4 @@
-/* SPDX-FileCopyrightText: 2018 Sébastien Wilmet <swilmet@gnome.org>
+/* SPDX-FileCopyrightText: 2018-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -37,20 +37,8 @@
  * #DhBookListDirectory:directory.
  */
 
-#define NEW_POSSIBLE_BOOK_TIMEOUT_SECS 5
-
-typedef struct {
-        DhBookListDirectory *list_directory; /* unowned */
-        GFile *book_directory;
-        guint timeout_id;
-} NewPossibleBookData;
-
 struct _DhBookListDirectoryPrivate {
         GFile *directory;
-        GFileMonitor *directory_monitor;
-
-        /* List of NewPossibleBookData* */
-        GSList *new_possible_books_data;
 };
 
 enum {
@@ -66,87 +54,18 @@ static GParamSpec *properties[N_PROPERTIES];
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhBookListDirectory, dh_book_list_directory, DH_TYPE_BOOK_LIST)
 
-/* Prototypes */
-static void create_book_from_index_file (DhBookListDirectory *list_directory,
-                                         GFile               *index_file);
-
-static NewPossibleBookData *
-new_possible_book_data_new (DhBookListDirectory *list_directory,
-                            GFile               *book_directory)
-{
-        NewPossibleBookData *data;
-
-        data = g_new0 (NewPossibleBookData, 1);
-        data->list_directory = list_directory;
-        data->book_directory = g_object_ref (book_directory);
-
-        return data;
-}
-
-static void
-new_possible_book_data_free (gpointer _data)
-{
-        NewPossibleBookData *data = _data;
-
-        if (data == NULL)
-                return;
-
-        g_clear_object (&data->book_directory);
-
-        if (data->timeout_id != 0)
-                g_source_remove (data->timeout_id);
-
-        g_free (data);
-}
-
-static void
-book_deleted_cb (DhBook              *book,
-                 DhBookListDirectory *list_directory)
-{
-        dh_book_list_remove_book (DH_BOOK_LIST (list_directory), book);
-}
-
-static void
-book_updated_cb (DhBook              *book,
-                 DhBookListDirectory *list_directory)
-{
-        GFile *index_file;
-
-        /* Re-create the DhBook to parse again the index file. */
-
-        index_file = dh_book_get_index_file (book);
-        g_object_ref (index_file);
-
-        dh_book_list_remove_book (DH_BOOK_LIST (list_directory), book);
-
-        create_book_from_index_file (list_directory, index_file);
-        g_object_unref (index_file);
-}
-
 static void
 create_book_from_index_file (DhBookListDirectory *list_directory,
                              GFile               *index_file)
 {
-        GList *books;
-        GList *l;
         DhBook *book;
-
-        books = dh_book_list_get_books (DH_BOOK_LIST (list_directory));
-
-        /* Check if a DhBook at the same location has already been loaded. */
-        for (l = books; l != NULL; l = l->next) {
-                DhBook *cur_book = DH_BOOK (l->data);
-                GFile *cur_index_file;
-
-                cur_index_file = dh_book_get_index_file (cur_book);
-
-                if (g_file_equal (index_file, cur_index_file))
-                        return;
-        }
+        GList *books;
 
         book = dh_book_new (index_file);
         if (book == NULL)
                 return;
+
+        books = dh_book_list_get_books (DH_BOOK_LIST (list_directory));
 
         /* Check if book with same ID was already loaded (we need to force
          * unique book IDs).
@@ -155,18 +74,6 @@ create_book_from_index_file (DhBookListDirectory *list_directory,
                 g_object_unref (book);
                 return;
         }
-
-        g_signal_connect_object (book,
-                                 "deleted",
-                                 G_CALLBACK (book_deleted_cb),
-                                 list_directory,
-                                 G_CONNECT_DEFAULT);
-
-        g_signal_connect_object (book,
-                                 "updated",
-                                 G_CALLBACK (book_updated_cb),
-                                 list_directory,
-                                 G_CONNECT_DEFAULT);
 
         dh_book_list_add_book (DH_BOOK_LIST (list_directory), book);
         g_object_unref (book);
@@ -184,86 +91,6 @@ create_book_from_book_directory (DhBookListDirectory *list_directory,
         index_file = _dh_util_get_index_file (book_directory);
         create_book_from_index_file (list_directory, index_file);
         g_object_unref (index_file);
-}
-
-static gboolean
-new_possible_book_timeout_cb (gpointer user_data)
-{
-        NewPossibleBookData *data = user_data;
-        DhBookListDirectoryPrivate *priv = data->list_directory->priv;
-
-        data->timeout_id = 0;
-
-        create_book_from_book_directory (data->list_directory, data->book_directory);
-
-        priv->new_possible_books_data = g_slist_remove (priv->new_possible_books_data, data);
-        new_possible_book_data_free (data);
-
-        return G_SOURCE_REMOVE;
-}
-
-static void
-books_directory_changed_cb (GFileMonitor        *directory_monitor,
-                            GFile               *file,
-                            GFile               *other_file,
-                            GFileMonitorEvent    event_type,
-                            DhBookListDirectory *list_directory)
-{
-        DhBookListDirectoryPrivate *priv = list_directory->priv;
-        NewPossibleBookData *data;
-
-        /* With the GFileMonitor here we only handle events for new directories
-         * created. Book deletions and updates are handled by the GFileMonitor
-         * in each DhBook object.
-         */
-        if (event_type != G_FILE_MONITOR_EVENT_CREATED)
-                return;
-
-        data = new_possible_book_data_new (list_directory, file);
-
-        /* We add a timeout of several seconds so that we give time to the whole
-         * documentation to get installed. If we don't do this, we may end up
-         * trying to add the new book when even the *.devhelp2 index file is not
-         * installed yet.
-         */
-        data->timeout_id = g_timeout_add_seconds (NEW_POSSIBLE_BOOK_TIMEOUT_SECS,
-                                                  new_possible_book_timeout_cb,
-                                                  data);
-
-        priv->new_possible_books_data = g_slist_prepend (priv->new_possible_books_data, data);
-}
-
-static void
-monitor_books_directory (DhBookListDirectory *list_directory)
-{
-        GError *error = NULL;
-
-        g_assert (list_directory->priv->directory_monitor == NULL);
-        list_directory->priv->directory_monitor = g_file_monitor_directory (list_directory->priv->directory,
-                                                                            G_FILE_MONITOR_NONE,
-                                                                            NULL,
-                                                                            &error);
-
-        if (error != NULL) {
-                gchar *parse_name;
-
-                parse_name = g_file_get_parse_name (list_directory->priv->directory);
-
-                g_warning ("Failed to create file monitor on directory “%s”: %s",
-                           parse_name,
-                           error->message);
-
-                g_free (parse_name);
-                g_clear_error (&error);
-        }
-
-        if (list_directory->priv->directory_monitor != NULL) {
-                g_signal_connect_object (list_directory->priv->directory_monitor,
-                                         "changed",
-                                         G_CALLBACK (books_directory_changed_cb),
-                                         list_directory,
-                                         G_CONNECT_DEFAULT);
-        }
 }
 
 static void
@@ -296,8 +123,6 @@ find_books (DhBookListDirectory *list_directory)
                 g_clear_error (&error);
                 goto out;
         }
-
-        monitor_books_directory (list_directory);
 
         while (TRUE) {
                 GFile *book_directory = NULL;
@@ -383,10 +208,6 @@ dh_book_list_directory_dispose (GObject *object)
         DhBookListDirectory *list_directory = DH_BOOK_LIST_DIRECTORY (object);
 
         g_clear_object (&list_directory->priv->directory);
-        g_clear_object (&list_directory->priv->directory_monitor);
-
-        g_slist_free_full (list_directory->priv->new_possible_books_data, new_possible_book_data_free);
-        list_directory->priv->new_possible_books_data = NULL;
 
         G_OBJECT_CLASS (dh_book_list_directory_parent_class)->dispose (object);
 }
@@ -418,7 +239,7 @@ dh_book_list_directory_class_init (DhBookListDirectoryClass *klass)
          */
         properties[PROP_DIRECTORY] =
                 g_param_spec_object ("directory",
-                                     "Directory",
+                                     "directory",
                                      "",
                                      G_TYPE_FILE,
                                      G_PARAM_READWRITE |
