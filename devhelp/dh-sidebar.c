@@ -623,7 +623,7 @@ dh_sidebar_class_init (DhSidebarClass *klass)
          */
         properties[PROP_PROFILE] =
                 g_param_spec_object ("profile",
-                                     "Profile",
+                                     "profile",
                                      "",
                                      DH_TYPE_PROFILE,
                                      G_PARAM_READWRITE |

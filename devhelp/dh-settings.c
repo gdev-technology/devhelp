@@ -404,7 +404,7 @@ dh_settings_class_init (DhSettingsClass *klass)
          */
         properties[PROP_GROUP_BOOKS_BY_LANGUAGE] =
                 g_param_spec_boolean ("group-books-by-language",
-                                      "Group books by language",
+                                      "group-books-by-language",
                                       "",
                                       FALSE,
                                       G_PARAM_READWRITE |
