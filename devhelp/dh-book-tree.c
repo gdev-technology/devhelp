@@ -67,7 +67,7 @@ enum {
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhBookTree, dh_book_tree, GTK_TYPE_TREE_VIEW);
 
-static guint signals[N_SIGNALS] = { 0 };
+static guint signals[N_SIGNALS];
 static GParamSpec *properties[N_PROPERTIES];
 
 static gboolean

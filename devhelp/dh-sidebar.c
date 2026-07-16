@@ -64,7 +64,7 @@ enum {
         N_PROPERTIES
 };
 
-static guint signals[N_SIGNALS] = { 0 };
+static guint signals[N_SIGNALS];
 static GParamSpec *properties[N_PROPERTIES];
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhSidebar, dh_sidebar, GTK_TYPE_GRID)

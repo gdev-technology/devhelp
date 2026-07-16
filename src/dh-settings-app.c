@@ -15,7 +15,7 @@ struct _DhSettingsAppPrivate {
 };
 
 /* DhSettingsApp is a singleton. */
-static DhSettingsApp *singleton = NULL;
+static DhSettingsApp *singleton;
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhSettingsApp, dh_settings_app, G_TYPE_OBJECT);
 

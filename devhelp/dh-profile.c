@@ -37,7 +37,7 @@ struct _DhProfilePrivate {
         DhBookList *book_list;
 };
 
-static DhProfile *default_instance = NULL;
+static DhProfile *default_instance;
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhProfile, dh_profile, G_TYPE_OBJECT)
 

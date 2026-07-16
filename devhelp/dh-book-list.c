@@ -32,8 +32,8 @@ enum {
         N_SIGNALS
 };
 
-static DhBookList *default_instance = NULL;
-static guint signals[N_SIGNALS] = { 0 };
+static DhBookList *default_instance;
+static guint signals[N_SIGNALS];
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhBookList, dh_book_list, G_TYPE_OBJECT)
 

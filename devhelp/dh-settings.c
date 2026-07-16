@@ -181,8 +181,8 @@ enum {
 };
 
 static GParamSpec *properties[N_PROPERTIES];
-static guint signals[N_SIGNALS] = { 0 };
-static DhSettings *default_instance = NULL;
+static guint signals[N_SIGNALS];
+static DhSettings *default_instance;
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhSettings, dh_settings, G_TYPE_OBJECT);
 

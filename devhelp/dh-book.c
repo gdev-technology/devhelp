@@ -68,7 +68,7 @@ typedef struct {
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhBook, dh_book, G_TYPE_OBJECT);
 
-static guint signals[N_SIGNALS] = { 0 };
+static guint signals[N_SIGNALS];
 
 static void
 dh_book_dispose (GObject *object)
