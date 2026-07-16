@@ -8,13 +8,13 @@
 /**
  * SECTION:dh-book-list-directory
  * @Title: DhBookListDirectory
- * @Short_description: Subclass of #DhBookList containing the #DhBook's in one
- *   directory
+ * @Short_description: Subclass of #DhBookList containing the set of #DhBook's
+ *   in one directory
  *
- * #DhBookListDirectory is a subclass of #DhBookList containing the #DhBook's in
- * #DhBookListDirectory:directory. In that directory, each book must be in a
- * direct sub-directory, with the Devhelp index file as a direct child of that
- * sub-directory.
+ * #DhBookListDirectory is a subclass of #DhBookList containing the set of
+ * #DhBook's in #DhBookListDirectory:directory. In that directory, each book
+ * must be in a direct sub-directory, with the Devhelp index file as a direct
+ * child of that sub-directory.
  *
  * For example if #DhBookListDirectory:directory is "/usr/share/gtk-doc/html/",
  * and if there is an index file at
@@ -23,18 +23,6 @@
  *
  * Additionally the name of (1) the sub-directory and (2) the index file minus
  * its extension, must match ("glib" in the example).
- *
- * See #DhBook for the list of allowed Devhelp index file extensions
- * ("*.devhelp2" in the example).
- *
- * #DhBookListDirectory listens to the #DhBook #DhBook::deleted and
- * #DhBook::updated signals, to remove the #DhBook or to re-create it. And
- * #DhBookListDirectory contains a #GFileMonitor on the
- * #DhBookListDirectory:directory to add new #DhBook's when they are installed.
- * But note that those #GFileMonitor's are not guaranteed to work perfectly,
- * recreating the #DhBookListDirectory (or restarting the application) may be
- * needed to see all the index files after filesystem changes in
- * #DhBookListDirectory:directory.
  */
 
 struct _DhBookListDirectoryPrivate {
