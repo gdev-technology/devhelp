@@ -117,15 +117,22 @@ add_default_sub_book_lists_in_data_dir (DhBookListBuilder *builder,
 
         g_return_if_fail (data_dir != NULL);
 
-        dir = g_build_filename (data_dir, "doc", NULL);
+        /* First something specific to Devhelp, in order to be able to override
+         * a book from another location.
+         */
+        dir = g_build_filename (data_dir, "devhelp", "books", NULL);
         add_book_list_directory (builder, dir);
         g_free (dir);
 
+        /* Then GTK-Doc, since Devhelp and GTK-Doc have been made to work well
+         * together.
+         */
         dir = g_build_filename (data_dir, "gtk-doc", "html", NULL);
         add_book_list_directory (builder, dir);
         g_free (dir);
 
-        dir = g_build_filename (data_dir, "devhelp", "books", NULL);
+        /* Then something more general. */
+        dir = g_build_filename (data_dir, "doc", NULL);
         add_book_list_directory (builder, dir);
         g_free (dir);
 }
@@ -139,22 +146,22 @@ add_default_sub_book_lists_in_data_dir (DhBookListBuilder *builder,
  *
  * It creates and adds a #DhBookListDirectory for the following directories (in
  * that order):
- * - `$XDG_DATA_HOME/doc/`
- * - `$XDG_DATA_HOME/gtk-doc/html/`
  * - `$XDG_DATA_HOME/devhelp/books/`
+ * - `$XDG_DATA_HOME/gtk-doc/html/`
+ * - `$XDG_DATA_HOME/doc/`
  * - For each directory in `$XDG_DATA_DIRS`:
- *   - `$xdg_data_dir/doc/`
- *   - `$xdg_data_dir/gtk-doc/html/`
  *   - `$xdg_data_dir/devhelp/books/`
+ *   - `$xdg_data_dir/gtk-doc/html/`
+ *   - `$xdg_data_dir/doc/`
  *
  * See g_get_user_data_dir() and g_get_system_data_dirs().
  *
  * Additionally, if the libdevhelp has been compiled with the `flatpak_build`
  * option, it creates and adds a #DhBookListDirectory for the following
  * directories (in that order, after the above ones):
- * - `/run/host/usr/share/doc/`
- * - `/run/host/usr/share/gtk-doc/html/`
  * - `/run/host/usr/share/devhelp/books/`
+ * - `/run/host/usr/share/gtk-doc/html/`
+ * - `/run/host/usr/share/doc/`
  *
  * The exact list of directories is subject to change, it is not part of the
  * API.
