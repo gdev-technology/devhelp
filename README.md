@@ -3,18 +3,13 @@ Devhelp
 
 The Devhelp web page:
 
-https://wiki.gnome.org/Apps/Devhelp
-
-Installation of the Devhelp Flatpak
------------------------------------
-
-- [Devhelp on Flathub](https://flathub.org/en/apps/org.gnome.Devhelp)
+https://github.com/gdev-technology/devhelp
 
 Dependencies
 ------------
 
 - GLib
-- GTK
+- GTK 3
 - WebKitGTK
 - [libgedit-amtk](https://gedit-text-editor.org/technology.html)
 - gsettings-desktop-schemas
