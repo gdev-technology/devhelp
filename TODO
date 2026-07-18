@@ -39,9 +39,7 @@ Improve DhSettings
 
 See the comment in dh-settings.c.
 
-Rename some classes
--------------------
+Renaming
+--------
 
-- DhSidebar -> DhSidePanel. A "bar" in GNOME is more for horizontal things,
-  like GtkInfoBar.
 - DhKeywordModel -> DhSearchModel ?
