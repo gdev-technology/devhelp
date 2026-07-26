@@ -23,6 +23,7 @@ libdevhelp_public_headers = [
   'dh-tab.h',
   'dh-tab-label.h',
   'dh-web-view.h',
+  'dh-web-view-search-controller.h',
   'dh-web-view-zoom-controller.h',
 ]
 
@@ -47,6 +48,7 @@ libdevhelp_public_c_files = [
   'dh-tab.c',
   'dh-tab-label.c',
   'dh-web-view.c',
+  'dh-web-view-search-controller.c',
   'dh-web-view-zoom-controller.c',
 ]
 
