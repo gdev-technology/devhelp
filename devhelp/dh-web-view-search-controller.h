@@ -32,4 +32,11 @@ GType                           dh_web_view_search_controller_get_type          
 
 DhWebViewSearchController *     dh_web_view_search_controller_new               (WebKitWebView *web_view);
 
+void                            dh_web_view_search_controller_set_search_text   (DhWebViewSearchController *search_controller,
+                                                                                 const gchar               *search_text);
+
+void                            dh_web_view_search_controller_search_next       (DhWebViewSearchController *search_controller);
+
+void                            dh_web_view_search_controller_search_previous   (DhWebViewSearchController *search_controller);
+
 G_END_DECLS

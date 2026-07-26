@@ -9,12 +9,15 @@
  * @Title: DhWebViewSearchController
  * @Short_description: #WebKitWebView search controller
  *
- * #WebKitWebView search controller.
+ * #WebKitWebView search controller providing a more convenient API (for Devhelp
+ * needs) on top of #WebKitFindController.
  */
 
 struct _DhWebViewSearchControllerPrivate {
         /* Weak ref */
         WebKitWebView *web_view;
+
+        gchar *search_text;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (DhWebViewSearchController, dh_web_view_search_controller, G_TYPE_OBJECT)
@@ -40,6 +43,9 @@ dh_web_view_search_controller_dispose (GObject *object)
 static void
 dh_web_view_search_controller_finalize (GObject *object)
 {
+        DhWebViewSearchController *search_controller = DH_WEB_VIEW_SEARCH_CONTROLLER (object);
+
+        g_free (search_controller->priv->search_text);
 
         G_OBJECT_CLASS (dh_web_view_search_controller_parent_class)->finalize (object);
 }
@@ -77,4 +83,105 @@ dh_web_view_search_controller_new (WebKitWebView *web_view)
         set_web_view (search_controller, web_view);
 
         return search_controller;
+}
+
+/**
+ * dh_web_view_search_controller_set_search_text:
+ * @search_controller: a #DhWebViewSearchController.
+ * @search_text: (nullable): the search string, or %NULL.
+ *
+ * Sets the text to search.
+ *
+ * If @search_text is %NULL or is the empty string, it cancels the search.
+ */
+void
+dh_web_view_search_controller_set_search_text (DhWebViewSearchController *search_controller,
+                                               const gchar               *search_text)
+{
+        WebKitFindController *find_controller;
+
+        g_return_if_fail (DH_IS_WEB_VIEW_SEARCH_CONTROLLER (search_controller));
+
+        if (search_controller->priv->web_view == NULL)
+                return;
+
+        if (g_strcmp0 (search_controller->priv->search_text, search_text) == 0)
+                return;
+
+        g_free (search_controller->priv->search_text);
+        search_controller->priv->search_text = g_strdup (search_text);
+
+        find_controller = webkit_web_view_get_find_controller (search_controller->priv->web_view);
+
+        if (search_text != NULL && search_text[0] != '\0') {
+                /* If webkit_find_controller_search() is called a second time
+                 * with the same parameters it's not a NOP, it launches a new
+                 * search, apparently, which ruins search_next() and
+                 * search_previous(). So we must call it only once for the same
+                 * search string.
+                 */
+                webkit_find_controller_search (find_controller,
+                                               search_text,
+                                               WEBKIT_FIND_OPTIONS_WRAP_AROUND |
+                                               WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE,
+                                               G_MAXUINT);
+        } else {
+                /* It's fine to call it several times. But unfortunately it
+                 * doesn't change the WebKitFindController:text property. So we
+                 * must store our own search_text.
+                 */
+                webkit_find_controller_search_finish (find_controller);
+        }
+}
+
+/**
+ * dh_web_view_search_controller_search_next:
+ * @search_controller: a #DhWebViewSearchController.
+ *
+ * Go to the next occurrence.
+ *
+ * This function immediately returns if there is no text to search.
+ */
+void
+dh_web_view_search_controller_search_next (DhWebViewSearchController *search_controller)
+{
+        WebKitFindController *find_controller;
+
+        g_return_if_fail (DH_IS_WEB_VIEW_SEARCH_CONTROLLER (search_controller));
+
+        if (search_controller->priv->web_view == NULL)
+                return;
+
+        if (search_controller->priv->search_text == NULL ||
+            search_controller->priv->search_text[0] == '\0')
+                return;
+
+        find_controller = webkit_web_view_get_find_controller (search_controller->priv->web_view);
+        webkit_find_controller_search_next (find_controller);
+}
+
+/**
+ * dh_web_view_search_controller_search_previous:
+ * @search_controller: a #DhWebViewSearchController.
+ *
+ * Go to the previous occurrence.
+ *
+ * This function immediately returns if there is no text to search.
+ */
+void
+dh_web_view_search_controller_search_previous (DhWebViewSearchController *search_controller)
+{
+        WebKitFindController *find_controller;
+
+        g_return_if_fail (DH_IS_WEB_VIEW_SEARCH_CONTROLLER (search_controller));
+
+        if (search_controller->priv->web_view == NULL)
+                return;
+
+        if (search_controller->priv->search_text == NULL ||
+            search_controller->priv->search_text[0] == '\0')
+                return;
+
+        find_controller = webkit_web_view_get_find_controller (search_controller->priv->web_view);
+        webkit_find_controller_search_previous (find_controller);
 }

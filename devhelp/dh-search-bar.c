@@ -1,4 +1,4 @@
-/* SPDX-FileCopyrightText: 2018-2020 Sébastien Wilmet <swilmet@gnome.org>
+/* SPDX-FileCopyrightText: 2018-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -41,11 +41,13 @@ update_search_in_web_view (DhSearchBar *search_bar,
                            DhWebView   *view)
 {
         const gchar *search_text = NULL;
+        DhWebViewSearchController *search_controller;
 
         if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (search_bar)))
                 search_text = gtk_entry_get_text (GTK_ENTRY (search_bar->priv->search_entry));
 
-        dh_web_view_set_search_text (view, search_text);
+        search_controller = dh_web_view_get_search_controller (view);
+        dh_web_view_search_controller_set_search_text (search_controller, search_text);
 }
 
 static void
@@ -78,26 +80,32 @@ static void
 search_previous_in_active_web_view (DhSearchBar *search_bar)
 {
         DhWebView *web_view;
+        DhWebViewSearchController *search_controller;
 
         web_view = dh_notebook_get_active_web_view (search_bar->priv->notebook);
         if (web_view == NULL)
                 return;
 
         update_search_in_web_view (search_bar, web_view);
-        dh_web_view_search_previous (web_view);
+
+        search_controller = dh_web_view_get_search_controller (web_view);
+        dh_web_view_search_controller_search_previous (search_controller);
 }
 
 static void
 search_next_in_active_web_view (DhSearchBar *search_bar)
 {
         DhWebView *web_view;
+        DhWebViewSearchController *search_controller;
 
         web_view = dh_notebook_get_active_web_view (search_bar->priv->notebook);
         if (web_view == NULL)
                 return;
 
         update_search_in_web_view (search_bar, web_view);
-        dh_web_view_search_next (web_view);
+
+        search_controller = dh_web_view_get_search_controller (web_view);
+        dh_web_view_search_controller_search_next (search_controller);
 }
 
 static void

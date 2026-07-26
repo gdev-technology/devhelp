@@ -359,12 +359,10 @@ dh_tab_label_get_type
 <FILE>dh-web-view</FILE>
 DhWebView
 dh_web_view_new
+dh_web_view_get_search_controller
 dh_web_view_get_zoom_controller
 dh_web_view_get_profile
 dh_web_view_get_devhelp_title
-dh_web_view_set_search_text
-dh_web_view_search_next
-dh_web_view_search_previous
 <SUBSECTION Standard>
 DH_IS_WEB_VIEW
 DH_IS_WEB_VIEW_CLASS
@@ -381,6 +379,9 @@ dh_web_view_get_type
 <FILE>dh-web-view-search-controller</FILE>
 DhWebViewSearchController
 dh_web_view_search_controller_new
+dh_web_view_search_controller_set_search_text
+dh_web_view_search_controller_search_next
+dh_web_view_search_controller_search_previous
 <SUBSECTION Standard>
 DH_IS_WEB_VIEW_SEARCH_CONTROLLER
 DH_IS_WEB_VIEW_SEARCH_CONTROLLER_CLASS

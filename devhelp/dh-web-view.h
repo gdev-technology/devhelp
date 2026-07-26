@@ -6,6 +6,7 @@
 
 #include <webkit2/webkit2.h>
 #include <devhelp/dh-profile.h>
+#include <devhelp/dh-web-view-search-controller.h>
 #include <devhelp/dh-web-view-zoom-controller.h>
 
 G_BEGIN_DECLS
@@ -34,22 +35,16 @@ struct _DhWebViewClass {
                                          const gchar *uri);
 };
 
-GType           dh_web_view_get_type            (void);
+GType                           dh_web_view_get_type                    (void);
 
-DhWebView *     dh_web_view_new                 (DhProfile *profile);
+DhWebView *                     dh_web_view_new                         (DhProfile *profile);
 
-DhWebViewZoomController *
-                dh_web_view_get_zoom_controller (DhWebView *view);
+DhWebViewSearchController *     dh_web_view_get_search_controller       (DhWebView *view);
 
-DhProfile *     dh_web_view_get_profile         (DhWebView *view);
+DhWebViewZoomController *       dh_web_view_get_zoom_controller         (DhWebView *view);
 
-const gchar *   dh_web_view_get_devhelp_title   (DhWebView *view);
+DhProfile *                     dh_web_view_get_profile                 (DhWebView *view);
 
-void            dh_web_view_set_search_text     (DhWebView   *view,
-                                                 const gchar *search_text);
-
-void            dh_web_view_search_next         (DhWebView *view);
-
-void            dh_web_view_search_previous     (DhWebView *view);
+const gchar *                   dh_web_view_get_devhelp_title           (DhWebView *view);
 
 G_END_DECLS

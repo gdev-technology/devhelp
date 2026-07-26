@@ -29,9 +29,9 @@
  */
 
 struct _DhWebViewPrivate {
+        DhWebViewSearchController *search_controller;
         DhWebViewZoomController *zoom_controller;
         DhProfile *profile;
-        gchar *search_text;
 };
 
 enum {
@@ -393,20 +393,11 @@ dh_web_view_dispose (GObject *object)
 {
         DhWebView *view = DH_WEB_VIEW (object);
 
+        g_clear_object (&view->priv->search_controller);
         g_clear_object (&view->priv->zoom_controller);
         g_clear_object (&view->priv->profile);
 
         G_OBJECT_CLASS (dh_web_view_parent_class)->dispose (object);
-}
-
-static void
-dh_web_view_finalize (GObject *object)
-{
-        DhWebView *view = DH_WEB_VIEW (object);
-
-        g_free (view->priv->search_text);
-
-        G_OBJECT_CLASS (dh_web_view_parent_class)->finalize (object);
 }
 
 static void
@@ -420,7 +411,6 @@ dh_web_view_class_init (DhWebViewClass *klass)
         object_class->set_property = dh_web_view_set_property;
         object_class->constructed = dh_web_view_constructed;
         object_class->dispose = dh_web_view_dispose;
-        object_class->finalize = dh_web_view_finalize;
 
         widget_class->button_press_event = dh_web_view_button_press_event;
 
@@ -468,6 +458,7 @@ dh_web_view_init (DhWebView *view)
 {
         view->priv = dh_web_view_get_instance_private (view);
 
+        view->priv->search_controller = dh_web_view_search_controller_new (WEBKIT_WEB_VIEW (view));
         view->priv->zoom_controller = dh_web_view_zoom_controller_new (WEBKIT_WEB_VIEW (view));
 
         gtk_widget_set_hexpand (GTK_WIDGET (view), TRUE);
@@ -488,6 +479,21 @@ dh_web_view_new (DhProfile *profile)
         return g_object_new (DH_TYPE_WEB_VIEW,
                              "profile", profile,
                              NULL);
+}
+
+/**
+ * dh_web_view_get_search_controller:
+ * @view: a #DhWebView.
+ *
+ * Returns: (transfer none): the #DhWebViewSearchController associated with
+ *   @view.
+ */
+DhWebViewSearchController *
+dh_web_view_get_search_controller (DhWebView *view)
+{
+        g_return_val_if_fail (DH_IS_WEB_VIEW (view), NULL);
+
+        return view->priv->search_controller;
 }
 
 /**
@@ -541,93 +547,4 @@ dh_web_view_get_devhelp_title (DhWebView *view)
                 title = _("Empty Page");
 
         return title;
-}
-
-/**
- * dh_web_view_set_search_text:
- * @view: a #DhWebView.
- * @search_text: (nullable): the search string, or %NULL.
- *
- * A more convenient API (for Devhelp needs) than #WebKitFindController. If
- * @search_text is not empty, it calls webkit_find_controller_search() if not
- * already done. If @search_text is empty or %NULL, it calls
- * webkit_find_controller_search_finish().
- */
-void
-dh_web_view_set_search_text (DhWebView   *view,
-                             const gchar *search_text)
-{
-        WebKitFindController *find_controller;
-
-        g_return_if_fail (DH_IS_WEB_VIEW (view));
-
-        if (g_strcmp0 (view->priv->search_text, search_text) == 0)
-                return;
-
-        g_free (view->priv->search_text);
-        view->priv->search_text = g_strdup (search_text);
-
-        find_controller = webkit_web_view_get_find_controller (WEBKIT_WEB_VIEW (view));
-
-        if (search_text != NULL && search_text[0] != '\0') {
-                /* If webkit_find_controller_search() is called a second time
-                 * with the same parameters it's not a NOP, it launches a new
-                 * search, apparently, which ruins search_next() and
-                 * search_previous(). So we must call it only once for the same
-                 * search string.
-                 */
-                webkit_find_controller_search (find_controller,
-                                               search_text,
-                                               WEBKIT_FIND_OPTIONS_WRAP_AROUND |
-                                               WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE,
-                                               G_MAXUINT);
-        } else {
-                /* It's fine to call it several times. But unfortunately it
-                 * doesn't change the WebKitFindController:text property. So we
-                 * must store our own search_text.
-                 */
-                webkit_find_controller_search_finish (find_controller);
-        }
-}
-
-/**
- * dh_web_view_search_next:
- * @view: a #DhWebView.
- *
- * Like webkit_find_controller_search_next(), but takes into account whether
- * dh_web_view_set_search_text() has been called.
- */
-void
-dh_web_view_search_next (DhWebView *view)
-{
-        WebKitFindController *find_controller;
-
-        g_return_if_fail (DH_IS_WEB_VIEW (view));
-
-        if (view->priv->search_text == NULL || view->priv->search_text[0] == '\0')
-                return;
-
-        find_controller = webkit_web_view_get_find_controller (WEBKIT_WEB_VIEW (view));
-        webkit_find_controller_search_next (find_controller);
-}
-
-/**
- * dh_web_view_search_previous:
- * @view: a #DhWebView.
- *
- * Like webkit_find_controller_search_previous(), but takes into account whether
- * dh_web_view_set_search_text() has been called.
- */
-void
-dh_web_view_search_previous (DhWebView *view)
-{
-        WebKitFindController *find_controller;
-
-        g_return_if_fail (DH_IS_WEB_VIEW (view));
-
-        if (view->priv->search_text == NULL || view->priv->search_text[0] == '\0')
-                return;
-
-        find_controller = webkit_web_view_get_find_controller (WEBKIT_WEB_VIEW (view));
-        webkit_find_controller_search_previous (find_controller);
 }
