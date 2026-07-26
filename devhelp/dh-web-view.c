@@ -18,12 +18,12 @@
  * Features:
  * - Sending the #DhWebView::open-new-tab signal on middle click or Ctrl+click
  *   on a link (#DhNotebook handles that signal).
- * - Calls gtk_show_uri_on_window() when opening a non-local link (for example a
- *   `http://` URL).
+ * - Calls gtk_show_uri_on_window() when opening a non-local link (for example
+ *   an `"https://"` URL).
  *
  * The #DhProfile is used for:
  * - Applying the #DhSettings fonts.
- * - When trying to load a remote URL from developer.gnome.org, find in the
+ * - When trying to load a remote URL from `"developer.gnome.org"`, find in the
  *   #DhBookList if there is an equivalent local link to load it instead of
  *   opening the URL with gtk_show_uri_on_window().
  */
