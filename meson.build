@@ -137,7 +137,7 @@ subdir('help')
 subdir('devhelp-glib')
 subdir('devhelp')
 subdir('src')
-subdir('unit-tests')
+subdir('tests')
 
 if get_option('gtk_doc')
   subdir('docs/reference')
