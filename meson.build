@@ -14,8 +14,6 @@ GNOME = import('gnome')
 PKG_CONFIG = import('pkgconfig')
 I18N = import('i18n')
 
-SO_VERSION_FOR_LIBDEVHELP = 0
-
 # API version, used for parallel installability.
 API_VERSION_FOR_LIBDEVHELP = '3'
 
@@ -138,7 +136,7 @@ subdir('src')
 subdir('tests')
 
 if get_option('gtk_doc')
-  subdir('docs/reference')
+#  subdir('docs/reference')
 endif
 
 GNOME.post_install(

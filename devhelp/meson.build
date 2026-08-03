@@ -60,17 +60,9 @@ libdevhelp_private_c_files = [
   'dh-util-lib.c'
 ]
 
-headers_install_dir = get_option('includedir') / 'devhelp-@0@/devhelp/'.format(API_VERSION_FOR_LIBDEVHELP)
-install_headers(
-  libdevhelp_public_headers,
-  install_dir: headers_install_dir
-)
-
 libdevhelp_enum_types = GNOME.mkenums_simple(
   'dh-enum-types',
   sources: libdevhelp_public_headers,
-  install_header: true,
-  install_dir: headers_install_dir
 )
 
 libdevhelp_static_lib = static_library(
@@ -78,44 +70,13 @@ libdevhelp_static_lib = static_library(
   [libdevhelp_public_c_files,
    libdevhelp_private_c_files,
    libdevhelp_enum_types],
-  pic: true, # libdevhelp_static_lib is linked in a shared library.
   include_directories: ROOT_INCLUDE_DIR,
   dependencies: ALL_DEPS_FOR_LIBDEVHELP,
 )
 
-# For unit tests, to be able to test private functions.
 LIBDEVHELP_STATIC_DEP = declare_dependency(
   include_directories: ROOT_INCLUDE_DIR,
   link_with: libdevhelp_static_lib,
   sources: libdevhelp_enum_types[1],
   dependencies: ALL_DEPS_FOR_LIBDEVHELP,
-)
-
-symbol_map = meson.current_source_dir() / 'symbol.map'
-
-libdevhelp_shared_lib = shared_library(
-  'devhelp-@0@'.format(API_VERSION_FOR_LIBDEVHELP),
-  link_whole: libdevhelp_static_lib,
-  link_args: '-Wl,--version-script,' + symbol_map,
-  link_depends: symbol_map,
-  soversion: SO_VERSION_FOR_LIBDEVHELP,
-  install: true
-)
-
-LIBDEVHELP_SHARED_LIB_DEP = declare_dependency(
-  include_directories: ROOT_INCLUDE_DIR,
-  link_with: libdevhelp_shared_lib,
-  sources: libdevhelp_enum_types[1],
-  dependencies: ALL_DEPS_FOR_LIBDEVHELP,
-)
-
-PKG_CONFIG.generate(
-  filebase: 'libdevhelp-@0@'.format(API_VERSION_FOR_LIBDEVHELP),
-  name: meson.project_name(),
-  description: meson.project_name(),
-  libraries: libdevhelp_shared_lib,
-  libraries_private: '-lm',
-  subdirs: 'devhelp-@0@'.format(API_VERSION_FOR_LIBDEVHELP),
-  requires: PUBLIC_DEPS_FOR_LIBDEVHELP,
-  requires_private: PRIVATE_DEPS_FOR_LIBDEVHELP,
 )

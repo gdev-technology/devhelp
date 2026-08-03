@@ -1,6 +1,0 @@
-{
-global:
-  dh_*;
-local:
-  *;
-};
