@@ -136,7 +136,7 @@ subdir('src')
 subdir('tests')
 
 if get_option('gtk_doc')
-#  subdir('docs/reference')
+  subdir('docs/reference/libdevhelp')
 endif
 
 GNOME.post_install(

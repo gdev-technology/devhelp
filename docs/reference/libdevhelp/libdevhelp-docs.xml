@@ -8,9 +8,9 @@
 ]>
 <book id="index">
   <bookinfo>
-    <title>&package_name; &package_api_version; Reference Manual</title>
+    <title>&package_name; Reference Manual</title>
     <releaseinfo>
-      For &package_string; (API version: &package_api_version;).
+      For &package_name; &package_version;.
     </releaseinfo>
   </bookinfo>
 
@@ -57,11 +57,6 @@
       <title>Putting It All Together</title>
       <xi:include href="xml/dh-application-window.xml"/>
     </chapter>
-
-    <chapter id="misc">
-      <title>Misc</title>
-      <xi:include href="xml/dh-completion.xml"/>
-    </chapter>
   </part>
 
   <part id="annexes">
@@ -78,15 +73,5 @@
       <title>API Index</title>
       <xi:include href="xml/api-index-full.xml"><xi:fallback /></xi:include>
     </index>
-    <!--
-    <index id="deprecated-api-index" role="deprecated">
-      <title>Index of deprecated API</title>
-      <xi:include href="xml/api-index-deprecated.xml"><xi:fallback /></xi:include>
-    </index>
-    <index id="api-index-3-36" role="3.36">
-      <title>Index of new symbols in 3.36</title>
-      <xi:include href="xml/api-index-3.36.xml"><xi:fallback /></xi:include>
-    </index>
-    -->
   </part>
 </book>
