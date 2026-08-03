@@ -14,11 +14,9 @@ GNOME = import('gnome')
 PKG_CONFIG = import('pkgconfig')
 I18N = import('i18n')
 
-SO_VERSION_FOR_LIBDEVHELP_GLIB = 0
 SO_VERSION_FOR_LIBDEVHELP = 0
 
-# API versions, used for parallel installability.
-API_VERSION_FOR_LIBDEVHELP_GLIB = '1'
+# API version, used for parallel installability.
 API_VERSION_FOR_LIBDEVHELP = '3'
 
 PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB = [
