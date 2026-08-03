@@ -9,7 +9,6 @@ libdevhelp_public_headers = [
   'dh-book-list-builder.h',
   'dh-book-list-directory.h',
   'dh-book-tree.h',
-  'dh-completion.h',
   'dh-init.h',
   'dh-keyword-model.h',
   'dh-link.h',
@@ -34,7 +33,6 @@ libdevhelp_public_c_files = [
   'dh-book-list-builder.c',
   'dh-book-list-directory.c',
   'dh-book-tree.c',
-  'dh-completion.c',
   'dh-init.c',
   'dh-keyword-model.c',
   'dh-link.c',
@@ -71,7 +69,7 @@ libdevhelp_static_lib = static_library(
    libdevhelp_private_c_files,
    libdevhelp_enum_types],
   include_directories: ROOT_INCLUDE_DIR,
-  dependencies: ALL_DEPS_FOR_LIBDEVHELP,
+  dependencies: [ALL_DEPS_FOR_LIBDEVHELP, LIBDEVHELP_GLIB_STATIC_DEP],
 )
 
 LIBDEVHELP_STATIC_DEP = declare_dependency(

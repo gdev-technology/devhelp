@@ -2,14 +2,14 @@
  * SPDX-FileCopyrightText: 2002 Mikael Hallendal <micke@imendio.com>
  * SPDX-FileCopyrightText: 2005-2008 Imendio AB
  * SPDX-FileCopyrightText: 2010 Lanedo GmbH
- * SPDX-FileCopyrightText: 2017, 2018 Sébastien Wilmet <swilmet@gnome.org>
+ * SPDX-FileCopyrightText: 2017-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 #pragma once
 
 #include <gio/gio.h>
-#include <devhelp/dh-completion.h>
+#include <devhelp-glib/devhelp-glib.h>
 
 G_BEGIN_DECLS
 
