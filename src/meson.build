@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2018 Sébastien Wilmet <swilmet@gnome.org>
+# SPDX-FileCopyrightText: 2018-2026 Sébastien Wilmet <swilmet@gnome.org>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 devhelp_app_sources = [
@@ -18,6 +18,6 @@ devhelp_app_sources += GNOME.compile_resources(
 executable(
   'devhelp',
   devhelp_app_sources,
-  dependencies: [DEVHELP_APP_DEPS, LIBDEVHELP_SHARED_LIB_DEP],
+  dependencies: [DEPS_FOR_DEVHELP_APP, LIBDEVHELP_SHARED_LIB_DEP],
   install: true
 )

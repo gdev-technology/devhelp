@@ -80,7 +80,7 @@ libdevhelp_static_lib = static_library(
    libdevhelp_enum_types],
   pic: true, # libdevhelp_static_lib is linked in a shared library.
   include_directories: ROOT_INCLUDE_DIR,
-  dependencies: LIBDEVHELP_DEPS
+  dependencies: ALL_DEPS_FOR_LIBDEVHELP,
 )
 
 # For unit tests, to be able to test private functions.
@@ -88,7 +88,7 @@ LIBDEVHELP_STATIC_DEP = declare_dependency(
   include_directories: ROOT_INCLUDE_DIR,
   link_with: libdevhelp_static_lib,
   sources: libdevhelp_enum_types[1],
-  dependencies: LIBDEVHELP_DEPS
+  dependencies: ALL_DEPS_FOR_LIBDEVHELP,
 )
 
 symbol_map = meson.current_source_dir() / 'symbol.map'
@@ -106,7 +106,7 @@ LIBDEVHELP_SHARED_LIB_DEP = declare_dependency(
   include_directories: ROOT_INCLUDE_DIR,
   link_with: libdevhelp_shared_lib,
   sources: libdevhelp_enum_types[1],
-  dependencies: LIBDEVHELP_DEPS
+  dependencies: ALL_DEPS_FOR_LIBDEVHELP,
 )
 
 PKG_CONFIG.generate(
@@ -116,6 +116,6 @@ PKG_CONFIG.generate(
   libraries: libdevhelp_shared_lib,
   libraries_private: '-lm',
   subdirs: 'devhelp-@0@'.format(LIBDEVHELP_API_VERSION),
-  requires: LIBDEVHELP_PUBLIC_DEPS,
-  requires_private: LIBDEVHELP_PRIVATE_DEPS
+  requires: PUBLIC_DEPS_FOR_LIBDEVHELP,
+  requires_private: PRIVATE_DEPS_FOR_LIBDEVHELP,
 )

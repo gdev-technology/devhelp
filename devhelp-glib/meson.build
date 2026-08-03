@@ -20,14 +20,14 @@ libdevhelp_glib_static_lib = static_library(
   libdevhelp_glib_public_c_files,
   pic: true, # libdevhelp_glib_static_lib is linked in a shared library.
   include_directories: ROOT_INCLUDE_DIR,
-  dependencies: LIBDEVHELP_DEPS # TODO: depend only on GIO.
+  dependencies: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
 )
 
 # For unit tests, to be able to test private functions.
 LIBDEVHELP_GLIB_STATIC_DEP = declare_dependency(
   include_directories: ROOT_INCLUDE_DIR,
   link_with: libdevhelp_glib_static_lib,
-  dependencies: LIBDEVHELP_DEPS # TODO: depend only on GIO.
+  dependencies: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
 )
 
 symbol_map = meson.current_source_dir() / 'symbol.map'
@@ -44,7 +44,7 @@ libdevhelp_glib_shared_lib = shared_library(
 LIBDEVHELP_GLIB_SHARED_LIB_DEP = declare_dependency(
   include_directories: ROOT_INCLUDE_DIR,
   link_with: libdevhelp_glib_shared_lib,
-  dependencies: LIBDEVHELP_DEPS # TODO: depend only on GIO.
+  dependencies: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
 )
 
 # TODO: adapt more.
@@ -54,6 +54,5 @@ PKG_CONFIG.generate(
   description: meson.project_name(),
   libraries: libdevhelp_glib_shared_lib,
   subdirs: 'devhelp-@0@'.format(LIBDEVHELP_API_VERSION),
-  requires: LIBDEVHELP_PUBLIC_DEPS,
-  requires_private: LIBDEVHELP_PRIVATE_DEPS
+  requires: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
 )

@@ -18,24 +18,31 @@ SO_VERSION_FOR_LIBDEVHELP_GLIB = 0
 SO_VERSION_FOR_LIBDEVHELP = 0
 
 # API version, used for parallel installability.
+# TODO: have separate ones for the two libs.
 LIBDEVHELP_API_VERSION = '3'
 
-LIBDEVHELP_PUBLIC_DEPS = [
+PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB = [
   dependency('gio-2.0', version: '>= 2.64'),
+]
+
+PUBLIC_DEPS_FOR_LIBDEVHELP = [
+  PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
   dependency('gtk+-3.0', version: '>= 3.22'),
   dependency('webkit2gtk-4.1'),
 ]
-LIBDEVHELP_PRIVATE_DEPS = [
+
+PRIVATE_DEPS_FOR_LIBDEVHELP = [
   dependency('gsettings-desktop-schemas'),
 ]
-LIBDEVHELP_DEPS = [
-  LIBDEVHELP_PUBLIC_DEPS,
-  LIBDEVHELP_PRIVATE_DEPS,
+
+ALL_DEPS_FOR_LIBDEVHELP = [
+  PUBLIC_DEPS_FOR_LIBDEVHELP,
+  PRIVATE_DEPS_FOR_LIBDEVHELP,
   meson.get_compiler('c').find_library('m'),
 ]
 
-DEVHELP_APP_DEPS = [
-  LIBDEVHELP_DEPS,
+DEPS_FOR_DEVHELP_APP = [
+  ALL_DEPS_FOR_LIBDEVHELP,
   dependency('libgedit-amtk-5'),
 ]
 
