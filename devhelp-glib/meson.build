@@ -10,10 +10,9 @@ libdevhelp_glib_public_c_files = [
   'dh-completion.c',
 ]
 
-headers_install_dir = get_option('includedir') / 'devhelp-@0@/devhelp-glib/'.format(LIBDEVHELP_API_VERSION)
 install_headers(
   libdevhelp_glib_public_headers,
-  install_dir: headers_install_dir
+  install_dir: get_option('includedir') / 'devhelp-@0@/devhelp-glib/'.format(LIBDEVHELP_API_VERSION),
 )
 
 libdevhelp_glib_static_lib = static_library(
