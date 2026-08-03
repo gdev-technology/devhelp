@@ -1,8 +1,8 @@
-/* SPDX-FileCopyrightText: 2018 Sébastien Wilmet <swilmet@gnome.org>
+/* SPDX-FileCopyrightText: 2018-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include <devhelp/devhelp.h>
+#include <devhelp-glib/devhelp-glib.h>
 
 static void
 test_empty (void)
