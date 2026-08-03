@@ -50,8 +50,8 @@ LIBDEVHELP_GLIB_SHARED_LIB_DEP = declare_dependency(
 # TODO: adapt more.
 PKG_CONFIG.generate(
   filebase: 'libdevhelp-glib-@0@'.format(LIBDEVHELP_API_VERSION),
-  name: meson.project_name(),
-  description: meson.project_name(),
+  name: 'libdevhelp-glib',
+  description: 'libdevhelp backend',
   libraries: libdevhelp_glib_shared_lib,
   subdirs: 'devhelp-@0@'.format(LIBDEVHELP_API_VERSION),
   requires: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
