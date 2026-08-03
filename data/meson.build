@@ -6,10 +6,10 @@ install_data(
 )
 
 libdevhelp_gschema_conf = configuration_data()
-libdevhelp_gschema_conf.set('LIBDEVHELP_API_VERSION', LIBDEVHELP_API_VERSION)
+libdevhelp_gschema_conf.set('LIBDEVHELP_API_VERSION', API_VERSION_FOR_LIBDEVHELP)
 configure_file(
   input: 'org.gnome.libdevhelp.gschema.xml.in',
-  output: 'org.gnome.libdevhelp-@0@.gschema.xml'.format(LIBDEVHELP_API_VERSION),
+  output: 'org.gnome.libdevhelp-@0@.gschema.xml'.format(API_VERSION_FOR_LIBDEVHELP),
   configuration: libdevhelp_gschema_conf,
   install: true,
   install_dir: get_option('datadir') / 'glib-2.0/schemas'

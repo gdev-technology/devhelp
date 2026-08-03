@@ -17,9 +17,9 @@ I18N = import('i18n')
 SO_VERSION_FOR_LIBDEVHELP_GLIB = 0
 SO_VERSION_FOR_LIBDEVHELP = 0
 
-# API version, used for parallel installability.
-# TODO: have separate ones for the two libs.
-LIBDEVHELP_API_VERSION = '3'
+# API versions, used for parallel installability.
+API_VERSION_FOR_LIBDEVHELP_GLIB = '1'
+API_VERSION_FOR_LIBDEVHELP = '3'
 
 PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB = [
   dependency('gio-2.0', version: '>= 2.64'),
@@ -54,7 +54,7 @@ config_data.set_quoted('GETTEXT_PACKAGE', GETTEXT_PACKAGE_NAME)
 config_data.set_quoted('DATADIR', get_option('prefix') / get_option('datadir'))
 config_data.set_quoted('LOCALEDIR', get_option('prefix') / get_option('localedir'))
 config_data.set_quoted('PACKAGE_VERSION', meson.project_version())
-config_data.set_quoted('LIBDEVHELP_API_VERSION', LIBDEVHELP_API_VERSION)
+config_data.set_quoted('LIBDEVHELP_API_VERSION', API_VERSION_FOR_LIBDEVHELP)
 config_data.set10('FLATPAK_BUILD', get_option('flatpak_build'))
 
 configure_file(

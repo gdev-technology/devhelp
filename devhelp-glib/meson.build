@@ -12,7 +12,7 @@ libdevhelp_glib_public_c_files = [
 
 install_headers(
   libdevhelp_glib_public_headers,
-  install_dir: get_option('includedir') / 'devhelp-@0@/devhelp-glib/'.format(LIBDEVHELP_API_VERSION),
+  install_dir: get_option('includedir') / 'devhelp-@0@/devhelp-glib/'.format(API_VERSION_FOR_LIBDEVHELP_GLIB),
 )
 
 libdevhelp_glib_static_lib = static_library(
@@ -33,7 +33,7 @@ LIBDEVHELP_GLIB_STATIC_DEP = declare_dependency(
 symbol_map = meson.current_source_dir() / 'symbol.map'
 
 libdevhelp_glib_shared_lib = shared_library(
-  'devhelp-glib-@0@'.format(LIBDEVHELP_API_VERSION),
+  'devhelp-glib-@0@'.format(API_VERSION_FOR_LIBDEVHELP_GLIB),
   link_whole: libdevhelp_glib_static_lib,
   link_args: '-Wl,--version-script,' + symbol_map,
   link_depends: symbol_map,
@@ -49,10 +49,10 @@ LIBDEVHELP_GLIB_SHARED_LIB_DEP = declare_dependency(
 
 # TODO: adapt more.
 PKG_CONFIG.generate(
-  filebase: 'libdevhelp-glib-@0@'.format(LIBDEVHELP_API_VERSION),
+  filebase: 'libdevhelp-glib-@0@'.format(API_VERSION_FOR_LIBDEVHELP_GLIB),
   name: 'libdevhelp-glib',
   description: 'libdevhelp backend',
   libraries: libdevhelp_glib_shared_lib,
-  subdirs: 'devhelp-@0@'.format(LIBDEVHELP_API_VERSION),
+  subdirs: 'devhelp-@0@'.format(API_VERSION_FOR_LIBDEVHELP_GLIB),
   requires: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
 )

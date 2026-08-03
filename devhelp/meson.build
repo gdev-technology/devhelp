@@ -60,7 +60,7 @@ libdevhelp_private_c_files = [
   'dh-util-lib.c'
 ]
 
-headers_install_dir = get_option('includedir') / 'devhelp-@0@/devhelp/'.format(LIBDEVHELP_API_VERSION)
+headers_install_dir = get_option('includedir') / 'devhelp-@0@/devhelp/'.format(API_VERSION_FOR_LIBDEVHELP)
 install_headers(
   libdevhelp_public_headers,
   install_dir: headers_install_dir
@@ -94,7 +94,7 @@ LIBDEVHELP_STATIC_DEP = declare_dependency(
 symbol_map = meson.current_source_dir() / 'symbol.map'
 
 libdevhelp_shared_lib = shared_library(
-  'devhelp-@0@'.format(LIBDEVHELP_API_VERSION),
+  'devhelp-@0@'.format(API_VERSION_FOR_LIBDEVHELP),
   link_whole: libdevhelp_static_lib,
   link_args: '-Wl,--version-script,' + symbol_map,
   link_depends: symbol_map,
@@ -110,12 +110,12 @@ LIBDEVHELP_SHARED_LIB_DEP = declare_dependency(
 )
 
 PKG_CONFIG.generate(
-  filebase: 'libdevhelp-@0@'.format(LIBDEVHELP_API_VERSION),
+  filebase: 'libdevhelp-@0@'.format(API_VERSION_FOR_LIBDEVHELP),
   name: meson.project_name(),
   description: meson.project_name(),
   libraries: libdevhelp_shared_lib,
   libraries_private: '-lm',
-  subdirs: 'devhelp-@0@'.format(LIBDEVHELP_API_VERSION),
+  subdirs: 'devhelp-@0@'.format(API_VERSION_FOR_LIBDEVHELP),
   requires: PUBLIC_DEPS_FOR_LIBDEVHELP,
   requires_private: PRIVATE_DEPS_FOR_LIBDEVHELP,
 )

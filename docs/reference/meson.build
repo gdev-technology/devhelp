@@ -2,11 +2,11 @@ subdir('xml')
 
 configure_file(
   input: 'devhelp-sections.txt',
-  output: 'devhelp-@0@-sections.txt'.format(LIBDEVHELP_API_VERSION),
+  output: 'devhelp-@0@-sections.txt'.format(API_VERSION_FOR_LIBDEVHELP),
   copy: true
 )
 
-gtkdoc_module_name = 'devhelp-@0@'.format(LIBDEVHELP_API_VERSION)
+gtkdoc_module_name = 'devhelp-@0@'.format(API_VERSION_FOR_LIBDEVHELP)
 html_dir = get_option('prefix') / GNOME.gtkdoc_html_dir(gtkdoc_module_name)
 
 glib_docpath = dependency('glib-2.0').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/glib'
@@ -21,7 +21,7 @@ GNOME.gtkdoc(
   src_dir: include_directories('../../devhelp/'),
   dependencies: LIBDEVHELP_SHARED_LIB_DEP,
   scan_args: ['--rebuild-types'],
-  gobject_typesfile: 'devhelp-@0@.types'.format(LIBDEVHELP_API_VERSION),
+  gobject_typesfile: 'devhelp-@0@.types'.format(API_VERSION_FOR_LIBDEVHELP),
   fixxref_args: [
     '--html-dir=@0@'.format(html_dir),
     '--extra-dir=@0@'.format(glib_docpath),
