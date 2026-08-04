@@ -18,7 +18,7 @@ LIBDEVHELP_GLIB_STATIC_DEP = declare_dependency(
   dependencies: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
 )
 
-# Do not install it, it's for GTK-Doc.
+# Do not install it, it's for internal use.
 libdevhelp_glib_shared_lib = shared_library(
   'devhelp-glib-shared',
   dependencies: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
@@ -28,4 +28,5 @@ libdevhelp_glib_shared_lib = shared_library(
 LIBDEVHELP_GLIB_SHARED_LIB_DEP = declare_dependency(
   link_with: libdevhelp_glib_shared_lib,
   dependencies: PUBLIC_DEPS_FOR_LIBDEVHELP_GLIB,
+  include_directories: ROOT_INCLUDE_DIR,
 )

@@ -11,7 +11,7 @@ foreach test_name : unit_tests
   test_exe = executable(
     full_name,
     test_name + '.c',
-    dependencies: LIBDEVHELP_GLIB_STATIC_DEP
+    dependencies: LIBDEVHELP_GLIB_SHARED_LIB_DEP
   )
 
   test(full_name, test_exe)
