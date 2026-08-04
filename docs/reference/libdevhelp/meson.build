@@ -8,6 +8,7 @@ gobject_docpath = dependency('gobject-2.0').get_variable(pkgconfig: 'prefix') / 
 gio_docpath = dependency('gio-2.0').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/gio'
 gtk_docpath = dependency('gtk+-3.0').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/gtk3'
 webkitgtk_docpath = dependency('webkit2gtk-4.1').get_variable(pkgconfig: 'prefix') / 'share/gtk-doc/html/webkit2gtk-4.1'
+libdevhelp_glib_docpath = get_option('prefix') / 'share/gtk-doc/html/libdevhelp-glib'
 
 GNOME.gtkdoc(
   gtkdoc_module_name,
@@ -23,6 +24,7 @@ GNOME.gtkdoc(
     '--extra-dir=@0@'.format(gio_docpath),
     '--extra-dir=@0@'.format(gtk_docpath),
     '--extra-dir=@0@'.format(webkitgtk_docpath),
+    '--extra-dir=@0@'.format(libdevhelp_glib_docpath),
   ],
   ignore_headers: [
     'dh-book-list-simple.h',
