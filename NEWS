@@ -7,12 +7,21 @@ User-visible changes:
 * Remove gedit plugin: gedit no longer supports plugins implemented in Python.
 * Remove books auto-updates when they change on the filesystem. It is currently
   necessary to quit Devhelp and to launch it again to reload the books.
+* Read books from doc/ data directories, to read gi-docgen books.
+* Apply a more logical priority order to load books.
 
 Under the hood changes:
-* Extract DhWebViewZoomController class from DhWebView.
+* First steps to separate the backend from the frontend: have an internal
+  libdevhelp-glib.
+* The libdevhelp shared library is no more: libdevhelp and libdevhelp-glib are
+  both internal libraries, statically linked with the devhelp executable.
+* Remove GObject Introspection support for the libdevhelp. It wasn't used.
+* Extract DhWebViewSearchController and DhWebViewZoomController classes from
+  DhWebView.
 * Don't annotate get_type() functions with G_GNUC_CONST.
 * Convert #include guards to #pragma once.
 * Build: small simplifications.
+* Files re-organization inside the git repository for the tests/ directory.
 * Small code maintenance.
 * More automated tests.
 
