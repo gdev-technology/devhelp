@@ -42,8 +42,7 @@ Devhelp provides some command line options, such as `--search`. A text editor
 plugin can for example launch the command `devhelp --search function_name` when
 a keyboard shortcut is pressed, with the `function_name` under the cursor.
 
-Devhelp also provides a shared library, to integrate the GTK widgets inside an
-IDE. It is used for example by Builder and Anjuta.
+Devhelp also provides re-usable code, to integrate the features inside an IDE.
 
 For the `--search` command line option, see the class description of
 DhKeywordModel, the search string supports additional features useful for IDEs
@@ -56,5 +55,5 @@ Other documentation
   directory. You can open that documentation with the `yelp help/C/` command,
   or pressing F1 in the Devhelp application.
 
-- There is an API reference manual for the libdevhelp that can be built with
-  GTK-Doc, see the `gtk_doc` build option.
+- For the re-usable code that Devhelp provides, there are API reference manuals
+  built with GTK-Doc, see the `gtk_doc` build option.
