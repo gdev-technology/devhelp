@@ -136,6 +136,7 @@ subdir('src')
 subdir('tests')
 
 if get_option('gtk_doc')
+  subdir('docs/reference/libdevhelp-glib')
   subdir('docs/reference/libdevhelp')
 endif
 

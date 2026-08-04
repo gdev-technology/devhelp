@@ -1,0 +1,21 @@
+<INCLUDE>devhelp-glib/devhelp-glib.h</INCLUDE>
+
+<SECTION>
+<FILE>dh-completion</FILE>
+DhCompletion
+dh_completion_new
+dh_completion_add_string
+dh_completion_sort
+dh_completion_complete
+dh_completion_aggregate_complete
+<SUBSECTION Standard>
+DH_COMPLETION
+DH_COMPLETION_CLASS
+DH_COMPLETION_GET_CLASS
+DH_IS_COMPLETION
+DH_IS_COMPLETION_CLASS
+DH_TYPE_COMPLETION
+DhCompletionClass
+DhCompletionPrivate
+dh_completion_get_type
+</SECTION>
