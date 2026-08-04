@@ -6,10 +6,13 @@ unit_tests = [
 ]
 
 foreach test_name : unit_tests
+  full_name = 'libdevhelp-glib-' + test_name
+
   test_exe = executable(
-    test_name,
+    full_name,
     test_name + '.c',
     dependencies: LIBDEVHELP_GLIB_STATIC_DEP
   )
-  test(test_name, test_exe)
+
+  test(full_name, test_exe)
 endforeach
