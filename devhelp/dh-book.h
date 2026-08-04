@@ -9,7 +9,7 @@
 #pragma once
 
 #include <gio/gio.h>
-#include <devhelp-glib/devhelp-glib.h>
+#include <devhelp-glib/dh-completion.h>
 
 G_BEGIN_DECLS
 
