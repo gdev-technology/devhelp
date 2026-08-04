@@ -22,9 +22,12 @@
       index file is generated.
     </p>
     <p>
-      Devhelp integrates with other applications such as Glade, Builder or
-      Anjuta, and plugins are available for different text editors (gedit, Vim,
-      Emacs, Geany, …).
+      Other developer tools can interact with the Devhelp application. As such,
+      plugins are available for different text editors (Emacs, Geany, Vim, …).
+    </p>
+    <p>
+      Re-usable code is also available to integrate Devhelp features into an
+      IDE.
     </p>
   </description>
   <url type="homepage">https://wiki.gnome.org/Apps/Devhelp/</url>

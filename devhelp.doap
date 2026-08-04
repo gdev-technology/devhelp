@@ -20,9 +20,11 @@ well supported. But other development platforms can be supported as well,
 as long as the API documentation is available in HTML and a *.devhelp2
 index file is generated.
 
-Devhelp integrates with other applications such as Glade, Builder or
-Anjuta, and plugins are available for different text editors (gedit, Vim,
-Emacs, Geany, …).
+Other developer tools can interact with the Devhelp application. As such,
+plugins are available for different text editors (Emacs, Geany, Vim, …).
+
+Re-usable code is also available to integrate Devhelp features into an
+IDE.
   </description>
 
   <homepage rdf:resource="https://wiki.gnome.org/Apps/Devhelp" />
