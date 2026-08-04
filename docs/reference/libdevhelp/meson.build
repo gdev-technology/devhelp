@@ -13,7 +13,7 @@ GNOME.gtkdoc(
   gtkdoc_module_name,
   main_xml: 'libdevhelp-docs.xml',
   src_dir: include_directories('../../../devhelp/'),
-  dependencies: LIBDEVHELP_STATIC_DEP,
+  dependencies: LIBDEVHELP_SHARED_LIB_DEP,
   scan_args: ['--rebuild-types'],
   gobject_typesfile: 'libdevhelp.types',
   fixxref_args: [

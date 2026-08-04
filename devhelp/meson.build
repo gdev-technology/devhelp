@@ -78,3 +78,15 @@ LIBDEVHELP_STATIC_DEP = declare_dependency(
   sources: libdevhelp_enum_types[1],
   dependencies: ALL_DEPS_FOR_LIBDEVHELP,
 )
+
+# Do not install it, it's for GTK-Doc.
+libdevhelp_shared_lib = shared_library(
+  'devhelp-shared',
+  dependencies: ALL_DEPS_FOR_LIBDEVHELP,
+  link_whole: libdevhelp_static_lib,
+)
+
+LIBDEVHELP_SHARED_LIB_DEP = declare_dependency(
+  link_with: libdevhelp_shared_lib,
+  dependencies: ALL_DEPS_FOR_LIBDEVHELP,
+)
