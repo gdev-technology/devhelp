@@ -13,9 +13,6 @@
 G_BEGIN_DECLS
 
 G_GNUC_INTERNAL
-void            _dh_util_ascii_strtitle                 (gchar *str);
-
-G_GNUC_INTERNAL
 void            _dh_util_free_book_tree                 (GNode *book_tree);
 
 G_GNUC_INTERNAL
