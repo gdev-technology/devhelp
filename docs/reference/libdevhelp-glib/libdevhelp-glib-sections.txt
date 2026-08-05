@@ -58,6 +58,11 @@ dh_link_type_get_type
 </SECTION>
 
 <SECTION>
+<FILE>dh-parser</FILE>
+dh_parser_read_file
+</SECTION>
+
+<SECTION>
 <FILE>dh-utils-glib</FILE>
 dh_utils_queue_concat
 dh_utils_get_index_file

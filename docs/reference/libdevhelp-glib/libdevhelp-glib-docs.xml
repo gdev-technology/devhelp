@@ -20,6 +20,7 @@
     <chapter id="data">
       <title>The Data</title>
       <xi:include href="xml/dh-link.xml"/>
+      <xi:include href="xml/dh-parser.xml"/>
     </chapter>
 
     <chapter id="utils">

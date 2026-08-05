@@ -5,6 +5,7 @@ libdevhelp_glib_public_c_files = [
   'dh-completion.c',
   'dh-error.c',
   'dh-link.c',
+  'dh-parser.c',
   'dh-utils-glib.c',
 ]
 

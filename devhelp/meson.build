@@ -50,7 +50,6 @@ libdevhelp_public_c_files = [
 
 libdevhelp_private_c_files = [
   'dh-book-list-simple.c',
-  'dh-parser.c',
   'dh-search-context.c',
   'dh-util-lib.c'
 ]

@@ -5,12 +5,19 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "config.h"
 #include "dh-parser.h"
-#include <devhelp-glib/dh-error.h>
-#include <devhelp-glib/dh-link.h>
-#include <devhelp-glib/dh-utils-glib.h>
 #include <string.h>
+#include "dh-error.h"
+#include "dh-link.h"
+#include "dh-utils-glib.h"
+
+/**
+ * SECTION:dh-parser
+ * @Title: DhParser
+ * @Short_description: Index file XML parser
+ *
+ * Index file XML parser.
+ */
 
 /* Possible things to do for the version 3 of the Devhelp index file format (if
  * one day there is a strong desire to create a new version):
@@ -456,14 +463,28 @@ parser_end_node_cb (GMarkupParseContext  *context,
         }
 }
 
+/**
+ * dh_parser_read_file:
+ * @index_file: the index file location.
+ * @book_title: (out) (transfer full):
+ * @book_id: (out) (transfer full):
+ * @book_language: (out) (transfer full):
+ * @book_tree: (out) (transfer full) (element-type DhLink):
+ * @all_links: (out) (transfer full) (element-type DhLink):
+ * @error: standard #GError parameter.
+ *
+ * Synchronously parses @index_file.
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ */
 gboolean
-_dh_parser_read_file (GFile   *index_file,
-                      gchar  **book_title,
-                      gchar  **book_id,
-                      gchar  **book_language,
-                      GNode  **book_tree,
-                      GList  **all_links,
-                      GError **error)
+dh_parser_read_file (GFile   *index_file,
+                     gchar  **book_title,
+                     gchar  **book_id,
+                     gchar  **book_language,
+                     GNode  **book_tree,
+                     GList  **all_links,
+                     GError **error)
 {
         DhParser *parser;
         GFileInputStream *file_input_stream = NULL;
