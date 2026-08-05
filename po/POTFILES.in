@@ -11,7 +11,6 @@ devhelp/dh-book-list.c
 devhelp/dh-book-list-directory.c
 devhelp/dh-book-list-simple.c
 devhelp/dh-book-tree.c
-devhelp/dh-error.c
 devhelp/dh-init.c
 devhelp/dh-keyword-model.c
 devhelp/dh-notebook.c
@@ -30,6 +29,7 @@ devhelp/dh-web-view.c
 devhelp/dh-web-view-search-controller.c
 devhelp/dh-web-view-zoom-controller.c
 devhelp-glib/dh-completion.c
+devhelp-glib/dh-error.c
 devhelp-glib/dh-link.c
 plugins/gedit-plugin/devhelp.plugin.desktop.in
 plugins/gedit-plugin/devhelp.py

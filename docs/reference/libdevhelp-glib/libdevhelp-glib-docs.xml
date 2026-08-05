@@ -25,6 +25,7 @@
     <chapter id="utils">
       <title>Utilities</title>
       <xi:include href="xml/dh-completion.xml"/>
+      <xi:include href="xml/dh-error.xml"/>
       <xi:include href="xml/dh-utils-glib.xml"/>
     </chapter>
   </part>

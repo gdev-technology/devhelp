@@ -7,10 +7,10 @@
 
 #include "config.h"
 #include "dh-parser.h"
+#include <devhelp-glib/dh-error.h>
 #include <devhelp-glib/dh-link.h>
 #include <devhelp-glib/dh-utils-glib.h>
 #include <string.h>
-#include "dh-error.h"
 
 /* Possible things to do for the version 3 of the Devhelp index file format (if
  * one day there is a strong desire to create a new version):

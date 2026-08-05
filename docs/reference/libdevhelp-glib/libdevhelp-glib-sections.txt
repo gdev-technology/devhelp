@@ -21,6 +21,14 @@ dh_completion_get_type
 </SECTION>
 
 <SECTION>
+<FILE>dh-error</FILE>
+DH_ERROR
+DhError
+<SUBSECTION Standard>
+dh_error_quark
+</SECTION>
+
+<SECTION>
 <FILE>dh-link</FILE>
 DhLink
 DhLinkType

@@ -1,6 +1,6 @@
 /* SPDX-FileCopyrightText: 2002 CodeFactory AB
  * SPDX-FileCopyrightText: 2002 Mikael Hallendal <micke@imendio.com>
- * SPDX-FileCopyrightText: 2018 Sébastien Wilmet <swilmet@gnome.org>
+ * SPDX-FileCopyrightText: 2018-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -10,13 +10,16 @@
 
 G_BEGIN_DECLS
 
-#define DH_ERROR _dh_error_quark ()
+#define DH_ERROR (dh_error_quark ())
 
+/**
+ * DhError:
+ * @DH_ERROR_MALFORMED_BOOK: Malformed book.
+ */
 typedef enum {
-        DH_ERROR_MALFORMED_BOOK
+        DH_ERROR_MALFORMED_BOOK,
 } DhError;
 
-G_GNUC_INTERNAL
-GQuark _dh_error_quark (void);
+GQuark dh_error_quark (void);
 
 G_END_DECLS
