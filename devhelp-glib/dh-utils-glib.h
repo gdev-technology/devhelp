@@ -13,4 +13,6 @@ G_BEGIN_DECLS
 void            dh_utils_queue_concat                   (GQueue *q1,
                                                          GQueue *q2);
 
+GFile *         dh_utils_get_index_file                 (GFile *book_directory);
+
 G_END_DECLS

@@ -3,7 +3,6 @@
 
 unit_tests = [
   'test-search-context',
-  'test-util'
 ]
 
 foreach test_name : unit_tests

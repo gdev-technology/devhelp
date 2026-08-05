@@ -58,33 +58,6 @@ _dh_util_free_book_tree (GNode *book_tree)
         g_node_destroy (book_tree);
 }
 
-/* Returns: (transfer full): the index file inside @book_directory. It is not
- * guaranteed that the index file actually exists.
- */
-GFile *
-_dh_util_get_index_file (GFile *book_directory)
-{
-        gchar *directory_name;
-        gchar *index_file_name;
-        GFile *index_file;
-
-        g_return_val_if_fail (G_IS_FILE (book_directory), NULL);
-
-        directory_name = g_file_get_basename (book_directory);
-        g_return_val_if_fail (directory_name != NULL, NULL);
-
-        /* The name of the directory the index file is in and the name
-         * of the index file (minus the extension) must match.
-         */
-        index_file_name = g_strconcat (directory_name, ".devhelp2", NULL);
-
-        index_file = g_file_get_child (book_directory, index_file_name);
-
-        g_free (directory_name);
-        g_free (index_file_name);
-        return index_file;
-}
-
 static void
 sidebar_link_selected_cb (DhSidebar  *sidebar,
                           DhLink     *link,

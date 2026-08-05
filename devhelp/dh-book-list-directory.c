@@ -3,6 +3,7 @@
  */
 
 #include "dh-book-list-directory.h"
+#include <devhelp-glib/dh-utils-glib.h>
 #include "dh-util-lib.h"
 
 /**
@@ -76,7 +77,7 @@ create_book_from_book_directory (DhBookListDirectory *list_directory,
 {
         GFile *index_file;
 
-        index_file = _dh_util_get_index_file (book_directory);
+        index_file = dh_utils_get_index_file (book_directory);
         create_book_from_index_file (list_directory, index_file);
         g_object_unref (index_file);
 }
