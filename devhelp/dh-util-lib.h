@@ -1,6 +1,6 @@
 /* SPDX-FileCopyrightText: 2001-2002 Mikael Hallendal <micke@imendio.com>
  * SPDX-FileCopyrightText: 2004,2008 Imendio AB
- * SPDX-FileCopyrightText: 2015, 2017, 2018 Sébastien Wilmet <swilmet@gnome.org>
+ * SPDX-FileCopyrightText: 2015-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -14,10 +14,6 @@ G_BEGIN_DECLS
 
 G_GNUC_INTERNAL
 void            _dh_util_ascii_strtitle                 (gchar *str);
-
-G_GNUC_INTERNAL
-void            _dh_util_queue_concat                   (GQueue *q1,
-                                                         GQueue *q2);
 
 G_GNUC_INTERNAL
 void            _dh_util_free_book_tree                 (GNode *book_tree);
