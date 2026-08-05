@@ -48,3 +48,8 @@ dh_link_get_type
 dh_link_flags_get_type
 dh_link_type_get_type
 </SECTION>
+
+<SECTION>
+<FILE>dh-utils-glib</FILE>
+dh_utils_queue_concat
+</SECTION>

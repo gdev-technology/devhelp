@@ -22,9 +22,10 @@
       <xi:include href="xml/dh-link.xml"/>
     </chapter>
 
-    <chapter id="misc">
-      <title>Misc</title>
+    <chapter id="utils">
+      <title>Utilities</title>
       <xi:include href="xml/dh-completion.xml"/>
+      <xi:include href="xml/dh-utils-glib.xml"/>
     </chapter>
   </part>
 
