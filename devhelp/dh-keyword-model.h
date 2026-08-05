@@ -7,7 +7,7 @@
 #pragma once
 
 #include <glib-object.h>
-#include <devhelp/dh-link.h>
+#include <devhelp-glib/dh-link.h>
 #include <devhelp/dh-profile.h>
 
 G_BEGIN_DECLS

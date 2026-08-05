@@ -16,7 +16,6 @@
 #include <devhelp/dh-book-tree.h>
 #include <devhelp/dh-init.h>
 #include <devhelp/dh-keyword-model.h>
-#include <devhelp/dh-link.h>
 #include <devhelp/dh-notebook.h>
 #include <devhelp/dh-profile.h>
 #include <devhelp/dh-profile-builder.h>

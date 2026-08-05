@@ -5,7 +5,7 @@
 #include "config.h"
 #include "dh-web-view.h"
 #include <glib/gi18n-lib.h>
-#include "dh-link.h"
+#include <devhelp-glib/dh-link.h>
 
 /**
  * SECTION:dh-web-view

@@ -17,6 +17,11 @@
   <part id="api-reference">
     <title>API Reference</title>
 
+    <chapter id="data">
+      <title>The Data</title>
+      <xi:include href="xml/dh-link.xml"/>
+    </chapter>
+
     <chapter id="misc">
       <title>Misc</title>
       <xi:include href="xml/dh-completion.xml"/>

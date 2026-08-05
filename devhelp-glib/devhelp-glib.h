@@ -7,3 +7,4 @@
 /* Include all the public headers. */
 
 #include <devhelp-glib/dh-completion.h>
+#include <devhelp-glib/dh-link.h>

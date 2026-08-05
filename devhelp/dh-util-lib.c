@@ -5,8 +5,8 @@
  */
 
 #include "config.h"
+#include <devhelp-glib/dh-link.h>
 #include "dh-util-lib.h"
-#include "dh-link.h"
 
 /* We're only going to expect ASCII strings here, so there's no point in
  * playing with g_unichar_totitle() and such.

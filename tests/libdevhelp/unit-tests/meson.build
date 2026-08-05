@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 unit_tests = [
-  'test-link',
   'test-search-context',
   'test-util'
 ]

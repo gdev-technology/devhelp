@@ -14,7 +14,6 @@ devhelp/dh-book-tree.c
 devhelp/dh-error.c
 devhelp/dh-init.c
 devhelp/dh-keyword-model.c
-devhelp/dh-link.c
 devhelp/dh-notebook.c
 devhelp/dh-parser.c
 devhelp/dh-profile-builder.c
@@ -31,6 +30,7 @@ devhelp/dh-web-view.c
 devhelp/dh-web-view-search-controller.c
 devhelp/dh-web-view-zoom-controller.c
 devhelp-glib/dh-completion.c
+devhelp-glib/dh-link.c
 plugins/gedit-plugin/devhelp.plugin.desktop.in
 plugins/gedit-plugin/devhelp.py
 src/dh-app.c

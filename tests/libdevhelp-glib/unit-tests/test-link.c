@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include <devhelp/devhelp.h>
+#include <devhelp-glib/devhelp-glib.h>
 
 #define DEVHELP_BOOK_BASE_PATH "/usr/share/gtk-doc/html/devhelp"
 

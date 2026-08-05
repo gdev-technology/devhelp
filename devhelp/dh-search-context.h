@@ -5,8 +5,8 @@
 #pragma once
 
 #include <glib.h>
+#include <devhelp-glib/dh-link.h>
 #include "dh-book.h"
-#include "dh-link.h"
 
 G_BEGIN_DECLS
 

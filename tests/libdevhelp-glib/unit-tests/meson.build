@@ -3,6 +3,7 @@
 
 unit_tests = [
   'test-completion',
+  'test-link',
 ]
 
 foreach test_name : unit_tests

@@ -3,6 +3,7 @@
 
 libdevhelp_glib_public_c_files = [
   'dh-completion.c',
+  'dh-link.c',
 ]
 
 libdevhelp_glib_static_lib = static_library(
