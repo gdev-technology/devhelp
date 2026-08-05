@@ -10,8 +10,8 @@
 #include "dh-book.h"
 #include <glib/gi18n-lib.h>
 #include <devhelp-glib/dh-link.h>
+#include <devhelp-glib/dh-utils-glib.h>
 #include "dh-parser.h"
-#include "dh-util-lib.h"
 
 /**
  * SECTION:dh-book
@@ -60,7 +60,7 @@ dh_book_finalize (GObject *object)
         g_free (priv->id);
         g_free (priv->title);
         g_free (priv->language);
-        _dh_util_free_book_tree (priv->tree);
+        dh_utils_free_book_tree (priv->tree);
         g_list_free_full (priv->links, (GDestroyNotify)dh_link_unref);
 
         G_OBJECT_CLASS (dh_book_parent_class)->finalize (object);

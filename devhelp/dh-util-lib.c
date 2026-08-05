@@ -4,33 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "config.h"
 #include "dh-util-lib.h"
 #include <devhelp-glib/dh-link.h>
-
-static gboolean
-unref_node_link (GNode    *node,
-                 gpointer  data)
-{
-        dh_link_unref (node->data);
-        return FALSE;
-}
-
-void
-_dh_util_free_book_tree (GNode *book_tree)
-{
-        if (book_tree == NULL)
-                return;
-
-        g_node_traverse (book_tree,
-                         G_IN_ORDER,
-                         G_TRAVERSE_ALL,
-                         -1,
-                         unref_node_link,
-                         NULL);
-
-        g_node_destroy (book_tree);
-}
 
 static void
 sidebar_link_selected_cb (DhSidebar  *sidebar,

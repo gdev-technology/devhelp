@@ -53,4 +53,5 @@ dh_link_type_get_type
 <FILE>dh-utils-glib</FILE>
 dh_utils_queue_concat
 dh_utils_get_index_file
+dh_utils_free_book_tree
 </SECTION>

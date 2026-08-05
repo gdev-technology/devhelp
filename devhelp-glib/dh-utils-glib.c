@@ -5,6 +5,7 @@
  */
 
 #include "dh-utils-glib.h"
+#include "dh-link.h"
 
 /**
  * SECTION:dh-utils-glib
@@ -88,4 +89,34 @@ dh_utils_get_index_file (GFile *book_directory)
         g_free (directory_name);
         g_free (index_file_name);
         return index_file;
+}
+
+static gboolean
+unref_node_link (GNode    *node,
+                 gpointer  data)
+{
+        dh_link_unref (node->data);
+        return FALSE;
+}
+
+/**
+ * dh_utils_free_book_tree:
+ * @book_tree: a tree of #DhLink's.
+ *
+ * Frees @book_tree.
+ */
+void
+dh_utils_free_book_tree (GNode *book_tree)
+{
+        if (book_tree == NULL)
+                return;
+
+        g_node_traverse (book_tree,
+                         G_IN_ORDER,
+                         G_TRAVERSE_ALL,
+                         -1,
+                         unref_node_link,
+                         NULL);
+
+        g_node_destroy (book_tree);
 }

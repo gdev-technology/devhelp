@@ -1,16 +1,16 @@
 /* SPDX-FileCopyrightText: 2002-2003 Mikael Hallendal <micke@imendio.com>
  * SPDX-FileCopyrightText: 2002-2003 CodeFactory AB
  * SPDX-FileCopyrightText: 2005, 2008 Imendio AB
- * SPDX-FileCopyrightText: 2017, 2018 Sébastien Wilmet <swilmet@gnome.org>
+ * SPDX-FileCopyrightText: 2017-2026 Sébastien Wilmet <swilmet@gnome.org>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 #include "config.h"
 #include "dh-parser.h"
 #include <devhelp-glib/dh-link.h>
+#include <devhelp-glib/dh-utils-glib.h>
 #include <string.h>
 #include "dh-error.h"
-#include "dh-util-lib.h"
 
 /* Possible things to do for the version 3 of the Devhelp index file format (if
  * one day there is a strong desire to create a new version):
@@ -81,7 +81,7 @@ dh_parser_free (DhParser *parser)
         g_free (parser->book_language);
 
         g_list_free_full (parser->all_links, (GDestroyNotify)dh_link_unref);
-        _dh_util_free_book_tree (parser->book_node);
+        dh_utils_free_book_tree (parser->book_node);
 
         g_free (parser);
 }

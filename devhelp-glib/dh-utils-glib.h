@@ -10,9 +10,11 @@
 
 G_BEGIN_DECLS
 
-void            dh_utils_queue_concat                   (GQueue *q1,
-                                                         GQueue *q2);
+void            dh_utils_queue_concat           (GQueue *q1,
+                                                 GQueue *q2);
 
-GFile *         dh_utils_get_index_file                 (GFile *book_directory);
+GFile *         dh_utils_get_index_file         (GFile *book_directory);
+
+void            dh_utils_free_book_tree         (GNode *book_tree);
 
 G_END_DECLS
