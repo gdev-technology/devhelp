@@ -10,11 +10,18 @@
 
 G_BEGIN_DECLS
 
+/**
+ * DH_ERROR:
+ *
+ * #GError domain. It uses error codes from the #DhError enumeration.
+ */
 #define DH_ERROR (dh_error_quark ())
 
 /**
  * DhError:
  * @DH_ERROR_MALFORMED_BOOK: Malformed book.
+ *
+ * Error codes used with the #DH_ERROR domain.
  */
 typedef enum {
         DH_ERROR_MALFORMED_BOOK,
