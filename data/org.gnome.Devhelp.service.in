@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.gnome.Devhelp
-Exec=@bindir@/devhelp --gapplication-service
