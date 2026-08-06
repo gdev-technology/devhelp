@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 libdevhelp_glib_public_c_files = [
+  'dh-book.c',
   'dh-completion.c',
   'dh-error.c',
   'dh-link.c',

@@ -5,7 +5,6 @@ data/org.gnome.Devhelp.desktop.in
 data/org.gnome.devhelp.gschema.xml
 data/org.gnome.libdevhelp.gschema.xml.in
 devhelp/dh-application-window.c
-devhelp/dh-book.c
 devhelp/dh-book-list-builder.c
 devhelp/dh-book-list.c
 devhelp/dh-book-list-directory.c
@@ -27,6 +26,7 @@ devhelp/dh-util-lib.c
 devhelp/dh-web-view.c
 devhelp/dh-web-view-search-controller.c
 devhelp/dh-web-view-zoom-controller.c
+devhelp-glib/dh-book.c
 devhelp-glib/dh-completion.c
 devhelp-glib/dh-error.c
 devhelp-glib/dh-link.c

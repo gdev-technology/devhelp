@@ -6,7 +6,7 @@
 #pragma once
 
 #include <gio/gio.h>
-#include <devhelp/dh-book.h>
+#include <devhelp-glib/dh-book.h>
 
 G_BEGIN_DECLS
 

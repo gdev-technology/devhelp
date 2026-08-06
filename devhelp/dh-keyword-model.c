@@ -8,8 +8,7 @@
 
 #include "dh-keyword-model.h"
 #include <gtk/gtk.h>
-#include <devhelp-glib/dh-utils-glib.h>
-#include "dh-book.h"
+#include <devhelp-glib/devhelp-glib.h>
 #include "dh-book-list.h"
 #include "dh-search-context.h"
 #include "dh-util-lib.h"

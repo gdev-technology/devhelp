@@ -4,7 +4,6 @@
 libdevhelp_public_headers = [
   'devhelp.h',
   'dh-application-window.h',
-  'dh-book.h',
   'dh-book-list.h',
   'dh-book-list-builder.h',
   'dh-book-list-directory.h',
@@ -27,7 +26,6 @@ libdevhelp_public_headers = [
 
 libdevhelp_public_c_files = [
   'dh-application-window.c',
-  'dh-book.c',
   'dh-book-list.c',
   'dh-book-list-builder.c',
   'dh-book-list-directory.c',

@@ -9,9 +9,9 @@
 #include "config.h"
 #include "dh-book.h"
 #include <glib/gi18n-lib.h>
-#include <devhelp-glib/dh-link.h>
-#include <devhelp-glib/dh-parser.h>
-#include <devhelp-glib/dh-utils-glib.h>
+#include "dh-link.h"
+#include "dh-parser.h"
+#include "dh-utils-glib.h"
 
 /**
  * SECTION:dh-book

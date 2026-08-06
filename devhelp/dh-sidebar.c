@@ -8,7 +8,7 @@
  */
 
 #include "dh-sidebar.h"
-#include "dh-book.h"
+#include <devhelp-glib/devhelp-glib.h>
 #include "dh-book-tree.h"
 #include "dh-keyword-model.h"
 

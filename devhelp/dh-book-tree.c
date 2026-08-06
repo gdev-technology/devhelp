@@ -9,7 +9,7 @@
 #include "config.h"
 #include "dh-book-tree.h"
 #include <glib/gi18n-lib.h>
-#include "dh-book.h"
+#include <devhelp-glib/devhelp-glib.h>
 #include "dh-book-list.h"
 #include "dh-settings.h"
 

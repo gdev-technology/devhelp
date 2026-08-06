@@ -4,9 +4,8 @@
 
 #pragma once
 
-#include <glib.h>
+#include <devhelp-glib/dh-book.h>
 #include <devhelp-glib/dh-link.h>
-#include "dh-book.h"
 
 G_BEGIN_DECLS
 
